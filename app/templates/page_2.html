@@ -1,0 +1,9 @@
+{% extends "common.html" %}
+{% block content %}
+<ul>
+    {% for rates in exchange_rates %}
+
+    <li>{{ rates }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

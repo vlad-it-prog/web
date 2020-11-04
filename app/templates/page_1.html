@@ -1,0 +1,392 @@
+{% extends "common.html" %}
+{% block content %}
+
+
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" data-placement="left" title="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    <div align="center">
+        <strong>
+            {% if  loged  %}Привет, {{ username_loged }}!
+                </strong> {% else %}Пожалуйста войдите на сайт. {% endif %}
+    </div>
+    </div>
+    <div class="container-fluid" style="padding: 0px">
+
+
+
+
+            <div class="row">
+                <div class="col-4" style="padding: 0px">
+                    <div class="card card-body bg-light">
+                        <div class="col-sm-12 offset-sm-0" align="left">
+
+
+
+                        <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenteredLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+                        <!-- Modal -->
+<div class="modal" id="exampleModalScrollable2" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenteredLabel2">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+                        <div class="modal" id="id88" tabindex="-1" role="dialog" aria-labelledby="id88" aria-hidden="true">
+
+                        <form method="post" action="logout">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                            <div style="padding-top: 200px" align="center">
+
+                            <div class="card card-body bg-white" style="height: 300px; width: 500px">
+                                <div class="col-12">
+                                <div>
+                                    <form>
+                                        <p style="padding-top: 30px">
+                                            Enter Cover Band name:
+                                        </p>
+                                        <p>
+                                            <input class="form-control mr-sm-2" style="width: 420px" list="CB_name" class="class-band-menu" type="search">
+                                            <datalist id="CB_name">
+                                            {% for xx in cover_bands %}
+                                                <option>{{ xx }}</option>
+                                            {% endfor %}
+                                            </datalist>
+                                        </p>
+                                        <div>
+                                        <div style="padding-top: 10px">
+                                            <input class="form-control mr-sm-2" title="Open Folder" type="file" maxlength="100" min="0" style="width: 420px" align="left" id="id_form_link">
+                                        </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                    <div style="padding-top: 40px" align="right">
+                                        <button class="btn btn-primary" style="height: auto" title="Open Folder" id="id_form">
+                                            Open Folder
+                                        </button>
+                                <button class="btn btn-primary" type="button" class="close" data-dismiss="modal"  style="height: auto; width: 100px" title="Cancel">
+                                    Cancel
+                                </button>
+                                <button  class="btn btn-primary" type="button" style="height: auto; width: 100px" id="id120">
+                                    OK
+                                </button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+                        </div>
+
+                        <div class="dropdown open">
+                        <button class="btn btn-primary dropdown-toggle"
+                              type="button" data-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false" style="height: auto; width: 150px" title="MAIN MENU">
+                        MAIN MENU
+                        </button>
+                            <div class="dropdown-menu">
+                                <a class="button dropdown-item" data-toggle="modal" href="#id87">UPDATE</a>
+                                <a class="button dropdown-item" data-toggle="modal" href="#id88">ADD COVER BAND</a>
+                                <a class="button dropdown-item" data-toggle="modal" href="#dropdownMenu3">DELETE COVER BAND</a>
+                                <a class="button dropdown-item" data-toggle="modal" href="#id90" data-target="#exampleModalScrollable2">KEY COMMANDS</a>
+                                <a class="button dropdown-item" data-toggle="modal" href="#id91">SETTINGS</a>
+                                <a class="button dropdown-item" data-toggle="modal" href="#id92" data-target="#exampleModalScrollable">ABOUT APP</a>
+                                <a class="button dropdown-item" data-toggle="modal" href="#id93">HELP</a>
+                                <a class="button dropdown-item" data-toggle="modal" href="#id3">EXIT</a>
+                            </div>
+
+                        <button class="btn btn-primary dropdown-toggle"
+                              type="button" id="dropdownMenu3" data-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false" align="left" >
+                        Dropdown
+                        </button>
+                            <div class="dropdown-menu" size="5">
+                                    {% for xx in cover_bands %}
+                                        <a class="dropdown-item" href="#!">{{ xx }}</a>
+                                    {% endfor %}
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="col-5" style="padding: 0px">
+                <div class="card card-body bg-light" >
+                    <div class="col-sm-0 offset-sm-0">
+                        <audio controls class="form-control mr-sm-2" style="width: 580px" title="Audio Player">
+                            <source src="\audio\coldplay a sky full of stars.mp3" type="audio/mp3"></source>
+                        </audio>
+
+                    </div>
+                </div>
+            </div>
+                <div class="col-1" style="padding: 0px">
+                <div class="card card-body bg-light">
+                    <div class="col-sm-0 offset-sm-0">
+                        <div align="center">
+                         <button type="button"class="btn btn-primary" style="height: auto; width: 100px" title="Download">
+                            Download
+                        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="col-2" style="padding: 0px">
+                    <div class="card card-body bg-light">
+                        <div class="col-sm-12 offset-sm-0" align="right">
+
+
+
+
+                    <!-- Modal -->
+
+                    <div class="modal" id="id3" tabindex="-1" role="dialog" aria-labelledby="id3" aria-hidden="true">
+                        <form method="post" action="logout">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                            <div style="padding-top: 200px" align="center">
+
+                            <div class="card card-body bg-light" style="height: 180px; width: 400px" align="center">
+                                <div>
+                                    <br>
+                                    Вы уверены, что хотите выйти?
+                                <br>
+                                <br>
+                                <br>
+                                </div>
+                                <div class="col-12" align="center">
+                                    <div align="center">
+                                <button type="submit" class="btn btn-primary" style="height: auto; width: 100px" title="Log Out">
+                                    Да
+                                </button>
+                                <button class="btn btn-primary" type="button" class="close" data-dismiss="modal"  style="height: auto; width: 100px" title="Cancel">
+                                    Нет
+                                </button>
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+                        </form>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" data-placement="left" data-toggle="modal" data-target="#id3" title="Log Out">
+                      Log out
+                        </button>
+                            {% if  loged_out  %} {% else %}
+
+                            {% endif %}
+                        </div>
+                </div>
+                </form>
+                </div>
+            </div>
+            </div>
+            </div>
+
+            </div>
+
+            </div>
+        </div>
+    <div>
+         <div class="row">
+            <div class="col-8" style="padding: 0px">
+                <div class="card card-body bg-light" style="height: 630px">
+
+                            <!-- Custom css that makes this example work like it does: -->
+                    <style type="text/css" scoped>
+                    .scrollspy-example {
+                        position: relative;
+                        height: 400px;
+                        margin-top: .5rem;
+                        overflow: auto;
+                    }
+                    </style>
+
+                    <!-- Actual scrollspy markup: -->
+
+                    <nav id="navbar-example2" class="navbar navbar-light bg-light">
+                        <div style="padding-bottom: 20px">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" title="Add Track to Track List">Add Track</button>
+                        </div>
+                        <div>
+                            <select class="custom-select" style="width: 260px">
+                                <option selected>Full Track List</option>
+                                <option value="1"><a class="nav-link" href="#verse2">Foreign Track List</a></option>
+                                <option value="2"><a href="#verse3">Domestic Track List</a></option></select>
+                        </div>
+                        <div>
+                            <select class="custom-select" style="width: 260px">
+                                <option selected>Full Track List</option>
+                                <option value="1"><a class="nav-link" href="#verse2">Foreign Track List</a></option>
+                                <option value="2"><a href="#verse3">Domestic Track List</a></option></select>
+                        </div>
+                      <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link" href="#verse1">Verse 1</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#verse2">Verse 2</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#verse3">Verse 3</a></li>
+                      </ul>
+
+
+                                                  <table class="table table-hover">
+                      <thead>
+                        <tr id="tr1">
+                          <th style="width: 0; padding-left: 0"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" title="Search">Search</button></th>
+                            <th style="width: 0"><input class="form-control mr-sm-2" style="width: 360px" type="text" placeholder="Artists" id="id101"></th>
+                          <th style="width: 0; padding-right: 0px"><input class="form-control mr-sm-2" style="width: 360px" type="text" placeholder="Songs" id="id102"></th>
+                            <th><button class="btn btn-outline-success my-2 my-sm-0" type="button" id="id105" title="Reverse to Songs/Artists" >Reverse</button></th>
+                        </tr >
+                        <tr id="tr2">
+                          <th style="width: 0; padding-left: 0"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" title="Search">Search</button></th>
+                            <th style="width: 0"><input class="form-control mr-sm-2" style="width: 360px" type="text" placeholder="Songs" id="id101"></th>
+                          <th style="width: 0; padding-right: 0px"><input class="form-control mr-sm-2" style="width: 360px" type="text" placeholder="Artists" id="id102"></th>
+                            <th><button class="btn btn-outline-success my-2 my-sm-0" type="button" id="id106" title="Reverse to Artists/Songs">Reverse</button></th>
+                        </tr>
+                      </thead>
+                                                  </table>
+                    </nav>
+
+                    <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy-example">
+                        <h4 id="verse1" align="center">Verse 1</h4>
+                          <table class="table table-hover">
+                      <tbody>
+                      {% for number, artist, song in table %}
+                            <tr>
+                              <th scope="row" width="176">{{ number }}</th>
+                              <td width="350">{{ artist }}</td>
+                                <td>{{ song }}</td>
+                            </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                      </p>
+                      <h4 id="verse2" align="center">Verse 2</h4>
+                      <p></p>
+                    <h4 id="verse3" align="center">Verse 3</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2" style="padding: 0px">
+                <div class="card card-body bg-light" style="height: 630px">
+                                        <style type="text/css" scoped>
+                    .scrollspy-example {
+                        position: relative;
+                        height: 400px;
+                        margin-top: .5rem;
+                        overflow: auto;
+                    }
+                    </style>
+
+                    <p>
+                        <input class="form-control mr-sm-2" style="width: 200px" list="CB_name" class="class-band-menu" type="search" placeholder="Cover Band 1">
+                        <datalist id="CB_name">
+                        {% for xx in cover_bands %}
+                            <option>{{ xx }}</option>
+                        {% endfor %}
+                        </datalist>
+                    </p>
+
+                    <p>
+                        <input class="form-control mr-sm-2" style="width: 200px" title="" placeholder="">
+                    </p>
+                    <p>
+                        <input class="form-control mr-sm-2" style="width: 200px" title="" placeholder="">
+                    </p>
+                    <p>
+                        <input class="form-control mr-sm-2" style="width: 200px" title="" placeholder="">
+                    </p>
+
+
+                </div>
+            </div>
+            <div class="col-2" style="padding: 0px">
+                <div class="card card-body bg-light" style="height: 630px">
+
+                    <p>
+                        <input class="form-control mr-sm-2" style="width: 200px" list="CB_name" class="class-band-menu" type="search" placeholder="Cover Band 2">
+                        <datalist id="CB_name">
+                        {% for xx in cover_bands %}
+                            <option>{{ xx }}</option>
+                        {% endfor %}
+                        </datalist>
+                    </p>
+
+                    <p>
+                        <input class="form-control mr-sm-2" style="width: 200px" title="" placeholder="">
+                    </p>
+                    <p>
+                        <input class="form-control mr-sm-2" style="width: 200px" title="" placeholder="">
+                    </p>
+                    <p>
+                        <input class="form-control mr-sm-2" style="width: 200px" title="" placeholder="">
+                    </p>
+
+
+                <div style="padding: 50px">
+                    <button class="btn-secondary" type="button" id="id100">
+                        Кнопка
+                    </button>
+                </div>
+
+
+        </div>
+    </div>
+
+            <div class="col-12" style="padding: 0px" >
+                <div class="card card-body bg-light" style="height: 50px">
+                </div>
+            </div>
+                  </div>
+
+
+
+
+
+{% endblock %}
