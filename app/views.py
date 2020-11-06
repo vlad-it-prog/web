@@ -278,3 +278,7 @@ def get_csv(request):
     for person in persons:
         writer.writerow([person.id, person.name])
 #    return response
+
+
+# Добавляю тренировочный комментарий для push & commit
+
