@@ -1,0 +1,11 @@
+.modal-window-text {
+    padding: 20%;
+}
+.modal-window {
+    padding-top: 50%;
+}
+.modal-scroll-window {
+    width: 300px;
+    height: 150px;
+    padding: 5px;
+}
