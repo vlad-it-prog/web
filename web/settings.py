@@ -130,3 +130,10 @@ LANGUAGES = [
     ('pl', 'Polish')
 ]
 
+
+MEDIA_ROOT = 'C:\\Users\\pc1\\PycharmProjects\\web\\images'
+MEDIA_URL = '/media/'
+
+
+AUDIO_ROOT = 'C:\\Users\\pc1\\PycharmProjects\\web\\audio'
+AUDIO_URL = '/audio/'

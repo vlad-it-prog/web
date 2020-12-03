@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 from django.http import JsonResponse
-from app.models import Client
 from random import randint
 import os
 import os.path
@@ -16,21 +15,51 @@ import requests
 import json
 from django.utils.translation import ugettext as _
 
-
 import random
 from datetime import datetime
-from app.models import Person
+from app.models import Track, Band, Client, Cash, Person, Cat, Audio
 
 
 from app.models import *
 
 
-def index(request):
-    ls = Songs.objects.all()
-    result = ""
-    for x in ls:
-        result = result + " " + x.song
-    return HttpResponse(result)
+def help_page(request):
+
+    """ URL: help_page
+        Function: help_page
+        File: help_page.html """
+
+    return render(request, "help_page.html", {})
+# ______________________________________________________________________________________________________________________
+
+
+def add_new_cover_band_to_band_list(request):
+
+    response = {
+        'message': request.POST['a']
+    }
+
+    return JsonResponse(response.message)
+# ______________________________________________________________________________________________________________________
+
+
+# def index(request):
+#     ls = Songs.objects.all()
+#     result = ""
+#     for x in ls:
+#         result = result + " " + x.song
+#     return HttpResponse(result)
+# ______________________________________________________________________________________________________________________
+
+
+def login_page(request):
+
+    """ URL: login_page
+        Function: login_page
+        File: login_page.html """
+
+    return render(request, "login_page.html", {})
+# ______________________________________________________________________________________________________________________
 
 
 def main_page(request):
@@ -77,8 +106,8 @@ def main_page(request):
     }
     #print(data)
 
-    return render(request, 'page_1.html', context)
-
+    return render(request, 'main_page.html', context)
+# ______________________________________________________________________________________________________________________
 
 
 def main_page_2(request):
@@ -86,13 +115,15 @@ def main_page_2(request):
     context = {'loged': request.user.is_authenticated,
                'username_loged': request.user.username
     }
-    return render(request, 'page_1.html', context)
+    return render(request, 'main_page.html', context)
+# ______________________________________________________________________________________________________________________
 
 
 def main(request):
     context = {'loged_2': request.user.is_authenticated,
     }
     return render(request, 'main.html', context)
+# ______________________________________________________________________________________________________________________
 
 
 def login_user(request):
@@ -104,15 +135,18 @@ def login_user(request):
         return render(request, 'main.html', {'msg': True})
     else:
         login(request, user)
-        return HttpResponseRedirect('/page_1')
+        return HttpResponseRedirect('/main_page')
+# ______________________________________________________________________________________________________________________
 
 
 def test(request):
     return render(request, 'test.html')
+# ______________________________________________________________________________________________________________________
 
 
 def logout_page(request):
     return render(request, 'logout_page.html')
+# ______________________________________________________________________________________________________________________
 
 
 def do_logout(request):
@@ -120,11 +154,14 @@ def do_logout(request):
         logout(request)
         return HttpResponseRedirect('/main')
     else:
-        return HttpResponseRedirect('/page_1')
+        return HttpResponseRedirect('/main_page')
+# ______________________________________________________________________________________________________________________
 
 
 def registration_form(request):
     return render(request, 'registration.html', {})
+# ______________________________________________________________________________________________________________________
+
 
 def register(request):
     user = User.objects.create_user(request.POST['login'],
@@ -137,6 +174,7 @@ def register(request):
     client.save()
     #return HttpResponse('OK'),
     return HttpResponseRedirect('/main')
+# ______________________________________________________________________________________________________________________
 
 
 def ajax_path(request):
@@ -145,6 +183,7 @@ def ajax_path(request):
         'message': request.POST['a'] + a
     }
     return JsonResponse(response)
+# ______________________________________________________________________________________________________________________
 
 
 def ajax_valid(request):
@@ -159,6 +198,7 @@ def ajax_valid(request):
             'user_exist': True
         }
     return JsonResponse(response)
+# ______________________________________________________________________________________________________________________
 
 
 def ajax_cb(request):
@@ -186,12 +226,14 @@ def ajax_cb(request):
             'message': 'ты нажал не на ту клавишу'
         }
         return JsonResponse(response)
+# ______________________________________________________________________________________________________________________
 
 
 def button_ok(request, x):
     creat_file = open("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\privet.csv", 'w')
     creat_file.write('artist,song')
     creat_file.close()
+# ______________________________________________________________________________________________________________________
 
 
 def band_list(request):
@@ -203,7 +245,8 @@ def band_list(request):
     }
     print(sorted(menu_items))
     print(df.loc[5])
-    return render(request, 'page_1.html', context)
+    return render(request, 'main_page.html', context)
+# ______________________________________________________________________________________________________________________
 
 
 def exchange_rates(request):
@@ -220,6 +263,7 @@ def exchange_rates(request):
     }
 
     return render(request, 'page_2.html', context)
+# ______________________________________________________________________________________________________________________
 
 
 def experiment(request):
@@ -252,16 +296,19 @@ def experiment(request):
     print("Время выполнения 100 запрсосов: " + str(sum) + ' секунд')
    # return render(request,'\page_3.html', {"Время выполнения 100 запрсосов: " + str(sum) + ' секунд'})
   #  print()
+# ______________________________________________________________________________________________________________________
 
 
 def main(request):
     return render(request,
-                  'page_1.html', {'title': _('Пожалуйста')}
+                  'main_page.html', {'title': _('Пожалуйста')}
                   )
+# ______________________________________________________________________________________________________________________
 
 
 def page_3(request):
     return render(request, 'page_3.html', {})
+# ______________________________________________________________________________________________________________________
 
 
 def get_csv(request):
@@ -278,7 +325,23 @@ def get_csv(request):
     for person in persons:
         writer.writerow([person.id, person.name])
 #    return response
+# ______________________________________________________________________________________________________________________
 
 
-# Добавляю тренировочный комментарий для push & commit
+def ajax_clock(request):
+    a = str(randint(1, 100))
+    response = {
+        'message': request.POST['a'] + a
+    }
+    return JsonResponse(response)
+# ______________________________________________________________________________________________________________________
 
+
+def main_test_cash(request):
+    return
+# ______________________________________________________________________________________________________________________
+
+
+def test_html(request):
+    return
+# ______________________________________________________________________________________________________________________

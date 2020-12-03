@@ -2,6 +2,7 @@
 <html lang="">
 <head>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <script src="/static/js/jquery-3.3.1.min.js"></script>
     <script src="/static/js/popper.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
@@ -18,6 +19,13 @@
     <script>
         function change_size_2() {
             document.getElementById('#id').id = 'CB_name'
+        }
+    </script>
+
+    <script>
+        function dataSelected(s) {
+            n = f.cover_band.selectedIndex
+            if (n) alert({{ xx }})
         }
     </script>
 </head>
