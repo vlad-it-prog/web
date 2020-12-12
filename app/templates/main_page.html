@@ -63,6 +63,96 @@
 
     <!-- Modal_2 "MAIN MENU -> Update" end -->
 
+        <!--- Modal_2 "MAIN MENU -> Export" --->
+
+        <div class="modal" id="modal-export" tabindex="-1" role="dialog" aria-labelledby="modal-export" aria-hidden="true" xmlns="http://www.w3.org/1999/html">
+        <div align="right">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-dialog modal-dialog-scrollable" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                        <div align="left">
+                            <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="export">Export</h5></a>
+                        </div>
+                        <div align="right">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" title="Close">&times;</span>
+                            </button>
+                            <button id="button_help" type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#main_menu_help" aria-label="Close" style="cursor: help">
+                                <span aria-hidden="true" title="Help">?</span>
+                            </button>
+                        </div>
+                </div>
+                <div class="modal-body">
+                <form method="post" action="">
+                    <div style="padding-top: 30px" align="center">
+                        <h6 style="padding-bottom: 30px">Enter Cover Band name you want to export:</h6>
+                        <input class="form-control mr-sm-2" style="width: 420px" id="export_cb_select" list="export_cb_name" class="class-band-menu" type="search" name="export_cover_band_name">
+                        <datalist id="export_cb_name">
+                            {% for cover_band_name in cover_bands %}
+                                <option>{{ cover_band_name }}</option>
+                            {% endfor %}
+                        </datalist>
+                        <div>
+                            <select class="custom-select" style="width: 260px">
+                                <option>Full Track List</option>
+                                <option>Foreign Track List</option>
+                                <option>Domestic Track List</option>
+                            </select>
+                        </div>
+
+                        <input class="form-control mr-sm-2" style="width: 420px" id="export_path_select" list="export_path_list_name" class="class-band-menu" type="search" name="export_path_name">
+                        <datalist id="export_path_list_name">
+                            {% for path_name in all_paths_list %}
+                                <option>{{ path_name }}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" style="width: 100px" title="Export">Export</button>
+                    <button type="button" class="btn btn-secondary" class="close" data-dismiss="modal" style="width: 100px" title="Close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal_2 "MAIN MENU -> Export" end -->
+
+
+    <!-- Modal_4 "MAIN MENU -> Add Cover Band -> Are You Sure?" -->
+
+    <div class="modal" class="modal" id="add_cover_band_sure" tabindex="-1" role="dialog" aria-labelledby="add_cover_band_sure" aria-hidden="true">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" data-toggle="modal" data-target="#main_menu_delete_cover_band">&times;</span>
+        </button>
+        <div class="modal-dialog modal-dialog-scrollable" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="add">Add Cover Band</h5></a>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" data-toggle="modal" data-target="#main_menu_add_cover_band">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding-bottom: 30px" align="center">
+                    Are You Sure you want to add this Cover Band?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="add_cb_yes" formaction="#delete_cb_select" formmethod="get" class="btn btn-primary" title="Yes" style="width: 80px">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#main_menu_add_cover_band" title="Cancel">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="close" title="Close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal_4 "MAIN MENU -> Add Cover Band -> Are You Sure?" end -->
+
+
     <!-- Modal_3 "MAIN MENU -> Add Cover Band" -->
 
         <div class="modal" id="main_menu_add_cover_band" tabindex="-1" role="dialog" aria-labelledby="main_menu_add_cover_band" aria-hidden="true">
@@ -96,7 +186,7 @@
                     </form>
                     <form id="form_id_add_new_cover_band" action="/add_new_cover_band_to_band_list">
                         <div align="center">
-                            <input class="form-control mr-sm-2" style="width: 420px" list="CB_name" class="class-band-menu" type="text" name="type_new_cover_band">
+                            <input id="add_cb_select" class="form-control mr-sm-2" style="width: 420px" list="CB_name" class="class-band-menu" type="text" name="type_new_cover_band">
                             <datalist id="CB_name">
                                 {% for xx in cover_bands %}
                                     <option>{{ xx }}</option>
@@ -110,7 +200,7 @@
                 </div>
                 <div class="modal-footer" style="padding-top: 40px" align="right">
                     <button type="button" class="btn btn-primary" title="Open Folder" id="id_form">Open Folder</button>
-                    <button type="submit" form="form_id_add_new_cover_band" class="btn btn-primary" title="Add" style="width: 100px">Add</button>
+                    <button type="submit" formaction="#add_cb_select" class="btn btn-primary" title="Add" style="width: 100px" data-toggle="modal" data-target="#add_cover_band_sure" data-dismiss="modal">Add</button>
                     <button type="button" class="btn btn-primary" title="Cancel -> All Bands" id="add_cover_band_cancel_button" data-toggle="modal" data-target="#main_block_all_bands" data-dismiss="modal" style="width: 100px">Cancel</button>
                     <button type="button" class="btn btn-secondary" class="close"data-dismiss="modal" style="width: 100px" title="Close">Close</button>
                 </div>
@@ -138,7 +228,7 @@
                     Are You Sure you want tot delete this Cover Band?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" title="Yes" style="width: 80px">Yes</button>
+                    <button type="submit" id="delete_cb_yes" formaction="#delete_cb_select" formmethod="get" class="btn btn-primary" title="Yes" style="width: 80px">Yes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#main_menu_delete_cover_band" title="Cancel">Cancel</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="close" title="Close">Close</button>
                 </div>
@@ -173,8 +263,8 @@
                 <form method="post" action="logout">
                     <div style="padding-top: 30px" align="center">
                         <h6 style="padding-bottom: 30px">Enter Cover Band name you want to delete:</h6>
-                        <input class="form-control mr-sm-2" style="width: 420px" list="CB_name" class="class-band-menu" type="search">
-                        <datalist id="CB_name">
+                        <input class="form-control mr-sm-2" style="width: 420px" id="delete_cb_select" list="CB_name" class="class-band-menu" type="search" name="delete_cover_band_name">
+                        <datalist>
                             {% for xx in cover_bands %}
                                 <option>{{ xx }}</option>
                             {% endfor %}
@@ -646,6 +736,7 @@
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: auto; width: 200px; white-space: nowrap" title="MAIN MENU">   MAIN MENU   </button>
                             <div class="dropdown-menu">
                                 <a class="button dropdown-item" data-toggle="modal" href="#modal-update" style="text-align: center">UPDATE</a>
+                                <a class="button dropdown-item" data-toggle="modal" href="#modal-export" style="text-align: center">EXPORT</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="button dropdown-item" data-toggle="modal" href="#main_menu_add_cover_band" style="text-align: center">ADD COVER BAND</a>
                                 <a class="button dropdown-item" data-toggle="modal" href="#main_menu_delete_cover_band" style="text-align: center">DELETE COVER BAND</a>
@@ -773,13 +864,13 @@
                         <h4 id="verse1" align="center">Foreign Track List</h4>
                           <table class="table table-hover">
                       <tbody>
-{#                      {% for number, artist, song in table %}#}
-{#                            <tr>#}
-{#                              <th scope="row" width="176">{{ number }}</th>#}
-{#                              <td width="350"><a href="http://127.0.0.1:8000/login_page">{{ artist }}</a></td>#}
-{#                                <td><a href="http://127.0.0.1:8000/login_page" >{{ song }}</a></td>#}
-{#                            </tr>#}
-{#                      {% endfor %}#}
+                      {% for number, artist, song in table %}
+                            <tr>
+                              <th scope="row" width="176">{{ number }}</th>
+                              <td width="350"><a href="http://127.0.0.1:8000/login_page">{{ artist }}</a></td>
+                                <td><a href="http://127.0.0.1:8000/login_page" >{{ song }}</a></td>
+                            </tr>
+                      {% endfor %}
                       {% for artist_name, song_name in track_list %}
                             <tr>
                               <th scope="row" width="176">{{ number }}</th>
@@ -832,20 +923,24 @@
                 <div class="card card-body bg-light" align="center" style="height: 650px">
                     <div class="row">
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 10px">
-                            <input class="form-control" name="cover_band" style="width: 230px" list="CB_name" class="class-band-menu" type="search" placeholder="Cover Band 1">
+                        <form id="form_cover_bands_details">
+                            <input id="cover_band_1_details" class="form-control" name="cover_band_1" style="width: 230px" list="CB_name" class="class-band-menu" type="search" placeholder="Cover Band 1">
                             <datalist id="CB_name">
-                                {% for xx in cover_bands %}
-                                    <option id="Cover-Band-1-selection" value="{{ xx }}" onclick="dataSelected(this.option.value())">{{ xx }}</option>
+                                {% for cb_1_name in cover_bands %}
+                                    <option id="Cover-Band-1-selection" value="{{ cb_1_name }}" onclick="dataSelected(this.option.value())">{{ xx }}</option>
                                 {% endfor %}
                             </datalist>
+                        </form>
                         </div>
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 10px">
-                            <input class="form-control" style="width: 230px" list="CB_name" class="class-band-menu" type="search" placeholder="Cover Band 2">
+                        <form id="form_cover_bands_details">
+                            <input id="cover_band_2_details" class="form-control" name="cover_band_2" style="width: 230px" list="CB_name" class="class-band-menu" type="search" placeholder="Cover Band 2">
                             <datalist id="CB_name">
-                                {% for xx in cover_bands %}
-                                    <option>{{ xx }}</option>
+                                {% for cb_2_name in cover_bands %}
+                                    <option>{{ cb_2_name }}</option>
                                 {% endfor %}
                             </datalist>
+                        </form>
                         </div>
 
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 30px">
@@ -856,9 +951,6 @@
                         </div>
                         <div class="col-6" style="padding-bottom: 20px; padding-top: 30px">
                             <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title="" placeholder="CB 2 Songs: {{ cb2_songs }}" readonly disabled>
-                            <div style="padding-top: 10px">
-                                <a href="#verse3"><span class="border border-dark">Hello World</span></a>
-                            </div>
                         </div>
 
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 30px">
@@ -888,6 +980,9 @@
                         <div>
                             <input type="" id="100_1" placeholder="gggg">
                         </div>
+                            <button id="cover_bands_details_start" type="submit" formmethod="get" formaction="#form_cover_bands_details" class="btn-secondary" type="button" id="" style="height: 50px">
+                                Start
+                            </button>
                     </div>
                 </div>
             </div>

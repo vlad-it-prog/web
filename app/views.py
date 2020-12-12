@@ -16,11 +16,9 @@ import json
 from django.utils.translation import ugettext as _
 
 import random
+from datetime import time
 from datetime import datetime
-from app.models import Track, Band, Client, Cash, Person, Cat, Audio
-
-
-from app.models import *
+from app.models import Track, Band, Client, Person, Person, Cash, Cat, Audio
 
 
 def help_page(request):
@@ -35,20 +33,15 @@ def help_page(request):
 
 def add_new_cover_band_to_band_list(request):
 
+    """ URL:
+        Function:
+        File: .html """
+
     response = {
         'message': request.POST['a']
     }
 
     return JsonResponse(response.message)
-# ______________________________________________________________________________________________________________________
-
-
-# def index(request):
-#     ls = Songs.objects.all()
-#     result = ""
-#     for x in ls:
-#         result = result + " " + x.song
-#     return HttpResponse(result)
 # ______________________________________________________________________________________________________________________
 
 
@@ -63,32 +56,36 @@ def login_page(request):
 
 
 def main_page(request):
-    key_tracklist = ''
-    x = request.POST
-    for p in x:
-        key_tracklist = key_tracklist + x[p]
-    print(key_tracklist)
-    df_track_list = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\track_list.csv")
-    ls_main = []
-    q = 0
-    for y in df_track_list['artist']:
-          for z in df_track_list['song']:
-                ls_main.append([str(q), df_track_list['artist'][q], df_track_list['song'][q]])
-                q = q + 1
-                break
 
-    if key_tracklist == 'artist':
-          ls_main = sorted(ls_main, key=lambda artist: artist[1])
-    else:
-        ls_main = sorted(ls_main, key=lambda song: song[2])
+    """ URL: main_page
+        Function: main_page
+        File: main_page.html """
+
+    all_songs = len(Track.objects.values('song_name'))
+    all_bands = len(Band.objects.values('band_name'))
+    all_bands_list = []
+    cover_bands = []
+    for band in range(len(Band.objects.values('band_name'))):
+        all_bands_list.append([band + 1, Band.objects.order_by('band_name').values()[band]['band_name']])
+        cover_bands.append(Band.objects.order_by('band_name').values()[band]['band_name'])
+
+    table = []
+    for track in range(len(Track.objects.values())):
+        table.append([track + 1, Track.objects.order_by("artist_name").values()[track]['artist_name'], Track.objects.order_by("artist_name").values()[track]['song_name']])
 
 
-    #elif key_tracklist != 'song':
-       #   ls_main = sorted(ls_main, key=lambda song: song[2])
 
-    df_bands = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\band_list.csv")
-    menu_items = df_bands['cover bands']
-    menu_head = str(df_bands.keys()[1])
+    # key_tracklist = ''
+    # x = request.POST
+    # for p in x:
+    #     key_tracklist = key_tracklist + x[p]
+    # print(key_tracklist)
+    # df_track_list = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\track_list.csv")
+
+
+    # df_bands = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\band_list.csv")
+    # menu_items = df_bands['cover bands']
+    # menu_head = str(df_bands.keys()[1])
 
 
   #  response = requests.get(
@@ -98,11 +95,16 @@ def main_page(request):
 
     context = {
         #'exchange rates': data,
-        'cover_bands': menu_items,
-        'table': ls_main,
+        # 'cover_bands': menu_items,
+        'table': table,
+        "all_songs": all_songs,
+        "all_bands": all_bands,
+        "all_bands_list": all_bands_list,
+        "cover_bands": cover_bands,
         'table_1': [],
         'loged': request.user.is_authenticated,
-        'username_loged': request.user.username
+        'username_loged': request.user.username,
+        'title': _('Пожалуйста')
     }
     #print(data)
 
@@ -112,6 +114,10 @@ def main_page(request):
 
 def main_page_2(request):
 
+    """ URL:
+        Function:
+        File: .html """
+
     context = {'loged': request.user.is_authenticated,
                'username_loged': request.user.username
     }
@@ -120,6 +126,11 @@ def main_page_2(request):
 
 
 def main(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     context = {'loged_2': request.user.is_authenticated,
     }
     return render(request, 'main.html', context)
@@ -127,6 +138,11 @@ def main(request):
 
 
 def login_user(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     user = authenticate(
         username=request.POST['username'],
         password=request.POST['password']
@@ -140,16 +156,21 @@ def login_user(request):
 
 
 def test(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     return render(request, 'test.html')
 # ______________________________________________________________________________________________________________________
 
 
-def logout_page(request):
-    return render(request, 'logout_page.html')
-# ______________________________________________________________________________________________________________________
-
-
 def do_logout(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     if request.user.is_authenticated:
         logout(request)
         return HttpResponseRedirect('/main')
@@ -159,11 +180,21 @@ def do_logout(request):
 
 
 def registration_form(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     return render(request, 'registration.html', {})
 # ______________________________________________________________________________________________________________________
 
 
 def register(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     user = User.objects.create_user(request.POST['login'],
                                     password=request.POST['password'],
                                     first_name=request.POST['first_name'],
@@ -178,6 +209,11 @@ def register(request):
 
 
 def ajax_path(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     a = str(randint(1, 100))
     response = {
         'message': request.POST['a'] + a
@@ -187,6 +223,11 @@ def ajax_path(request):
 
 
 def ajax_valid(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     x = User.objects.filter(username=request.POST['a'])
 
     if len(x) == 0:
@@ -202,6 +243,11 @@ def ajax_valid(request):
 
 
 def ajax_cb(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     x = request.POST['a']
     print(x)
     alph_ls = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '_', ' ']
@@ -230,6 +276,11 @@ def ajax_cb(request):
 
 
 def button_ok(request, x):
+
+    """ URL:
+        Function:
+        File: .html """
+
     creat_file = open("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\privet.csv", 'w')
     creat_file.write('artist,song')
     creat_file.close()
@@ -237,6 +288,11 @@ def button_ok(request, x):
 
 
 def band_list(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     df = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\band_list.csv")
     menu_items = df['cover bands']
     menu_head = str(df.keys()[1])
@@ -250,6 +306,11 @@ def band_list(request):
 
 
 def exchange_rates(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     response = requests.get(
         'http://www.nbrb.by/api/exrates/rates/145?startDate=2020-10-14&endDate=2020-10-20'
     )
@@ -267,6 +328,11 @@ def exchange_rates(request):
 
 
 def experiment(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     size = 1
     slice_size = 500
     Person.objects.all().delete()
@@ -299,19 +365,22 @@ def experiment(request):
 # ______________________________________________________________________________________________________________________
 
 
-def main(request):
-    return render(request,
-                  'main_page.html', {'title': _('Пожалуйста')}
-                  )
-# ______________________________________________________________________________________________________________________
-
-
 def page_3(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     return render(request, 'page_3.html', {})
 # ______________________________________________________________________________________________________________________
 
 
 def get_csv(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = \
         'attachment; filename="somefilename.csv"'
@@ -328,7 +397,12 @@ def get_csv(request):
 # ______________________________________________________________________________________________________________________
 
 
-def ajax_clock(request):
+def ajax_path(request):
+
+    """ URL: ajax_clock
+        Function: ajax_clock
+        File: .html """
+
     a = str(randint(1, 100))
     response = {
         'message': request.POST['a'] + a
@@ -337,11 +411,84 @@ def ajax_clock(request):
 # ______________________________________________________________________________________________________________________
 
 
+def ajax_clock(request):
+
+    """ URL: ajax_clock
+        Function: ajax_clock
+        File: .html """
+
+    a = str(datetime.now().time())
+    response = {
+        'message': request.POST['a'] + a
+    }
+    return JsonResponse(response)
+# ______________________________________________________________________________________________________________________
+
+
 def main_test_cash(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     return
 # ______________________________________________________________________________________________________________________
 
 
 def test_html(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
     return
+# ______________________________________________________________________________________________________________________
+
+
+def delete_cover_band(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
+    response = {
+        'message': request.GET['select_to_delete_cover_band']
+    }
+    print(request.GET['select_to_delete_cover_band'])
+    Band.objects.filter(band_name=request.GET['select_to_delete_cover_band']).delete()
+
+    return JsonResponse(response)
+# ______________________________________________________________________________________________________________________
+
+
+def add_cover_band(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
+    response = {
+        'message': request.GET['select_to_add_cover_band']
+    }
+    print(request.GET['select_to_add_cover_band'])
+    Band.objects.create(band_name=request.GET['select_to_add_cover_band'])
+
+    return JsonResponse(response)
+# ______________________________________________________________________________________________________________________
+
+
+def cover_bands_details(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
+    # response = {
+    #     'message': request.GET['cover_band_1_details']
+    # }
+    print(request.GET['cover_band_1_details'])
+    print(request.GET['cover_band_2_details'])
+
+
+    return JsonResponse()#(response)
 # ______________________________________________________________________________________________________________________
