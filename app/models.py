@@ -45,5 +45,5 @@ class ExportFolderName(models.Model):
 
 
 class ExportFileName(models.Model):
-    subject = models.CharField(max_length=125)
+    # subject = models.CharField(max_length=125)
     name = models.CharField(max_length=125)

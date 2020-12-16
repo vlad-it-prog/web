@@ -18,7 +18,7 @@ from django.utils.translation import ugettext as _
 import random
 from datetime import time
 from datetime import datetime
-from app.models import Track, Band, Client, Person, Person, Cash, Cat, Audio, ExportFolderName
+from app.models import Track, Band, Client, Person, Person, Cash, Cat, Audio, ExportFolderName, ExportFileName
 
 
 def help_page(request):
@@ -590,7 +590,10 @@ def name_export_file(request):
     response = {
         'message': ""
     }
+    ExportFileName.objects.create(subject="")
     print(export_file_name)
+
+
 
 
     # current_dir_name = ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name']
