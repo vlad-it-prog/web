@@ -37,3 +37,8 @@ class Cat(models.Model):                                                # Мод
 class Audio(models.Model):
     name = models.CharField(max_length=125)
     audio_file = models.FileField()
+
+
+class ExportFolderName(models.Model):
+    subject = models.CharField(max_length=125)
+    name = models.CharField(max_length=125)

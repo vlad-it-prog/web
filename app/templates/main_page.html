@@ -63,9 +63,37 @@
 
     <!-- Modal_2 "MAIN MENU -> Update" end -->
 
-        <!--- Modal_2 "MAIN MENU -> Export" --->
+     <!-- Modal_4 "MAIN MENU -> Export -> Are You Sure?" -->
 
-        <div class="modal" id="modal-export" tabindex="-1" role="dialog" aria-labelledby="modal-export" aria-hidden="true" xmlns="http://www.w3.org/1999/html">
+    <div class="modal" class="modal" id="export_cover_band_sure" tabindex="-1" role="dialog" aria-labelledby="export_cover_band_sure" aria-hidden="true">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" data-toggle="modal" data-target="#modal-export">&times;</span>
+        </button>
+        <div class="modal-dialog modal-dialog-scrollable" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="export">Export</h5></a>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" data-toggle="modal" data-target="#main_menu_export_cover_band">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding-bottom: 30px" align="center">
+                    Are You Sure you want to Export it?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="export_cb_yes" formaction="#export_cb_select" formmethod="get" class="btn btn-primary" title="Yes" style="width: 80px">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#modal-export" title="Cancel">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="close" title="Close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal_4 "MAIN MENU -> Export -> Are You Sure?" end -->
+
+    <!--- Modal_2 "MAIN MENU -> Export" --->
+
+    <div class="modal" id="modal-export" tabindex="-1" role="dialog" aria-labelledby="modal-export" aria-hidden="true" xmlns="http://www.w3.org/1999/html">
         <div align="right">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close">
                 <span aria-hidden="true">&times;</span>
@@ -90,31 +118,51 @@
                 <form method="post" action="">
                     <div style="padding-top: 30px" align="center">
                         <h6 style="padding-bottom: 30px">Enter Cover Band name you want to export:</h6>
-                        <input class="form-control mr-sm-2" style="width: 420px" id="export_cb_select" list="export_cb_name" class="class-band-menu" type="search" name="export_cover_band_name">
+                    </div>
+                <div class="row" style="padding-bottom: 10px">
+                    <div class="col-5">
+                        Cover Band Name:
+                    </div>
+                    <div class="col-7">
+                        <input class="form-control mr-sm-2" id="export_cb_select" list="export_cb_name" class="class-band-menu" type="search" name="export_cover_band_name" placeholder="Cover Band Name">
                         <datalist id="export_cb_name">
                             {% for cover_band_name in cover_bands %}
                                 <option>{{ cover_band_name }}</option>
                             {% endfor %}
                         </datalist>
                         <div>
-                            <select class="custom-select" style="width: 260px">
-                                <option>Full Track List</option>
-                                <option>Foreign Track List</option>
-                                <option>Domestic Track List</option>
-                            </select>
                         </div>
-
-                        <input class="form-control mr-sm-2" style="width: 420px" id="export_path_select" list="export_path_list_name" class="class-band-menu" type="search" name="export_path_name">
-                        <datalist id="export_path_list_name">
-                            {% for path_name in all_paths_list %}
-                                <option>{{ path_name }}</option>
-                            {% endfor %}
-                        </datalist>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 10px">
+                    <div class="col-5">
+                        Select Track List:
+                    </div>
+                    <div class="col-7">
+                        <select class="custom-select">
+                            <option>Full Track List</option>
+                            <option>Foreign Track List</option>
+                            <option>Domestic Track List</option>
+                        </select>
+                    </div>
+                </div>
+                    <div class="row" style="padding-bottom: 10px">
+                        <div class="col-5">
+                            Select Path to Export:
+                        </div>
+                        <div class="col-7">
+                            <input class="form-control mr-sm-2" id="export_path_select" list="export_path_list_name" class="class-band-menu" type="search" name="export_path_name" placeholder="Save Path">
+                            <datalist id="export_path_list_name">
+                                {% for path_name in all_paths_list %}
+                                    <option>{{ path_name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
                     </div>
                 </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" style="width: 100px" title="Export">Export</button>
+                    <button type="button" class="btn btn-primary" style="width: 100px" title="Export" data-toggle="modal" data-target="#export_cover_band_sure" data-dismiss="modal">Export</button>
                     <button type="button" class="btn btn-secondary" class="close" data-dismiss="modal" style="width: 100px" title="Close">Close</button>
                 </div>
             </div>
@@ -283,6 +331,115 @@
 
     <!-- Modal_4 "MAIN MENU -> Delete Cover Band" end -->
 
+        <!-- Scroll Style "MAIN MENU -> History" -->
+    <style type="text/css" scoped>
+        .scrollspy_history {
+            position: relative;
+            height: 150px;
+            margin-top: .5rem;
+            overflow: auto;
+        }
+    </style>
+    <!-- Scroll Style "MAIN MENU -> History" end -->
+
+    <!-- Modal_4 "MAIN MENU -> History" -->
+
+    <div class="modal" id="main_menu_history" tabindex="-1" role="dialog" aria-labelledby="main_menu_history" aria-hidden="true">
+        <div align="right">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-dialog modal-dialog-scrollable" role="dialog">
+            <div class="modal-content" style="padding-top: 30px">
+                <div class="modal-header" style="padding-top: 0px">
+                    <div align="left">
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="main_menu_history">History</h5></a>
+                    </div>
+                    <div align="right">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" title="Close">&times;</span>
+                        </button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                            <span aria-hidden="true" title="Help">?</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body" class="modal-scroll-window">
+                    <table class="table table-sm" class="modal-title" id="main_menu_history">
+                        <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>History Name</th>
+                          <th>Key Name</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <div data-spy="scroll" class="scrollspy_history">
+                        <table class="table table-sm" style="padding-top: 0px; padding-bottom: 0px">
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>History 1</td>
+                                <td>Ctrl + T</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>History 2</td>
+                                <td>Alt + O</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>History 3</td>
+                                <td>Q</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>History 4</td>
+                                <td>Ctrl + Enter</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>History 5</td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">6</th>
+                                <td>History 6</td>
+                                <td>O</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">7</th>
+                                <td>History 7</td>
+                                <td>Ctrl + Alt + L</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding-bottom: 0px">
+                    <table class="table table-sm" style="padding-top: 0px; padding-bottom: 0px">
+                        <tbody>
+                        <thead>
+                    <th scope="row"></th>
+                    <th><input type="text" name="Input Command Name" class="form-control" id="" placeholder="Input Command Name"></th>
+                    <th><input type="text" name="Input Key" class="form-control" id="" placeholder="Input Key"></th>
+                    </thead>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer" style="padding-top: 0px; padding-bottom: 20px">
+                    <button type="button" class="btn btn-primary" style="width: 100px" title="Search">Search</button>
+                    <button type="button" class="btn btn-primary" style="width: 100px" title="Add Key">Add Key</button>
+                    <button type="button" class="btn btn-primary" style="width: 100px" title="Save changes">OK</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px" title="Close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal_4 "MAIN MENU -> History" end -->
+
     <!-- Scroll Style "MAIN MENU -> Key Commands" -->
     <style type="text/css" scoped>
         .scrollspy-example-2 {
@@ -416,6 +573,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
+                    <form id="settings_form">
                         <div class="row">
                             <div class="col-10">
                                 <label>Setting 1</label>
@@ -433,14 +591,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-10">
-                                <label>Setting 3</label>
+                            <div class="col-6">
+                                <label>Export Files Folder Name: </label>
                             </div>
-                            <div class="col-2">
-                                <input type="checkbox">
+                            <div class="col-6">
+                                <input id="new_export_folder_name_input" type="text" class="form-control mr-sm-6" name="export_folder_name" placeholder="{{ dir_name }}" required>
                             </div>
                         </div>
-                                            <div class="row">
+                    <div class="row">
                             <div class="col-6">
                                 <label>Language</label>
                             </div>
@@ -456,9 +614,10 @@
                                 </form>
                             </div>
                         </div>
+                    </form>
             </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" title="Save Changes">Save Changes</button>
+                    <button id="settings_save_changes_button" type="submit" form="#settings_form" formmethod="get" class="btn btn-primary" title="Save Changes">Save Changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" title="Close">Close</button>
                 </div>
             </div>
@@ -740,6 +899,8 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="button dropdown-item" data-toggle="modal" href="#main_menu_add_cover_band" style="text-align: center">ADD COVER BAND</a>
                                 <a class="button dropdown-item" data-toggle="modal" href="#main_menu_delete_cover_band" style="text-align: center">DELETE COVER BAND</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="button dropdown-item" data-toggle="modal" href="#main_menu_history" data-target="#main_menu_history" style="text-align: center">HISTORY</a> <!-- Button trigger modal -->
                                 <div class="dropdown-divider"></div>
                                 <a class="button dropdown-item" data-toggle="modal" href="#id90" data-target="#Modal-Key-Commands" style="text-align: center">KEY COMMANDS</a> <!-- Button trigger modal -->
                                 <a class="button dropdown-item" data-toggle="modal" href="#main_menu_settings" style="text-align: center">SETTINGS</a>

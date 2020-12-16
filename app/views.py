@@ -18,7 +18,7 @@ from django.utils.translation import ugettext as _
 import random
 from datetime import time
 from datetime import datetime
-from app.models import Track, Band, Client, Person, Person, Cash, Cat, Audio
+from app.models import Track, Band, Client, Person, Person, Cash, Cat, Audio, ExportFolderName
 
 
 def help_page(request):
@@ -73,7 +73,14 @@ def main_page(request):
     for track in range(len(Track.objects.values())):
         table.append([track + 1, Track.objects.order_by("artist_name").values()[track]['artist_name'], Track.objects.order_by("artist_name").values()[track]['song_name']])
 
+    dir_name = ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name']
+    if dir_name not in os.listdir():
+        os.makedirs(os.path.split(os.path.abspath(os.listdir()[0]))[0] + "\\" + dir_name)
+    else:
+        pass
 
+    print(os.listdir())
+    # print(os.path.basename('C:\\Users\\User\\PycharmProjects\\test_python\\test_1'))
 
     # key_tracklist = ''
     # x = request.POST
@@ -97,6 +104,7 @@ def main_page(request):
         #'exchange rates': data,
         # 'cover_bands': menu_items,
         'table': table,
+        "dir_name": dir_name,
         "all_songs": all_songs,
         "all_bands": all_bands,
         "all_bands_list": all_bands_list,
@@ -467,11 +475,28 @@ def add_cover_band(request):
         Function:
         File: .html """
 
-    response = {
-        'message': request.GET['select_to_add_cover_band']
-    }
+    band = request.GET['select_to_add_cover_band']
+
+    band_name_list = []
+    for x in range(len(Band.objects.values("band_name"))):
+        band_name_list.append(Band.objects.values()[x]["band_name"])
+    print(band_name_list)
+
+    if len(request.GET['select_to_add_cover_band']) == 0:
+        response = {
+            'message': "Nothing was ever done!"
+        }
+    elif band in band_name_list:
+        response = {
+            'message': "This Cover Band is already exist!"
+        }
+    else:
+        response = {
+            'message': ''
+        }
+        Band.objects.create(band_name=request.GET['select_to_add_cover_band'])
     print(request.GET['select_to_add_cover_band'])
-    Band.objects.create(band_name=request.GET['select_to_add_cover_band'])
+
 
     return JsonResponse(response)
 # ______________________________________________________________________________________________________________________
@@ -492,3 +517,35 @@ def cover_bands_details(request):
 
     return JsonResponse()#(response)
 # ______________________________________________________________________________________________________________________
+
+
+def rename_export_folder(request):
+
+    """ URL: rename_export_folder
+        Function: rename_export_folder
+        File: main_page.html
+        Element path (web/html): "MAIN MENU" button --> "Settings" button --> "Settings Modal Window" --> "Export Files Folder
+        Name:..." input + "Save Changes" button
+        JS path: """
+
+    current_dir_name = ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name']
+    if len(request.GET['new_export_folder_name']) == 0:
+        response = {
+            'message': "don't alert"
+        }
+    elif request.GET['new_export_folder_name'] == current_dir_name:
+        response = {
+            'message': "don't alert"
+        }
+    else:
+        response = {
+            'message': ""
+        }
+        os.rename(current_dir_name, request.GET['new_export_folder_name'])
+        ExportFolderName.objects.filter(subject='export folder').update(name=request.GET['new_export_folder_name'])
+
+    print(ExportFolderName.objects.values())
+
+    return JsonResponse(response)
+# ______________________________________________________________________________________________________________________
+
