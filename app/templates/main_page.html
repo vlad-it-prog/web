@@ -151,7 +151,7 @@
                             Select Path to Export:
                         </div>
                         <div class="col-7">
-                            <input class="form-control mr-sm-2" id="export_path_select" list="export_path_list_name" class="class-band-menu" type="search" name="export_path_name" placeholder="Save Path">
+                            <input class="form-control mr-sm-2" id="export_path_select" list="export_path_list_name" class="class-band-menu" type="search" name="export_path_name" placeholder="{{ export_path }}">
                             <datalist id="export_path_list_name">
                                 {% for path_name in all_paths_list %}
                                     <option>{{ path_name }}</option>

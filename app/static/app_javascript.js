@@ -164,16 +164,42 @@ $(document).ready(function() {
 //______________________________________________________________________________________________________________________
 
 
+        // """ URL: delete_cover_band
+        // Function: delete_cover_band
+        // File: main_page.html
+        // Element path (web/html): "MAIN MENU" button --> "Delete Cover Band" button --> "Delete Cover Band Modal Window"
+        // --> "Export Files Folder
+        // Name:..." input + "Delete" button
+        // JS path: """
+
     $("#delete_cb_yes").click(function () {
         $.get(
             "delete_cover_band",
             {
                 'select_to_delete_cover_band': $("#delete_cb_select").val()
-            }),
-        window.location.pathname = '/main_page'
-        alert(('Cover Band "') + $("#delete_cb_select").val() + ('" was deleted successfully!'))
+            },
+            (function (response) {
+                if (response.message == "Nothing was ever done!") {
+                    // window.location.pathname = '/main_page'
+                    alert(("You have not enter the Cover Band name! Please, try again."))
+                    // $("#main_menu_add_cover_band").selected()
+                    window.location.pathname = '/main_page'
+                } else if (response.message == "This Cover Band does not exist in the band list!") {
+                    // window.location.pathname = '/main_page'
+                    alert(("This Cover Band does not exist in the band list! Please, try again."))
+                    window.location.pathname = '/main_page'
+                } else {
+                    alert(('Cover Band "') + $("#delete_cb_select").val() + ('" was deleted successfully!'))
+                    window.location.pathname = '/main_page'
+                }
+            })
+        )
     })
-//______________________________________________________________________________________________________________________
+            // ),
+    //     window.location.pathname = '/main_page'
+    //     alert(('Cover Band "') + $("#delete_cb_select").val() + ('" was deleted successfully!'))
+    // })
+    // delete_cover_band End______________________________________________________________________________________________________________________
 
 
     $("#add_cb_yes").click(function () {

@@ -80,6 +80,9 @@ def main_page(request):
         pass
 
     print(os.listdir())
+
+    export_path = os.path.abspath(ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name'] + "\\")
+
     # print(os.path.basename('C:\\Users\\User\\PycharmProjects\\test_python\\test_1'))
 
     # key_tracklist = ''
@@ -105,6 +108,7 @@ def main_page(request):
         # 'cover_bands': menu_items,
         'table': table,
         "dir_name": dir_name,
+        "export_path": export_path,
         "all_songs": all_songs,
         "all_bands": all_bands,
         "all_bands_list": all_bands_list,
@@ -455,15 +459,36 @@ def test_html(request):
 
 def delete_cover_band(request):
 
-    """ URL:
-        Function:
-        File: .html """
+    """ URL: delete_cover_band
+        Function: delete_cover_band
+        File: main_page.html
+        Element path (web/html): "MAIN MENU" button --> "Delete Cover Band" button --> "Delete Cover Band Modal Window"
+        --> "Export Files Folder
+        Name:..." input + "Delete" button
+        JS path: """
 
-    response = {
-        'message': request.GET['select_to_delete_cover_band']
-    }
+    band_delete = request.GET['select_to_delete_cover_band']
+
+    band_name_list = []
+    for x in range(len(Band.objects.values("band_name"))):
+        band_name_list.append(Band.objects.values()[x]["band_name"])
+    print(band_name_list)
+
+    if len(request.GET['select_to_delete_cover_band']) == 0:
+        response = {
+            'message': "Nothing was ever done!"
+        }
+    elif band_delete not in band_name_list and band_delete != "":
+        response = {
+            'message': "This Cover Band does not exist in the band list!"
+        }
+    else:
+        response = {
+            'message': ""
+        }
+        Band.objects.filter(band_name=request.GET['select_to_delete_cover_band']).delete()
     print(request.GET['select_to_delete_cover_band'])
-    Band.objects.filter(band_name=request.GET['select_to_delete_cover_band']).delete()
+
 
     return JsonResponse(response)
 # ______________________________________________________________________________________________________________________
