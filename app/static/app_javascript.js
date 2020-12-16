@@ -287,11 +287,17 @@ $(document).ready(function() {
                 'new_export_file_name': $("#export_cb_name_select").val()
             },
             (function (response) {
-                alert($("#export_cb_name_select").val())
-                window.location.pathname = '/main_page'
-
-            }
-            ))})
+                if ($("#export_cb_name_select").val() == "") {
+                    alert('File "' + response.message + '.csv" was successfully created on path !')
+                    window.location.pathname = '/main_page'
+                } else {
+                    alert($("#export_cb_name_select").val() + ", " + $(response.message))
+                    window.location.pathname = '/main_page'
+                    // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
+                }
+            })
+        )
+    })
     //         (function (response) {
     //             if (response.message == "don't alert") {
     //                 window.location.pathname = '/main_page'

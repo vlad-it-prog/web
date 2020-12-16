@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 import requests
 import json
 from django.utils.translation import ugettext as _
-
+import re
 import random
 from datetime import time
 from datetime import datetime
@@ -584,15 +584,33 @@ def name_export_file(request):
         Name:..." input + "Save Changes" button
         JS path: """
 
-    # os.path.abspath(ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name'] + "\\")
-
     export_file_name = request.GET["new_export_file_name"]
-    response = {
-        'message': ""
-    }
-    ExportFileName.objects.create(subject="")
-    print(export_file_name)
+    
+    if export_file_name == "":
+        file_name_list = []
+        for x in range(len(ExportFileName.objects.values('name'))):
+            if re.match("^default list\s\d+$", ExportFileName.objects.values()[x]['name']) is not None:
+                file_name_list.append(ExportFileName.objects.values()[x]['name'])
 
+        default_number = 0
+        for file_name in file_name_list:
+            if default_number <= int(re.match("^default list\s(\d+)$", file_name)[1]):
+                default_number = int(re.match("^default list\s(\d+)$", file_name)[1])
+            else:
+                continue
+
+        default_export_file_name = "default list " + str(default_number + 1)
+        print(default_export_file_name)
+        ExportFileName.objects.create(name=default_export_file_name)
+        creat_file = open((os.path.abspath(ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name'] + "\\") + default_export_file_name + ".csv"), 'w')
+        # creat_file.write('artist,song')
+        creat_file.close()
+    response = {
+        'message': default_export_file_name
+    }
+
+    #ExportFileName.objects.create(name=request.GET["new_export_file_name"])
+    # print(export_file_name)
 
 
 
