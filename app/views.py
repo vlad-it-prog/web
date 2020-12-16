@@ -574,3 +574,42 @@ def rename_export_folder(request):
     return JsonResponse(response)
 # ______________________________________________________________________________________________________________________
 
+
+def name_export_file(request):
+
+    """ URL: name_export_file
+        Function: name_export_file
+        File: main_page.html
+        Element path (web/html): "MAIN MENU" button --> "Settings" button --> "Settings Modal Window" --> "Export Files Folder
+        Name:..." input + "Save Changes" button
+        JS path: """
+
+    # os.path.abspath(ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name'] + "\\")
+
+    export_file_name = request.GET["new_export_file_name"]
+    response = {
+        'message': ""
+    }
+    print(export_file_name)
+
+
+    # current_dir_name = ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name']
+    # if len(request.GET['new_export_folder_name']) == 0:
+    #     response = {
+    #         'message': "don't alert"
+    #     }
+    # elif request.GET['new_export_folder_name'] == current_dir_name:
+    #     response = {
+    #         'message': "don't alert"
+    #     }
+    # else:
+    #     response = {
+    #         'message': ""
+    #     }
+    #     os.rename(current_dir_name, request.GET['new_export_folder_name'])
+    #     ExportFolderName.objects.filter(subject='export folder').update(name=request.GET['new_export_folder_name'])
+    #
+    # print(ExportFolderName.objects.values())
+
+    return JsonResponse(response)
+# ______________________________________________________________________________________________________________________

@@ -81,7 +81,7 @@
                     Are You Sure you want to Export it?
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="export_cb_yes" formaction="#export_cb_select" formmethod="get" class="btn btn-primary" title="Yes" style="width: 80px">Yes</button>
+                    <button type="submit" id="export_cb_yes" formaction="#export_form" formmethod="get" form="#export_form" class="btn btn-primary" title="Yes" style="width: 80px" data-toggle="modal" data-dismiss="modal" data-target="export_cb_yes">Yes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#modal-export" title="Cancel">Cancel</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="close" title="Close">Close</button>
                 </div>
@@ -115,7 +115,7 @@
                         </div>
                 </div>
                 <div class="modal-body">
-                <form method="post" action="">
+                <form id="export_form" method="get" action="" name="export_form">
                     <div style="padding-top: 30px" align="center">
                         <h6 style="padding-bottom: 30px">Enter Cover Band name you want to export:</h6>
                     </div>
@@ -124,7 +124,7 @@
                         Cover Band Name:
                     </div>
                     <div class="col-7">
-                        <input class="form-control mr-sm-2" id="export_cb_select" list="export_cb_name" class="class-band-menu" type="search" name="export_cover_band_name" placeholder="Cover Band Name">
+                        <input class="form-control mr-sm-2" id="export_cb_name_select" list="export_cb_name" class="class-band-menu" type="search" name="export_file_name" placeholder="Cover Band Name">
                         <datalist id="export_cb_name">
                             {% for cover_band_name in cover_bands %}
                                 <option>{{ cover_band_name }}</option>

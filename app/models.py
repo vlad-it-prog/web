@@ -42,3 +42,8 @@ class Audio(models.Model):
 class ExportFolderName(models.Model):
     subject = models.CharField(max_length=125)
     name = models.CharField(max_length=125)
+
+
+class ExportFileName(models.Model):
+    subject = models.CharField(max_length=125)
+    name = models.CharField(max_length=125)

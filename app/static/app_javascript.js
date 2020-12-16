@@ -272,4 +272,37 @@ $(document).ready(function() {
 
     // rename_export_folder End_________________________________________________________________________________________
 
+    //    """ URL: name_export_file
+    //         Function: name_export_file
+    //         File: main_page.html
+    //         Element path (web/html): "MAIN MENU" button --> "Settings" button --> "Settings Modal Window" --> "Export Files Folder
+    //         Name:..." input + "Save Changes" button
+    //         JS path: """
+
+    $("#export_cb_yes").click(function () {
+        $.get(
+            "name_export_file",
+            {
+                // 'new_export_file_name': $(document).forms["export_form"].export_file_name.value
+                'new_export_file_name': $("#export_cb_name_select").val()
+            },
+            (function (response) {
+                alert($("#export_cb_name_select").val())
+                window.location.pathname = '/main_page'
+
+            }
+            ))})
+    //         (function (response) {
+    //             if (response.message == "don't alert") {
+    //                 window.location.pathname = '/main_page'
+    //             } else {
+    //                 window.location.pathname = '/main_page'
+    //                 alert(('Fxport Folder was renamed "') + $("#new_export_folder_name_input").val() + ('" successfully!'))
+    //                 // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
+    //             }
+    //         })
+    //     )
+    // })
+
+    // rename_export_folder End_________________________________________________________________________________________
 });

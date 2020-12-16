@@ -5,7 +5,7 @@ from app.views import \
     ajax_cb, band_list, \
     page_3, main_test_cash, login, test_html, help_page, \
     add_new_cover_band_to_band_list, ajax_clock, delete_cover_band, add_cover_band, cover_bands_details, \
-    rename_export_folder
+    rename_export_folder, name_export_file
 
 
 urlpatterns = [
@@ -44,6 +44,7 @@ urlpatterns = [
     path('add_cover_band', add_cover_band),
     path('cover_bands_details', cover_bands_details),
     path('rename_export_folder', rename_export_folder),
+    path('name_export_file', name_export_file),
 
 ]
 
