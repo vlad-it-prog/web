@@ -290,8 +290,12 @@ $(document).ready(function() {
                 if ($("#export_cb_name_select").val() == "") {
                     alert('File "' + response.message + '.csv" was successfully created on path !')
                     window.location.pathname = '/main_page'
+                } else if (response.message == "This Cover Band name does not exist in the Band list! Please, try again!") {
+                    alert(response.message)
+                    window.location.pathname = '/main_page'
+                    // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
                 } else {
-                    alert($("#export_cb_name_select").val() + ", " + $(response.message))
+                    alert('File "' + response.message + '.csv" was successfully created on path !')
                     window.location.pathname = '/main_page'
                     // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
                 }

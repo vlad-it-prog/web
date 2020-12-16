@@ -584,9 +584,30 @@ def name_export_file(request):
         Name:..." input + "Save Changes" button
         JS path: """
 
+    other_file_name_list = []
     export_file_name = request.GET["new_export_file_name"]
-    
-    if export_file_name == "":
+
+    for y in range(len(Band.objects.values('band_name'))):
+        other_file_name_list.append(Band.objects.values()[y]['band_name'])
+
+    if export_file_name in other_file_name_list:
+        for dir_content_name in os.path.abspath(ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name'] + "\\"):
+            if re.match(export_file_name + "^\s\d+$", dir_content_name) is not None:
+                creat_file = open((os.path.abspath(ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name'] + "\\") + export_file_name + " 1.csv"), 'w')
+                # creat_file.write('artist,song')
+                creat_file.close()
+            else:
+                creat_file = open((os.path.abspath(
+                    ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1][
+                        'name'] + "\\") + export_file_name + ".csv"), 'w')
+                # creat_file.write('artist,song')
+                creat_file.close()
+
+        response = {
+            'message': export_file_name
+        }
+
+    elif export_file_name == "":
         file_name_list = []
         for x in range(len(ExportFileName.objects.values('name'))):
             if re.match("^default list\s\d+$", ExportFileName.objects.values()[x]['name']) is not None:
@@ -605,32 +626,15 @@ def name_export_file(request):
         creat_file = open((os.path.abspath(ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name'] + "\\") + default_export_file_name + ".csv"), 'w')
         # creat_file.write('artist,song')
         creat_file.close()
-    response = {
-        'message': default_export_file_name
-    }
 
-    #ExportFileName.objects.create(name=request.GET["new_export_file_name"])
-    # print(export_file_name)
+        response = {
+            'message': default_export_file_name
+        }
 
-
-
-    # current_dir_name = ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name']
-    # if len(request.GET['new_export_folder_name']) == 0:
-    #     response = {
-    #         'message': "don't alert"
-    #     }
-    # elif request.GET['new_export_folder_name'] == current_dir_name:
-    #     response = {
-    #         'message': "don't alert"
-    #     }
-    # else:
-    #     response = {
-    #         'message': ""
-    #     }
-    #     os.rename(current_dir_name, request.GET['new_export_folder_name'])
-    #     ExportFolderName.objects.filter(subject='export folder').update(name=request.GET['new_export_folder_name'])
-    #
-    # print(ExportFolderName.objects.values())
+    else:
+        response = {
+            'message': "This Cover Band name does not exist in the Band list! Please, try again!"
+        }
 
     return JsonResponse(response)
 # ______________________________________________________________________________________________________________________
