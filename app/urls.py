@@ -1,33 +1,31 @@
 from django.urls import path
 from app.views import \
-    main_page, main, test, login_user, do_logout, \
-    login_page, register, registration_form, ajax_path, ajax_valid, \
+    main_page, test, login_user, do_logout, \
+    login_page, register, registration, ajax_path, ajax_valid, \
     ajax_cb, band_list, \
-    page_3, main_test_cash, login, test_html, help_page, \
-    add_new_cover_band_to_band_list, ajax_clock, delete_cover_band, add_cover_band, cover_bands_details, \
-    rename_export_folder, name_export_file
+    page_3, main_test_cash, test_html, help_page, \
+    add_new_cover_band_to_band_list, delete_cover_band, add_cover_band, cover_bands_details, \
+    rename_export_folder, name_export_file, sort_track_list_change, song_list_page, player
 
 
 urlpatterns = [
 
     path('login_page', login_page),
-    path('registeration', registration_form),  # Путь к странице с формой регистрации      (registration.html)
+    path('registration', registration),  # Путь к странице с формой регистрации      (registration.html)
 
 
     path('main_page', main_page),                      # Путь к главной странице                   ('main_page.html')
     path('help_page', help_page),                      # Путь к странице помощи                    ('help_page.html')
 
     path('add_new_cover_band_to_band_list', add_new_cover_band_to_band_list),
-    path('ajax_clock', ajax_clock),
 
 
     # Путь к странице с формой Login
 
-    path('main', main),                             #
-    path('main_error', login_user),                 #
+    path('login_user', login_user),                 #
     path('test', test),                             # Путь к тестовой страние                   (test.html)
-    path('logout', do_logout),                      #
-    path('register_2', register),                   #
+    path('do_logout', do_logout),                      #
+    path('register', register),                   #
     path('path_4', ajax_valid),                     #
     path('path_5', ajax_cb),                        #
     # path('path_7', button_ok),                      #
@@ -45,6 +43,10 @@ urlpatterns = [
     path('cover_bands_details', cover_bands_details),
     path('rename_export_folder', rename_export_folder),
     path('name_export_file', name_export_file),
+    path('sort_track_list_change', sort_track_list_change),
+    path('song_list_page', song_list_page),
+    path('player', player),
+
 
 ]
 

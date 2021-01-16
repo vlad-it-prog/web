@@ -1,5 +1,6 @@
 {% extends "common.html" %}
 {% block content %}
+    {% load i18n %}
 
 
     <!--- Modal_1 "Entering the App": Модальное окно, всплывающее при загрузке главной страницы main_page. --->
@@ -10,11 +11,11 @@
             <div class="modal-content">
                 <div class="modal-body" class="modal-window">
                     <div class="modal-window-text" align="center">
-                        <strong>{% if  loged  %}Привет, {{ username_loged }}!</strong>{% else %}Please, sign in the App. {% endif %}
+                        <strong>{% if  loged %}{% trans "Привет" %}, {{ username_loged }}!</strong>{% else %}{% trans "Пожалуйста, Войдите в Приложение." %} {% endif %}
                     </div>
                     <div align="right">
-                        <button type="button" class="btn btn-primary">Save Changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">{% trans "Сохранить Изменения" %}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Закрыть" %}</button>
                     </div>
                 </div>
             </div>
@@ -25,35 +26,40 @@
 
     <!--- Modal_2 "MAIN MENU -> Update" --->
 
-        <div class="modal" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="modal-update" aria-hidden="true" xmlns="http://www.w3.org/1999/html">
+    <div class="modal" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="modal-update" aria-hidden="true"
+         xmlns="http://www.w3.org/1999/html">
         <div align="right">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="{% trans "Закрыть" %}">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                        <div align="left">
-                            <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="update">Update</h5></a>
-                        </div>
-                        <div align="right">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true" title="Close">&times;</span>
-                            </button>
-                            <button id="button_help" type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#main_menu_help" aria-label="Close" style="cursor: help">
-                                <span aria-hidden="true" title="Help">?</span>
-                            </button>
-                        </div>
+                    <div align="left">
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="update">{% trans "Обновить" %}</h5></a>
+                    </div>
+                    <div align="right">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" title="{% trans "Закрыть" %}">&times;</span>
+                        </button>
+                        <button id="button_help" type="button" class="close" data-dismiss="modal" data-toggle="modal"
+                                data-target="#main_menu_help" aria-label="Close" style="cursor: help">
+                            <span aria-hidden="true" title="{% trans "Помощь" %}">?</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <div align="center" style="height: 100px">
-                        <h6 style="padding-top: 30px">Are you sure you  want to update all databases?</h6>
+                        <h6 style="padding-top: 30px">{% trans "Вы уверены, что хотите обновить все базы данных?" %}</h6>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" style="width: 100px" title="Update">Update</button>
-                    <button type="button" class="btn btn-secondary" class="close" data-dismiss="modal" style="width: 100px" title="Close">Close</button>
+                    <button type="button" class="btn btn-primary" style="width: 100px" title="{% trans "Обновить" %}">{% trans "Обновить" %}</button>
+                    <button type="button" class="btn btn-secondary" class="close" data-dismiss="modal"
+                            style="width: 100px" title="{% trans "Закрыть" %}">{% trans "Закрыть" %}
+                    </button>
                 </div>
             </div>
         </div>
@@ -63,27 +69,37 @@
 
     <!-- Modal_2 "MAIN MENU -> Update" end -->
 
-     <!-- Modal_4 "MAIN MENU -> Export -> Are You Sure?" -->
+    <!-- Modal_4 "MAIN MENU -> Export -> Are You Sure?" -->
 
-    <div class="modal" class="modal" id="export_cover_band_sure" tabindex="-1" role="dialog" aria-labelledby="export_cover_band_sure" aria-hidden="true">
+    <div class="modal" class="modal" id="export_cover_band_sure" tabindex="-1" role="dialog"
+         aria-labelledby="export_cover_band_sure" aria-hidden="true">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" data-toggle="modal" data-target="#modal-export">&times;</span>
         </button>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="export">Export</h5></a>
+                    <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                       style="cursor: help"><h5 class="modal-title" id="export">{% trans "Экспортировать" %}</h5></a>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" data-toggle="modal" data-target="#main_menu_export_cover_band">&times;</span>
+                        <span aria-hidden="true" data-toggle="modal"
+                              data-target="#main_menu_export_cover_band">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="padding-bottom: 30px" align="center">
-                    Are You Sure you want to Export it?
+                    {% trans "Вы Уверены, Что Хотите Экспортировать Это?" %}
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="export_cb_yes" formaction="#export_form" formmethod="get" form="#export_form" class="btn btn-primary" title="Yes" style="width: 80px" data-toggle="modal" data-dismiss="modal" data-target="export_cb_yes">Yes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#modal-export" title="Cancel">Cancel</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="close" title="Close">Close</button>
+                    <button type="submit" id="export_cb_yes" formaction="#export_form" formmethod="get"
+                            form="#export_form" class="btn btn-primary" title="{% trans "Да" %}" style="width: 80px"
+                            data-toggle="modal" data-dismiss="modal" data-target="export_cb_yes">{% trans "Да" %}
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                            data-target="#modal-export" title="{% trans "Выйти" %}">{% trans "Выйти" %}
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                            data-target="close" title="{% trans "Закрыть" %}">{% trans "Закрыть" %}
+                    </button>
                 </div>
             </div>
         </div>
@@ -93,77 +109,88 @@
 
     <!--- Modal_2 "MAIN MENU -> Export" --->
 
-    <div class="modal" id="modal-export" tabindex="-1" role="dialog" aria-labelledby="modal-export" aria-hidden="true" xmlns="http://www.w3.org/1999/html">
+    <div class="modal" id="modal-export" tabindex="-1" role="dialog" aria-labelledby="modal-export" aria-hidden="true"
+         xmlns="http://www.w3.org/1999/html">
         <div align="right">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="{% trans "Закрыть" %}">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                        <div align="left">
-                            <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="export">Export</h5></a>
-                        </div>
-                        <div align="right">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true" title="Close">&times;</span>
-                            </button>
-                            <button id="button_help" type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#main_menu_help" aria-label="Close" style="cursor: help">
-                                <span aria-hidden="true" title="Help">?</span>
-                            </button>
-                        </div>
+                    <div align="left">
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="export">{% trans "Экспортировать" %}</h5></a>
+                    </div>
+                    <div align="right">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" title="{% trans "Закрыть" %}">&times;</span>
+                        </button>
+                        <button id="button_help" type="button" class="close" data-dismiss="modal" data-toggle="modal"
+                                data-target="#main_menu_help" aria-label="Close" style="cursor: help">
+                            <span aria-hidden="true" title="{% trans "Помощь" %}">?</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="modal-body">
-                <form id="export_form" method="get" action="" name="export_form">
-                    <div style="padding-top: 30px" align="center">
-                        <h6 style="padding-bottom: 30px">Enter Cover Band name you want to export:</h6>
-                    </div>
-                <div class="row" style="padding-bottom: 10px">
-                    <div class="col-5">
-                        Cover Band Name:
-                    </div>
-                    <div class="col-7">
-                        <input class="form-control mr-sm-2" id="export_cb_name_select" list="export_cb_name" class="class-band-menu" type="search" name="export_file_name" placeholder="Cover Band Name">
-                        <datalist id="export_cb_name">
-                            {% for cover_band_name in cover_bands %}
-                                <option>{{ cover_band_name }}</option>
-                            {% endfor %}
-                        </datalist>
-                        <div>
+                    <form id="export_form" method="get" action="" name="export_form">
+                        <div style="padding-top: 30px" align="center">
+                            <h6 style="padding-bottom: 30px">{% trans "Введите имя Кавер Бенда, который вы хотите экспортировать:" %}</h6>
                         </div>
-                    </div>
-                </div>
-                <div class="row" style="padding-bottom: 10px">
-                    <div class="col-5">
-                        Select Track List:
-                    </div>
-                    <div class="col-7">
-                        <select class="custom-select">
-                            <option>Full Track List</option>
-                            <option>Foreign Track List</option>
-                            <option>Domestic Track List</option>
-                        </select>
-                    </div>
-                </div>
-                    <div class="row" style="padding-bottom: 10px">
-                        <div class="col-5">
-                            Select Path to Export:
+                        <div class="row" style="padding-bottom: 10px">
+                            <div class="col-5">
+                                {% trans "Имя Кавер Бенда:" %}
+                            </div>
+                            <div class="col-7">
+                                <input class="form-control mr-sm-2" id="export_cb_name_select" list="export_cb_name"
+                                       class="class-band-menu" type="search" name="export_file_name"
+                                       placeholder="{% trans "Имя Кавер Бенда" %}">
+                                <datalist id="export_cb_name">
+                                    {% for cover_band_name in cover_bands %}
+                                        <option>{{ cover_band_name }}</option>
+                                    {% endfor %}
+                                </datalist>
+                                <div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-7">
-                            <input class="form-control mr-sm-2" id="export_path_select" list="export_path_list_name" class="class-band-menu" type="search" name="export_path_name" placeholder="{{ export_path }}">
-                            <datalist id="export_path_list_name">
-                                {% for path_name in all_paths_list %}
-                                    <option>{{ path_name }}</option>
-                                {% endfor %}
-                            </datalist>
+                        <div class="row" style="padding-bottom: 10px">
+                            <div class="col-5">
+                                Select Track List:
+                            </div>
+                            <div class="col-7">
+                                <select class="custom-select">
+                                    <option>Full Track List</option>
+                                    <option>Foreign Track List</option>
+                                    <option>Domestic Track List</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                        <div class="row" style="padding-bottom: 10px">
+                            <div class="col-5">
+                                Select Path to Export:
+                            </div>
+                            <div class="col-7">
+                                <input class="form-control mr-sm-2" id="export_path_select" list="export_path_list_name"
+                                       class="class-band-menu" type="search" name="export_path_name"
+                                       placeholder="{{ export_path }}">
+                                <datalist id="export_path_list_name">
+                                    {% for path_name in all_paths_list %}
+                                        <option>{{ path_name }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" style="width: 100px" title="Export" data-toggle="modal" data-target="#export_cover_band_sure" data-dismiss="modal">Export</button>
-                    <button type="button" class="btn btn-secondary" class="close" data-dismiss="modal" style="width: 100px" title="Close">Close</button>
+                    <button type="button" class="btn btn-primary" style="width: 100px" title="Export"
+                            data-toggle="modal" data-target="#export_cover_band_sure" data-dismiss="modal">Export
+                    </button>
+                    <button type="button" class="btn btn-secondary" class="close" data-dismiss="modal"
+                            style="width: 100px" title="Close">Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -174,25 +201,34 @@
 
     <!-- Modal_4 "MAIN MENU -> Add Cover Band -> Are You Sure?" -->
 
-    <div class="modal" class="modal" id="add_cover_band_sure" tabindex="-1" role="dialog" aria-labelledby="add_cover_band_sure" aria-hidden="true">
+    <div class="modal" class="modal" id="add_cover_band_sure" tabindex="-1" role="dialog"
+         aria-labelledby="add_cover_band_sure" aria-hidden="true">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" data-toggle="modal" data-target="#main_menu_delete_cover_band">&times;</span>
         </button>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="add">Add Cover Band</h5></a>
+                    <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                       style="cursor: help"><h5 class="modal-title" id="add">Add Cover Band</h5></a>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" data-toggle="modal" data-target="#main_menu_add_cover_band">&times;</span>
+                        <span aria-hidden="true" data-toggle="modal"
+                              data-target="#main_menu_add_cover_band">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="padding-bottom: 30px" align="center">
                     Are You Sure you want to add this Cover Band?
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="add_cb_yes" formaction="#delete_cb_select" formmethod="get" class="btn btn-primary" title="Yes" style="width: 80px">Yes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#main_menu_add_cover_band" title="Cancel">Cancel</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="close" title="Close">Close</button>
+                    <button type="submit" id="add_cb_yes" formaction="#delete_cb_select" formmethod="get"
+                            class="btn btn-primary" title="Yes" style="width: 80px">Yes
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                            data-target="#main_menu_add_cover_band" title="Cancel">Cancel
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                            data-target="close" title="Close">Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -203,7 +239,8 @@
 
     <!-- Modal_3 "MAIN MENU -> Add Cover Band" -->
 
-        <div class="modal" id="main_menu_add_cover_band" tabindex="-1" role="dialog" aria-labelledby="main_menu_add_cover_band" aria-hidden="true">
+    <div class="modal" id="main_menu_add_cover_band" tabindex="-1" role="dialog"
+         aria-labelledby="main_menu_add_cover_band" aria-hidden="true">
         <div align="right">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" title="Close">&times;</span>
@@ -213,28 +250,32 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div align="left">
-                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="main_menu_add_cover_band">Add Cover Band</h5></a>
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_add_cover_band">Add Cover
+                            Band</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" title="Close">&times;</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                data-target="#main_menu_help" style="cursor: help">
                             <span aria-hidden="true" title="Help">?</span>
                         </button>
                     </div>
                 </div>
                 <div class="modal-body">
-                        <div style="padding-top: 30px; padding-bottom: 30px" align="center">
-                            Enter Cover Band name you want to add:
-                        </div>
+                    <div style="padding-top: 30px; padding-bottom: 30px" align="center">
+                        Enter Cover Band name you want to add:
+                    </div>
                     <form action="/">
                         <input type="text" name="test_name">
                         <input type="submit">
                     </form>
                     <form id="form_id_add_new_cover_band" action="/add_new_cover_band_to_band_list">
                         <div align="center">
-                            <input id="add_cb_select" class="form-control mr-sm-2" style="width: 420px" list="CB_name" class="class-band-menu" type="text" name="type_new_cover_band">
+                            <input id="add_cb_select" class="form-control mr-sm-2" style="width: 420px" list="CB_name"
+                                   class="class-band-menu" type="text" name="type_new_cover_band">
                             <datalist id="CB_name">
                                 {% for xx in cover_bands %}
                                     <option>{{ xx }}</option>
@@ -242,15 +283,24 @@
                             </datalist>
                         </div>
                         <div style="padding-top: 10px" align="center">
-                            <input class="form-control mr-sm-2" title="Open Folder" type="file" maxlength="100" min="0" style="width: 420px" align="left" id="id_form_link">
+                            <input class="form-control mr-sm-2" title="Open Folder" type="file" maxlength="100" min="0"
+                                   style="width: 420px" align="left" id="id_form_link">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer" style="padding-top: 40px" align="right">
                     <button type="button" class="btn btn-primary" title="Open Folder" id="id_form">Open Folder</button>
-                    <button type="submit" formaction="#add_cb_select" class="btn btn-primary" title="Add" style="width: 100px" data-toggle="modal" data-target="#add_cover_band_sure" data-dismiss="modal">Add</button>
-                    <button type="button" class="btn btn-primary" title="Cancel -> All Bands" id="add_cover_band_cancel_button" data-toggle="modal" data-target="#main_block_all_bands" data-dismiss="modal" style="width: 100px">Cancel</button>
-                    <button type="button" class="btn btn-secondary" class="close"data-dismiss="modal" style="width: 100px" title="Close">Close</button>
+                    <button type="submit" formaction="#add_cb_select" class="btn btn-primary" title="Add"
+                            style="width: 100px" data-toggle="modal" data-target="#add_cover_band_sure"
+                            data-dismiss="modal">Add
+                    </button>
+                    <button type="button" class="btn btn-primary" title="Cancel -> All Bands"
+                            id="add_cover_band_cancel_button" data-toggle="modal" data-target="#main_block_all_bands"
+                            data-dismiss="modal" style="width: 100px">Cancel
+                    </button>
+                    <button type="button" class="btn btn-secondary" class="close" data-dismiss="modal"
+                            style="width: 100px" title="Close">Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -260,25 +310,34 @@
 
     <!-- Modal_4 "MAIN MENU -> Delete Cover Band -> Are You Sure?" -->
 
-    <div class="modal" class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+    <div class="modal" class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete"
+         aria-hidden="true">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" data-toggle="modal" data-target="#main_menu_delete_cover_band">&times;</span>
         </button>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="delete">Delete Cover Band</h5></a>
+                    <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                       style="cursor: help"><h5 class="modal-title" id="delete">Delete Cover Band</h5></a>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" data-toggle="modal" data-target="#main_menu_delete_cover_band">&times;</span>
+                        <span aria-hidden="true" data-toggle="modal"
+                              data-target="#main_menu_delete_cover_band">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="padding-bottom: 30px" align="center">
                     Are You Sure you want tot delete this Cover Band?
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="delete_cb_yes" formaction="#delete_cb_select" formmethod="get" class="btn btn-primary" title="Yes" style="width: 80px">Yes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#main_menu_delete_cover_band" title="Cancel">Cancel</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="close" title="Close">Close</button>
+                    <button type="submit" id="delete_cb_yes" formaction="#delete_cb_select" formmethod="get"
+                            class="btn btn-primary" title="Yes" style="width: 80px">Yes
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                            data-target="#main_menu_delete_cover_band" title="Cancel">Cancel
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
+                            data-target="close" title="Close">Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -288,7 +347,8 @@
 
     <!-- Modal_4 "MAIN MENU -> Delete Cover Band" -->
 
-    <div class="modal" class="modal" id="main_menu_delete_cover_band" tabindex="-1" role="dialog" aria-labelledby="main_menu_delete_cover_band" aria-hidden="true">
+    <div class="modal" class="modal" id="main_menu_delete_cover_band" tabindex="-1" role="dialog"
+         aria-labelledby="main_menu_delete_cover_band" aria-hidden="true">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -296,33 +356,41 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div align="left">
-                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="main_menu_delete_cover_band">Delete Cover Band</h5></a>
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_delete_cover_band">Delete Cover
+                            Band</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" title="Close">&times;</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                data-target="#main_menu_help" style="cursor: help">
                             <span aria-hidden="true" title="Help">?</span>
                         </button>
                     </div>
                 </div>
                 <div class="modal-body" style="padding-bottom: 30px">
-                <form method="post" action="logout">
-                    <div style="padding-top: 30px" align="center">
-                        <h6 style="padding-bottom: 30px">Enter Cover Band name you want to delete:</h6>
-                        <input class="form-control mr-sm-2" style="width: 420px" id="delete_cb_select" list="CB_name" class="class-band-menu" type="search" name="delete_cover_band_name">
-                        <datalist>
-                            {% for xx in cover_bands %}
-                                <option>{{ xx }}</option>
-                            {% endfor %}
-                        </datalist>
-                    </div>
-                </form>
+                    <form method="post" action="logout">
+                        <div style="padding-top: 30px" align="center">
+                            <h6 style="padding-bottom: 30px">Enter Cover Band name you want to delete:</h6>
+                            <input class="form-control mr-sm-2" style="width: 420px" id="delete_cb_select"
+                                   list="CB_name" class="class-band-menu" type="search" name="delete_cover_band_name">
+                            <datalist>
+                                {% for xx in cover_bands %}
+                                    <option>{{ xx }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete" data-dismiss="modal" class="modal" title="Delete">Delete</button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#main_block_all_bands" data-dismiss="modal" title="Cancel">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete"
+                            data-dismiss="modal" class="modal" title="Delete">Delete
+                    </button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#main_block_all_bands" data-dismiss="modal" title="Cancel">Cancel
+                    </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" title="Cancel">Close</button>
                 </div>
             </div>
@@ -331,7 +399,7 @@
 
     <!-- Modal_4 "MAIN MENU -> Delete Cover Band" end -->
 
-        <!-- Scroll Style "MAIN MENU -> History" -->
+    <!-- Scroll Style "MAIN MENU -> History" -->
     <style type="text/css" scoped>
         .scrollspy_history {
             position: relative;
@@ -344,7 +412,8 @@
 
     <!-- Modal_4 "MAIN MENU -> History" -->
 
-    <div class="modal" id="main_menu_history" tabindex="-1" role="dialog" aria-labelledby="main_menu_history" aria-hidden="true">
+    <div class="modal" id="main_menu_history" tabindex="-1" role="dialog" aria-labelledby="main_menu_history"
+         aria-hidden="true">
         <div align="right">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -354,13 +423,15 @@
             <div class="modal-content" style="padding-top: 30px">
                 <div class="modal-header" style="padding-top: 0px">
                     <div align="left">
-                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="main_menu_history">History</h5></a>
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_history">History</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" title="Close">&times;</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                data-target="#main_menu_help" style="cursor: help">
                             <span aria-hidden="true" title="Help">?</span>
                         </button>
                     </div>
@@ -369,11 +440,11 @@
                     <table class="table table-sm" class="modal-title" id="main_menu_history">
                         <thead>
                         <tr>
-                          <th>#</th>
-                          <th>History Name</th>
-                          <th>Key Name</th>
+                            <th>#</th>
+                            <th>History Name</th>
+                            <th>Key Name</th>
                         </tr>
-                      </thead>
+                        </thead>
                     </table>
                     <div data-spy="scroll" class="scrollspy_history">
                         <table class="table table-sm" style="padding-top: 0px; padding-bottom: 0px">
@@ -421,10 +492,11 @@
                     <table class="table table-sm" style="padding-top: 0px; padding-bottom: 0px">
                         <tbody>
                         <thead>
-                    <th scope="row"></th>
-                    <th><input type="text" name="Input Command Name" class="form-control" id="" placeholder="Input Command Name"></th>
-                    <th><input type="text" name="Input Key" class="form-control" id="" placeholder="Input Key"></th>
-                    </thead>
+                        <th scope="row"></th>
+                        <th><input type="text" name="Input Command Name" class="form-control" id=""
+                                   placeholder="Input Command Name"></th>
+                        <th><input type="text" name="Input Key" class="form-control" id="" placeholder="Input Key"></th>
+                        </thead>
                         </tbody>
                     </table>
                 </div>
@@ -432,7 +504,9 @@
                     <button type="button" class="btn btn-primary" style="width: 100px" title="Search">Search</button>
                     <button type="button" class="btn btn-primary" style="width: 100px" title="Add Key">Add Key</button>
                     <button type="button" class="btn btn-primary" style="width: 100px" title="Save changes">OK</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px" title="Close">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px"
+                            title="Close">Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -453,7 +527,8 @@
 
     <!-- Modal_4 "MAIN MENU -> Key Commands" -->
 
-    <div class="modal" id="Modal-Key-Commands" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+    <div class="modal" id="Modal-Key-Commands" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableLabel"
+         aria-hidden="true">
         <div align="right">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -463,13 +538,16 @@
             <div class="modal-content" style="padding-top: 30px">
                 <div class="modal-header" style="padding-top: 0px">
                     <div align="left">
-                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="exampleModalCenteredLabel">Key Commands</h5></a>
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="exampleModalCenteredLabel">Key Commands</h5>
+                        </a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" title="Close">&times;</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                data-target="#main_menu_help" style="cursor: help">
                             <span aria-hidden="true" title="Help">?</span>
                         </button>
                     </div>
@@ -478,11 +556,11 @@
                     <table class="table table-sm" class="modal-title" id="exampleModalCenteredLabel">
                         <thead>
                         <tr>
-                          <th>#</th>
-                          <th>Command Name</th>
-                          <th>Key Name</th>
+                            <th>#</th>
+                            <th>Command Name</th>
+                            <th>Key Name</th>
                         </tr>
-                      </thead>
+                        </thead>
                     </table>
                     <div data-spy="scroll" class="scrollspy-example-2">
                         <table class="table table-sm" style="padding-top: 0px; padding-bottom: 0px">
@@ -530,10 +608,11 @@
                     <table class="table table-sm" style="padding-top: 0px; padding-bottom: 0px">
                         <tbody>
                         <thead>
-                    <th scope="row"></th>
-                    <th><input type="text" name="Input Command Name" class="form-control" id="" placeholder="Input Command Name"></th>
-                    <th><input type="text" name="Input Key" class="form-control" id="" placeholder="Input Key"></th>
-                    </thead>
+                        <th scope="row"></th>
+                        <th><input type="text" name="Input Command Name" class="form-control" id=""
+                                   placeholder="Input Command Name"></th>
+                        <th><input type="text" name="Input Key" class="form-control" id="" placeholder="Input Key"></th>
+                        </thead>
                         </tbody>
                     </table>
                 </div>
@@ -541,7 +620,9 @@
                     <button type="button" class="btn btn-primary" style="width: 100px" title="Search">Search</button>
                     <button type="button" class="btn btn-primary" style="width: 100px" title="Add Key">Add Key</button>
                     <button type="button" class="btn btn-primary" title="Save changes">Save Changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px" title="Close">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px"
+                            title="Close">Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -551,7 +632,8 @@
 
     <!--- Modal_5 "MAIN MENU -> Settings" --->
 
-    <div class="modal" id="main_menu_settings" tabindex="-1" role="dialog" aria-labelledby="main_menu_settings" aria-hidden="true">
+    <div class="modal" id="main_menu_settings" tabindex="-1" role="dialog" aria-labelledby="main_menu_settings"
+         aria-hidden="true">
         <div align="right">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -561,13 +643,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div align="left">
-                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="main_menu_settings">Settings</h5></a>
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_settings">Settings</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Close">
                             <span aria-hidden="true" title="Close">&times;</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                data-target="#main_menu_help" style="cursor: help">
                             <span aria-hidden="true" title="Help">?</span>
                         </button>
                     </div>
@@ -592,32 +676,44 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
+                                <label>App Style: </label>
+                            </div>
+                            <div class="col-6">
+                                <input id="app_style_name_input" type="text" class="form-control mr-sm-6"
+                                       name="app_style_name_input" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
                                 <label>Export Files Folder Name: </label>
                             </div>
                             <div class="col-6">
-                                <input id="new_export_folder_name_input" type="text" class="form-control mr-sm-6" name="export_folder_name" placeholder="{{ dir_name }}" required>
+                                <input id="new_export_folder_name_input" type="text" class="form-control mr-sm-6"
+                                       name="export_folder_name" placeholder="{{ dir_name }}" required>
                             </div>
                         </div>
-                    <div class="row">
+                        <div class="row">
                             <div class="col-6">
                                 <label>Language</label>
                             </div>
                             <div class="col-6">
                                 <form>
                                     <select class="custom-select" type="" list="settings_language_list">
-                                    <datalist id="settings_language_list">
-                                        <option value="english">english</option>
-                                        <option value="русский">русский</option>
-                                        <option value="беларуская">беларуская</option>
-                                    </datalist>
+                                        <datalist id="settings_language_list">
+                                            <option value="english">english</option>
+                                            <option value="русский">русский</option>
+                                            <option value="беларуская">беларуская</option>
+                                        </datalist>
                                     </select>
                                 </form>
                             </div>
                         </div>
                     </form>
-            </div>
+                </div>
                 <div class="modal-footer">
-                    <button id="settings_save_changes_button" type="submit" form="#settings_form" formmethod="get" class="btn btn-primary" title="Save Changes">Save Changes</button>
+                    <button id="settings_save_changes_button" type="submit" form="#settings_form" formmethod="get"
+                            class="btn btn-primary" title="Save Changes">Save Changes
+                    </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" title="Close">Close</button>
                 </div>
             </div>
@@ -639,7 +735,8 @@
 
     <!--- Modal_6 "MAIN MENU -> About App" --->
 
-    <div class="modal" id="main_menu_about_app" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+    <div class="modal" id="main_menu_about_app" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
         <div align="right">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -649,20 +746,51 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div align="left">
-                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="exampleModalCenteredLabel">About App</h5></a>
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="exampleModalCenteredLabel">About App</h5>
+                        </a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" title="Close">&times;</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                data-target="#main_menu_help" style="cursor: help">
                             <span aria-hidden="true" title="Help">?</span>
                         </button>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div data-spy="scroll" class="scrollspy-about_app">
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
+                        egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                        commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
+                        laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent
+                        commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                        nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo
+                        odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                        vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                        sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed
+                        consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
+                        dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet
+                        fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
+                        ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl
+                        consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean
+                        lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
+                        consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras
+                        mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
+                        eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus
+                        magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum
+                        faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+                        magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non
+                        metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum
+                        at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+                        lacus vel augue laoreet rutrum faucibus dolor auctor. Praesent commodo cursus magna, vel
+                        scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
+                        auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
+                        scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor
+                        fringilla.
 
                     </div>
                 </div>
@@ -689,7 +817,8 @@
 
     <!--- Modal_7 "MAIN MENU -> Help" --->
 
-        <div class="modal" id="main_menu_help" tabindex="-1" role="dialog" aria-labelledby="main_menu_help" aria-hidden="true">
+    <div class="modal" id="main_menu_help" tabindex="-1" role="dialog" aria-labelledby="main_menu_help"
+         aria-hidden="true">
         <div align="right">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" title="Close">&times;</span>
@@ -699,24 +828,56 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div align="left">
-                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="main_menu_help">Help</h5></a>
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_help">Help</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" title="Close">&times;</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                data-target="#main_menu_help" style="cursor: help">
                             <span aria-hidden="true" title="Help">?</span>
                         </button>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div data-spy="scroll" class="scrollspy-help">
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
+                        egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                        commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue
+                        laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent
+                        commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                        nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo
+                        odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
+                        vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+                        sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed
+                        consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
+                        dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet
+                        fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
+                        ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl
+                        consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean
+                        lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
+                        consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras
+                        mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
+                        eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus
+                        magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum
+                        faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+                        magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non
+                        metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum
+                        at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+                        lacus vel augue laoreet rutrum faucibus dolor auctor. Praesent commodo cursus magna, vel
+                        scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
+                        auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
+                        scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor
+                        fringilla.
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="http://127.0.0.1:8000/help_page" target="_blank"><button type="button" class="btn btn-primary">Open Full Documentation</button></a>
+                    <a href="http://127.0.0.1:8000/help_page" target="_blank">
+                        <button type="button" class="btn btn-primary">Open Full Documentation</button>
+                    </a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -738,25 +899,33 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div align="left">
-                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="main_menu_help">Exit</h5></a>
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_help">Exit</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" title="Close">&times;</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                data-target="#main_menu_help" style="cursor: help">
                             <span aria-hidden="true" title="Help">?</span>
                         </button>
                     </div>
                 </div>
                 <div class="modal-body">
-                        <div align="center" style="padding-top: 50px; padding-bottom: 50px">
-                            Are you sure you want to exit the App?
-                        </div>
+                    <div align="center" style="padding-top: 50px; padding-bottom: 50px">
+                        Are you sure you want to exit the App?
+                    </div>
                 </div>
                 <div class="modal-footer">
-                        <a href="http://127.0.0.1:8000/login_page"><button type="button" class="btn btn-primary" style="width: 100px" title="Yes">Yes</button></a>
-                        <button type="button" class="btn btn-secondary" style="width: 100px" class="close" data-dismiss="modal" title="No">No</button>
+                    <a href="http://127.0.0.1:8000/login_page">
+                        <button type="button" class="btn btn-primary" style="width: 100px" title="Yes"
+                                id="do_logout_button">Yes
+                        </button>
+                    </a/>
+                    <button type="button" class="btn btn-secondary" style="width: 100px" class="close"
+                            data-dismiss="modal" title="No">No
+                    </button>
                 </div>
             </div>
         </div>
@@ -766,7 +935,8 @@
 
     <!-- Modal_9 "Button_Download Song -> Download Window" -->
 
-    <div class="modal" id="main_page_download_song" tabindex="-1" role="dialog" aria-labelledby="main_page_download_song" aria-hidden="true">
+    <div class="modal" id="main_page_download_song" tabindex="-1" role="dialog"
+         aria-labelledby="main_page_download_song" aria-hidden="true">
         <div align="right">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" title="Close">&times;</span>
@@ -776,13 +946,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div align="left">
-                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="main_page_download_song">Download Song</h5></a>
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="main_page_download_song">Download Song</h5>
+                        </a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" title="Close">&times;</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                data-target="#main_menu_help" style="cursor: help">
                             <span aria-hidden="true" title="Help">?</span>
                         </button>
                     </div>
@@ -793,7 +966,8 @@
                             Enter Cover Band name you want to add:
                         </div>
                         <div align="center">
-                            <input class="form-control mr-sm-2" style="width: 420px" list="CB_name" class="class-band-menu" type="search">
+                            <input class="form-control mr-sm-2" style="width: 420px" list="CB_name"
+                                   class="class-band-menu" type="search">
                             <datalist id="CB_name">
                                 {% for xx in cover_bands %}
                                     <option>{{ xx }}</option>
@@ -801,14 +975,18 @@
                             </datalist>
                         </div>
                         <div style="padding-top: 10px" align="center">
-                            <input class="form-control mr-sm-2" title="Open Folder" type="file" maxlength="100" min="0" style="width: 420px" align="left" id="id_form_link">
+                            <input class="form-control mr-sm-2" title="Open Folder" type="file" maxlength="100" min="0"
+                                   style="width: 420px" align="left" id="id_form_link">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer" style="padding-top: 40px" align="right">
                     <button type="button" class="btn btn-primary" title="Open Folder" id="id_form">Open Folder</button>
-                    <button type="button" class="btn btn-primary" title="Add" id="id120" style="width: 100px">Download</button>
-                    <button type="button" class="btn btn-secondary" class="close"data-dismiss="modal" style="width: 100px" title="Cancel">Cancel</button>
+                    <button type="button" class="btn btn-primary" title="Add" id="id120" style="width: 100px">Download
+                    </button>
+                    <button type="button" class="btn btn-secondary" class="close" data-dismiss="modal"
+                            style="width: 100px" title="Cancel">Cancel
+                    </button>
                 </div>
             </div>
         </div>
@@ -816,7 +994,7 @@
 
     <!-- Modal_9 "Button_Download Song -> Download Window" end -->
 
-        <!-- Scroll Style "Main Block -> All Bands" -->
+    <!-- Scroll Style "Main Block -> All Bands" -->
     <style type="text/css" scoped>
         .scrollspy-all_bands {
             position: relative;
@@ -829,7 +1007,8 @@
 
     <!--- Modal_10 "Main Block -> All Bands" --->
 
-        <div class="modal" id="main_block_all_bands" tabindex="-1" role="dialog" aria-labelledby="main_block_all_bands" aria-hidden="true">
+    <div class="modal" id="main_block_all_bands" tabindex="-1" role="dialog" aria-labelledby="main_block_all_bands"
+         aria-hidden="true">
         <div align="right">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" title="Close">&times;</span>
@@ -839,13 +1018,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div align="left">
-                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help"><h5 class="modal-title" id="main_menu_help">All Bands</h5></a>
+                        <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_help">All Bands</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" title="Close">&times;</span>
                         </button>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help" style="cursor: help">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                data-target="#main_menu_help" style="cursor: help">
                             <span aria-hidden="true" title="Help">?</span>
                         </button>
                     </div>
@@ -854,18 +1035,19 @@
                     <div data-spy="scroll" class="scrollspy-all_bands">
                         <table class="table table-sm" class="modal-title" id="exampleModalCenteredLabel">
                             <thead>
-                                <tr style="text-align: center">
-                                  <th>#</th>
-                                  <th>Cover Band Name</th>
-                                  <th>Rating</th>
-                                </tr>
+                            <tr style="text-align: center">
+                                <th>#</th>
+                                <th>Cover Band Name</th>
+                                <th>Songs</th>
+                                <th>Rating</th>
+                            </tr>
                             </thead>
                             <tbody>
                             {% for band_number, band in all_bands_list %}
                                 <tr style="text-align: center">
-                                  <th scope="row" width="50">{{ band_number }}</th>
-                                  <td width="250"><a href="http://127.0.0.1:8000/login_page">{{ band }}</a></td>
-                                    <td><a href="http://127.0.0.1:8000/login_page">{{ band_rating }}</a></td>
+                                    <th scope="row" width="50">{{ band_number }}</th>
+                                    <td width="250"><a href="http://127.0.0.1:8000/song_list_page">{{ band }}</a></td>
+                                    <td><a href="http://127.0.0.1:8000/song_list_page">{{ band_rating }}</a></td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -873,8 +1055,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="all_bands-add_cover_band_button" type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" href="#main_menu_add_cover_band">Add Cover Band</button>
-                    <button id="" type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" href="#main_menu_delete_cover_band">Delete Cover Band</button>
+                    <button id="all_bands-add_cover_band_button" type="button" class="btn btn-primary"
+                            data-toggle="modal" data-dismiss="modal" href="#main_menu_add_cover_band">Add Cover Band
+                    </button>
+                    <button id="" type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal"
+                            href="#main_menu_delete_cover_band">Delete Cover Band
+                    </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -891,25 +1077,40 @@
 
                     <!-- "MAIN MENU" -->
 
-                        <div class="dropdown open">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: auto; width: 200px; white-space: nowrap" title="MAIN MENU">   MAIN MENU   </button>
-                            <div class="dropdown-menu">
-                                <a class="button dropdown-item" data-toggle="modal" href="#modal-update" style="text-align: center">UPDATE</a>
-                                <a class="button dropdown-item" data-toggle="modal" href="#modal-export" style="text-align: center">EXPORT</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="button dropdown-item" data-toggle="modal" href="#main_menu_add_cover_band" style="text-align: center">ADD COVER BAND</a>
-                                <a class="button dropdown-item" data-toggle="modal" href="#main_menu_delete_cover_band" style="text-align: center">DELETE COVER BAND</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="button dropdown-item" data-toggle="modal" href="#main_menu_history" data-target="#main_menu_history" style="text-align: center">HISTORY</a> <!-- Button trigger modal -->
-                                <div class="dropdown-divider"></div>
-                                <a class="button dropdown-item" data-toggle="modal" href="#id90" data-target="#Modal-Key-Commands" style="text-align: center">KEY COMMANDS</a> <!-- Button trigger modal -->
-                                <a class="button dropdown-item" data-toggle="modal" href="#main_menu_settings" style="text-align: center">SETTINGS</a>
-                                <a class="button dropdown-item" data-toggle="modal" href="#main_menu_about_app" data-target="#main_menu_about_app" style="text-align: center">ABOUT APP</a>
-                                <a class="button dropdown-item" data-toggle="modal" href="#main_menu_help" data-target="#main_menu_help"style="text-align: center">HELP</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="button dropdown-item" data-toggle="modal" href="#id3" style="text-align: center; white-space: nowrap">EXIT</a>
-                            </div>
+                    <div class="dropdown open">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"
+                                style="height: auto; width: 200px; white-space: nowrap" title="MAIN MENU"> MAIN MENU
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="button dropdown-item" data-toggle="modal" href="#modal-update"
+                               style="text-align: center">UPDATE</a>
+                            <a class="button dropdown-item" data-toggle="modal" href="#modal-export"
+                               style="text-align: center">EXPORT</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="button dropdown-item" data-toggle="modal" href="#main_menu_add_cover_band"
+                               style="text-align: center">ADD COVER BAND</a>
+                            <a class="button dropdown-item" data-toggle="modal" href="#main_menu_delete_cover_band"
+                               style="text-align: center">DELETE COVER BAND</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="button dropdown-item" data-toggle="modal" href="#main_menu_history"
+                               data-target="#main_menu_history" style="text-align: center">HISTORY</a>
+                            <!-- Button trigger modal -->
+                            <div class="dropdown-divider"></div>
+                            <a class="button dropdown-item" data-toggle="modal" href="#id90"
+                               data-target="#Modal-Key-Commands" style="text-align: center">KEY COMMANDS</a>
+                            <!-- Button trigger modal -->
+                            <a class="button dropdown-item" data-toggle="modal" href="#main_menu_settings"
+                               style="text-align: center">SETTINGS</a>
+                            <a class="button dropdown-item" data-toggle="modal" href="#main_menu_about_app"
+                               data-target="#main_menu_about_app" style="text-align: center">ABOUT APP</a>
+                            <a class="button dropdown-item" data-toggle="modal" href="#main_menu_help"
+                               data-target="#main_menu_help" style="text-align: center">HELP</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="button dropdown-item" data-toggle="modal" href="#id3"
+                               style="text-align: center; white-space: nowrap">EXIT</a>
                         </div>
+                    </div>
 
                     <!-- "MAIN MENU" end -->
                 </div>
@@ -920,38 +1121,43 @@
             <div class="col-6" style="padding: 0px">
                 <div class="card card-body bg-light">
                     <div class="row">
-                    <div class="col-10">
-                        <audio controls class="form-control mr-sm-0" style="width: 400px" title="Audio Player">
-                            <source src={{ song.audio_file.url }}></source>
-                        </audio>
+                        <div class="col-10">
+                            <audio controls class="form-control mr-sm-0" style="width: 600px" title="Audio Player">
+                                <source src="{{ song.audio_file.url }}" type="audio/mpeg">
+                            </audio>
                         </div>
 
                         <div class="col-2" align="right">
-                        <button data-toggle="modal" data-target="#main_page_download_song" type="button" class="btn btn-primary" style="height: auto; width: 100px" title="Download Song">
-                            Download
-                        </button>
+                            <button data-toggle="modal" data-target="#main_page_download_song" type="button"
+                                    class="btn btn-primary" style="height: auto; width: 100px" title="Download Song">
+                                Download
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-             <!-- "Audio Player" end -->
-
+            <!-- "Audio Player" end -->
 
 
             <div class="col-4" style="padding: 0px">
                 <div class="card card-body bg-light">
                     <div class="row">
                         <div class="col-5" align="left">
-                            <input class="form-control mr-sm-2" style="width: 170px; cursor: inherit" title="All Songs" placeholder="All Songs: {{ all_songs }}" readonly disabled>
+                            <input class="form-control mr-sm-2" style="width: 170px; cursor: inherit" title="All Songs"
+                                   placeholder="All Songs: {{ all_songs }}" readonly disabled>
                         </div>
                         <div class="col-3" align="right">
-                            <button type="button" class="form-control mr-sm-2" style="width: 170px; cursor: inherit" data-toggle="modal" data-target="#main_block_all_bands" title="All Bands" placeholder="All Bands: {{ all_bands }}" readonly>All Bands: {{ all_bands }}</button>
+                            <button type="button" class="form-control mr-sm-2" style="width: 170px; cursor: inherit"
+                                    data-toggle="modal" data-target="#main_block_all_bands" title="All Bands"
+                                    placeholder="All Bands: {{ all_bands }}" readonly>All
+                                Bands: {{ all_bands }}</button>
                         </div>
 
                         <!-- "Log Out Button" -->
                         <div class="col-4" align="right">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id3" title="Log Out" style="width: 100px; text-align: center">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id3"
+                                    title="Log Out" style="width: 100px; text-align: center">
                                 Log Out
                             </button>
                         </div>
@@ -961,33 +1167,36 @@
             </div>
 
 
-    </div>
+        </div>
         <div class="row">
             <div class="col-8" style="padding: 0px">
                 <div class="card card-body bg-light" style="height: 650px">
 
                     <!-- Custom css that makes this example work like it does: -->
                     <style type="text/css" scoped>
-                    .scrollspy-example {
-                        position: relative;
-                        height: 400px;
-                        margin-top: .5rem;
-                        overflow: auto;
-                    }
+                        .scrollspy-example {
+                            position: relative;
+                            height: 400px;
+                            margin-top: .5rem;
+                            overflow: auto;
+                        }
                     </style>
 
                     <!-- Actual scrollspy markup: -->
 
                     <nav id="navbar-example2" class="navbar navbar-light bg-light">
                         <div style="padding-bottom: 20px">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" title="Add Track to Track List">Add Track</button>
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                                    title="Add Track to Track List">Add Track
+                            </button>
                         </div>
                         <div>
                             <select class="custom-select" style="width: 260px" disabled>
                                 <option value="1" selected>All Tracks</option>
                                 <option value="2"><a class="nav-link" href="#verse2">Coincided Tracks</a></option>
                                 <option value="3"><a href="#verse3">Unmatched Tracks</a></option>
-                                <option value="3"><a href="#verse3">Default</a></option></select>
+                                <option value="3"><a href="#verse3">Default</a></option>
+                            </select>
                         </div>
                         <div>
                             <select class="custom-select" style="width: 260px">
@@ -996,64 +1205,89 @@
                                 <option>Domestic Track List</option>
                             </select>
                         </div>
-                      <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link" href="#verse1" title="Foreign Track List">FTL</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#verse2" title="Domestic Track List">DTL</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#verse3" title="Another Songs">AS</a></li>
-                      </ul>
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link" href="#verse1" title="Foreign Track List">FTL</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#verse2" title="Domestic Track List">DTL</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#verse3" title="Another Songs">AS</a></li>
+                        </ul>
 
 
                         <table class="table table-hover">
-                      <thead>
-                        <tr id="tr1">
-                          <th style="width: 0; padding-left: 0"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" title="Search">Search</button></th>
-                            <th style="width: 0"><input class="form-control mr-sm-2" style="width: 360px" type="text" placeholder="Artists" id="id101"></th>
-                          <th style="width: 0; padding-right: 0px"><input class="form-control mr-sm-2" style="width: 360px" type="text" placeholder="Songs" id="id102"></th>
-                            <th><button class="btn btn-outline-success my-2 my-sm-0" type="button" id="id105" title="Reverse to Songs/Artists" >Reverse</button></th>
-                        </tr >
-                        <tr id="tr2">
-                          <th style="width: 0; padding-left: 0"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" title="Search">Search</button></th>
-                            <th style="width: 0"><input class="form-control mr-sm-2" style="width: 360px" type="text" placeholder="Songs" id="id101"></th>
-                          <th style="width: 0; padding-right: 0px"><input class="form-control mr-sm-2" style="width: 360px" type="text" placeholder="Artists" id="id102"></th>
-                            <th><button class="btn btn-outline-success my-2 my-sm-0" type="button" id="id106" title="Reverse to Artists/Songs">Reverse</button></th>
-                        </tr>
-                      </thead>
-                                                  </table>
+                            <thead>
+                            <tr id="tr1">
+                                <th style="width: 0; padding-left: 0">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" title="Search">
+                                        Search
+                                    </button>
+                                </th>
+                                <th style="width: 0"><input class="form-control mr-sm-2" style="width: 360px"
+                                                            type="text" placeholder="Artists" id="id101"></th>
+                                <th style="width: 0; padding-right: 0px"><input class="form-control mr-sm-2"
+                                                                                style="width: 360px" type="text"
+                                                                                placeholder="Songs" id="id102"></th>
+                                <th>
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="id105"
+                                            title="Reverse to Songs/Artists">Reverse
+                                    </button>
+                                </th>
+                            </tr>
+                            <tr id="tr2">
+                                <th style="width: 0; padding-left: 0">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" title="Search">
+                                        Search
+                                    </button>
+                                </th>
+                                <th style="width: 0"><input class="form-control mr-sm-2" style="width: 360px"
+                                                            type="text" placeholder="Songs" id="id101"></th>
+                                <th style="width: 0; padding-right: 0px"><input class="form-control mr-sm-2"
+                                                                                style="width: 360px" type="text"
+                                                                                placeholder="Artists" id="id102"></th>
+                                <th>
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="id106"
+                                            title="Reverse to Artists/Songs">Reverse
+                                    </button>
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
                     </nav>
 
                     <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy-example">
                         <h4 id="verse1" align="center">Foreign Track List</h4>
-                          <table class="table table-hover">
-                      <tbody>
-                      {% for number, artist, song in table %}
-                            <tr>
-                              <th scope="row" width="176">{{ number }}</th>
-                              <td width="350"><a href="http://127.0.0.1:8000/login_page">{{ artist }}</a></td>
-                                <td><a href="http://127.0.0.1:8000/login_page" >{{ song }}</a></td>
-                            </tr>
-                      {% endfor %}
-                      {% for artist_name, song_name in track_list %}
-                            <tr>
-                              <th scope="row" width="176">{{ number }}</th>
-                              <td width="350"><a href="http://127.0.0.1:8000/login_page">{{ artist_name }}</a></td>
-                                <td><a href="http://127.0.0.1:8000/login_page" >{{ song_name }}</a></td>
-                            </tr>
-                      {% endfor %}
-                      <tr>
-                          <th scope="row" width="176"></th>
-                          <td width="350"></td>
-                          <td></td>
-                      </tr>
-                      </tbody>
-                    </table>
-                      </p>
-                      <h4 id="verse2" align="center">Domestic Track List</h4>
                         <table class="table table-hover">
                             <tbody>
                             {% for number, artist, song in table %}
                                 <tr>
-                                  <th scope="row" width="176">{{ number }}</th>
-                                  <td width="350">{{ artist }}</td>
+                                    <th scope="row" width="176">{{ number }}</th>
+                                    <td width="350"><a href="http://127.0.0.1:8000/login_page">{{ artist }}</a></td>
+                                    <td><a href="http://127.0.0.1:8000/login_page">{{ song }}</a></td>
+                                </tr>
+                            {% endfor %}
+                            {% for artist_name, song_name in track_list %}
+                                <tr>
+                                    <th scope="row" width="176">{{ number }}</th>
+                                    <td width="350"><a href="http://127.0.0.1:8000/login_page">{{ artist_name }}</a>
+                                    </td>
+                                    <td><a href="http://127.0.0.1:8000/login_page">{{ song_name }}</a></td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <th scope="row" width="176"></th>
+                                <td width="350"></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </p>
+                        <h4 id="verse2" align="center">Domestic Track List</h4>
+                        <table class="table table-hover">
+                            <tbody>
+                            {% for number, artist, song in table %}
+                                <tr>
+                                    <th scope="row" width="176">{{ number }}</th>
+                                    <td width="350">{{ artist }}</td>
                                     <td>{{ song }}</td>
                                 </tr>
                             {% endfor %}
@@ -1064,16 +1298,16 @@
                             </tr>
                             </tbody>
                         </table>
-                    <h4 id="verse3" align="center">Another Songs</h4>
+                        <h4 id="verse3" align="center">Another Songs</h4>
                         <table class="table table-hover">
                             <tbody>
                             {% for number, artist, song in table %}
                                 <tr>
-                                  <th scope="row" width="176">{{ number }}</th>
-                                  <td width="350">{{ artist }}</td>
+                                    <th scope="row" width="176">{{ number }}</th>
+                                    <td width="350">{{ artist }}</td>
                                     <td>{{ song }}</td>
                                 </tr>
-                          {% endfor %}
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -1084,75 +1318,100 @@
                 <div class="card card-body bg-light" align="center" style="height: 650px">
                     <div class="row">
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 10px">
-                        <form id="form_cover_bands_details">
-                            <input id="cover_band_1_details" class="form-control" name="cover_band_1" style="width: 230px" list="CB_name" class="class-band-menu" type="search" placeholder="Cover Band 1">
-                            <datalist id="CB_name">
-                                {% for cb_1_name in cover_bands %}
-                                    <option id="Cover-Band-1-selection" value="{{ cb_1_name }}" onclick="dataSelected(this.option.value())">{{ xx }}</option>
-                                {% endfor %}
-                            </datalist>
-                        </form>
+                            <form id="form_cover_bands_details">
+                                <input id="cover_band_1_details" class="form-control" name="cover_band_1"
+                                       style="width: 230px" list="CB_name" class="class-band-menu" type="search"
+                                       placeholder="Cover Band 1">
+                                <datalist id="CB_name">
+                                    {% for cb_1_name in cover_bands %}
+                                        <option id="Cover-Band-1-selection" value="{{ cb_1_name }}"
+                                                onclick="dataSelected(this.option.value())">{{ xx }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </form>
                         </div>
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 10px">
-                        <form id="form_cover_bands_details">
-                            <input id="cover_band_2_details" class="form-control" name="cover_band_2" style="width: 230px" list="CB_name" class="class-band-menu" type="search" placeholder="Cover Band 2">
-                            <datalist id="CB_name">
-                                {% for cb_2_name in cover_bands %}
-                                    <option>{{ cb_2_name }}</option>
-                                {% endfor %}
-                            </datalist>
-                        </form>
+                            <form id="form_cover_bands_details">
+                                <input id="cover_band_2_details" class="form-control" name="cover_band_2"
+                                       style="width: 230px" list="CB_name" class="class-band-menu" type="search"
+                                       placeholder="Cover Band 2">
+                                <datalist id="CB_name">
+                                    {% for cb_2_name in cover_bands %}
+                                        <option>{{ cb_2_name }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </form>
                         </div>
 
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 30px">
-                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title="" placeholder="CB 1 Songs: {{ cb2_songs }}" readonly disabled>
+                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
+                                   placeholder="CB 1 Songs: {{ cb2_songs }}" readonly disabled>
                             <div style="padding-top: 10px">
-                                <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit; padding-top: 10px" title="" placeholder="Difference: {{ difference_1 }}" readonly disabled>
+                                <input class="form-control mr-sm-2"
+                                       style="width: 230px; cursor: inherit; padding-top: 10px" title=""
+                                       placeholder="Difference: {{ difference_1 }}" readonly disabled>
                             </div>
                         </div>
                         <div class="col-6" style="padding-bottom: 20px; padding-top: 30px">
-                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title="" placeholder="CB 2 Songs: {{ cb2_songs }}" readonly disabled>
+                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
+                                   placeholder="CB 2 Songs: {{ cb2_songs }}" readonly disabled>
                         </div>
 
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 30px">
-                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title="" placeholder="CB 1 Rating: {{ cb1_rating }}" readonly disabled>
+                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
+                                   placeholder="CB 1 Rating: {{ cb1_rating }}" readonly disabled>
                             <div style="padding-top: 10px">
-                                <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit; padding-top: 10px" title="" placeholder="Difference: {{ difference_2 }}" readonly disabled>
+                                <input class="form-control mr-sm-2"
+                                       style="width: 230px; cursor: inherit; padding-top: 10px" title=""
+                                       placeholder="Difference: {{ difference_2 }}" readonly disabled>
                             </div>
                         </div>
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 30px">
-                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title="" placeholder="CB 2 Rating: {{ cb2_rating }}" readonly disabled>
+                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
+                                   placeholder="CB 2 Rating: {{ cb2_rating }}" readonly disabled>
                         </div>
 
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 30px">
-                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title="" placeholder="" readonly disabled>
+                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
+                                   placeholder="" readonly disabled>
                             <div style="padding-top: 10px">
-                                <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit; padding-top: 10px" title="" placeholder="Difference: {{ difference_3 }}" readonly disabled>
+                                <input class="form-control mr-sm-2"
+                                       style="width: 230px; cursor: inherit; padding-top: 10px" title=""
+                                       placeholder="Difference: {{ difference_3 }}" readonly disabled>
                             </div>
                         </div>
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 30px">
-                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title="" placeholder="" readonly disabled>
+                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
+                                   placeholder="" readonly disabled>
                         </div>
-                        <div style="padding: 50px">
-                            <button class="btn-secondary" type="button" id="id100">
-                                Кнопка
-                            </button>
-                        </div>
-                        <div>
-                            <input type="" id="100_1" placeholder="gggg">
-                        </div>
-                            <button id="cover_bands_details_start" type="submit" formmethod="get" formaction="#form_cover_bands_details" class="btn-secondary" type="button" id="" style="height: 50px">
-                                Start
-                            </button>
+                        <button id="cover_bands_details_start" type="submit" formmethod="get"
+                                formaction="#form_cover_bands_details" class="btn-secondary" type="button"
+                                style="height: 50px">
+                            Start
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-12" style="padding: 0px">
-        <div class="card card-body bg-light" style="height: 50px">
-            <div align="right" style="opacity: 50%; cursor: default">
-                <h6>{{ app_language }}EN</h6>
+    <div class="card card-body bg-light" style="height: 60px; padding-bottom: 10px">
+    <div class="row">
+        <div class="col-6">
+            <div>
+                <div align="left" style="opacity: 50%; cursor: default">
+                    <button id="id_reverse" type="button">Reverse</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+                <div id="time" align="right">
+{#                    <snap></snap>#}
+                </div>
+        </div>
+        <div class="col-3">
+                <div align="right" style="opacity: 50%; cursor: default">
+                    <h6>{{ app_language }}EN</h6>
+                </div>
             </div>
         </div>
     </div>

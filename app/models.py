@@ -6,9 +6,13 @@ class Track(models.Model):                                              # Мод
     artist_name = models.CharField(max_length=100)
     song_name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.artist_name + self.song_name
+
 
 class Band(models.Model):                                               # Модель: база данных кавер-групп Cover Bands
     band_name = models.CharField(max_length=100)
+    tracks = models.ManyToManyField(Track)
 
 
 class Client(models.Model):
@@ -34,7 +38,7 @@ class Cat(models.Model):                                                # Мод
     photo = models.ImageField()
 
 
-class Audio(models.Model):
+class Song(models.Model):
     name = models.CharField(max_length=125)
     audio_file = models.FileField()
 
@@ -47,3 +51,8 @@ class ExportFolderName(models.Model):
 class ExportFileName(models.Model):
     # subject = models.CharField(max_length=125)
     name = models.CharField(max_length=125)
+
+
+class OtherTrackList(models.Model):
+    artist_name = models.CharField(max_length=100)
+    song_name = models.CharField(max_length=100)

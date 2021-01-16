@@ -1,5 +1,16 @@
 {% extends "common.html" %}
 {% block content %}
+    {% load i18n %}
+    <div class="row">
+    <div class="col-12" style="height: 40px">
+        {% if msg %}
+            <div class="alert alert-info" align="center">
+                <strong>{% trans "Пожалуйста, Попробуйте Ещё Раз!" %}</strong>
+            </div>
+        {% endif %}
+    </div>
+    </div>
+
 
 
      <div class="container-fluid">
@@ -12,31 +23,29 @@
                 </div>
             <div class="col-4" style="padding: 0px">
                 <div class="card card-body bg-light">
-                    <form method="post" action="main_page">
+                    <form method="post" action="/login_user">
                       <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Username</label>
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">{% trans "Имя Пользователя" %}</label>
                         <div class="col-sm-8">
-                          <input type="text" name="username" class="form-control" id="inputEmail3" placeholder="Username">
+                          <input type="text" name="username" class="form-control" id="" placeholder="{% trans "Имя Пользователя" %}">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Password</label>
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">{% trans "Пороль" %}</label>
                         <div class="col-sm-8">
-                          <input type="password" name="password" class="form-control" id="inputEmail3" placeholder="Password">
+                          <input type="password" name="password" class="form-control" id="" placeholder="{% trans "Пороль" %}">
                         </div>
+
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-8 offset-sm-0">
-                          <button type="submit" class="btn btn-primary"type="button" data-toggle="modal" data-actions-icnt="/page_2" data-target="#exampleModalScrollable">Log in</button>
-                            {% if  loged_2  %} {% else %}
-                                {% if msg %}<div class="alert alert-info" role="alert" class="col-sm-4 offset-sm-0" align="right" style="padding: 8px">
-                                    <strong></strong> Пожалуйста войдите на сайт
-                                </div>{% endif %}
-                            {% endif %}
+                          <button type="submit" class="btn btn-primary" data-toggle="modal">{% trans "Войти" %}</button>
                         </div>
                       </div>
                     </form>
-                        <a class="btn btn-primary" href="register_1">Register</a>
+                <div class="col-4" style="padding: 0px">
+                    <a class="btn btn-primary" href="/registration">{% trans "Зарегистрироваться" %}</a>
+                </div>
                 </div>
             </div>
         </div>

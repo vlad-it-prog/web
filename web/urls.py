@@ -25,6 +25,4 @@ urlpatterns = [
     path('', include('app.urls')),
     path('admin/', admin.site.urls) #vlad_user,vladislavshitik@mail.ru 21221211wqwwqwqq
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.AUDIO_URL, document_root=settings.AUDIO_ROOT)
-
-
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

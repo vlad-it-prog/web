@@ -126,6 +126,7 @@ STATIC_URL = '/static/'
 
 
 LANGUAGES = [
+    ('ru', 'Russian'),
     ('en', 'English'),
     ('pl', 'Polish')
 ]
@@ -133,7 +134,9 @@ LANGUAGES = [
 
 MEDIA_ROOT = 'C:\\Users\\pc1\\PycharmProjects\\web\\images'
 MEDIA_URL = '/media/'
+MEDIA_ROOT = 'C:\\Users\\pc1\\PycharmProjects\\web\\app\\media'
+MEDIA_URL = '/media/'
 
 
-AUDIO_ROOT = 'C:\\Users\\pc1\\PycharmProjects\\web\\audio'
-AUDIO_URL = '/audio/'
+# AUDIO_ROOT = 'C:\\Users\\pc1\\PycharmProjects\\web\\audio'
+# AUDIO_URL = '/audio/'

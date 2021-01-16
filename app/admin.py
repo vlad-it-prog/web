@@ -5,3 +5,4 @@ from app.models import *
 
 admin.site.register(Client)
 admin.site.register(Cat)
+admin.site.register(Song)

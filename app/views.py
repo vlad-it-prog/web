@@ -13,12 +13,13 @@ from app import pandas_dataframes
 from django.contrib.auth.models import User
 import requests
 import json
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, activate
 import re
 import random
 from datetime import time
 from datetime import datetime
-from app.models import Track, Band, Client, Person, Person, Cash, Cat, Audio, ExportFolderName, ExportFileName
+from app.models import Track, Band, Client, Person, Person, Cash, Cat, Song, ExportFolderName, ExportFileName
+import requests
 
 
 def help_page(request):
@@ -27,7 +28,14 @@ def help_page(request):
         Function: help_page
         File: help_page.html """
 
-    return render(request, "help_page.html", {})
+    activate('ru')
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login_page')
+    else:
+        return render(request, "help_page.html", {})
+
+
 # ______________________________________________________________________________________________________________________
 
 
@@ -43,7 +51,7 @@ def add_new_cover_band_to_band_list(request):
 
     return JsonResponse(response.message)
 # ______________________________________________________________________________________________________________________
-
+from django.conf import settings
 
 def login_page(request):
 
@@ -51,7 +59,13 @@ def login_page(request):
         Function: login_page
         File: login_page.html """
 
-    return render(request, "login_page.html", {})
+    activate('ru')
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/main_page')
+    else:
+        response = render(request, "login_page.html", {})
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, 'ru')
+        return response
 # ______________________________________________________________________________________________________________________
 
 
@@ -61,66 +75,70 @@ def main_page(request):
         Function: main_page
         File: main_page.html """
 
-    all_songs = len(Track.objects.values('song_name'))
-    all_bands = len(Band.objects.values('band_name'))
-    all_bands_list = []
-    cover_bands = []
-    for band in range(len(Band.objects.values('band_name'))):
-        all_bands_list.append([band + 1, Band.objects.order_by('band_name').values()[band]['band_name']])
-        cover_bands.append(Band.objects.order_by('band_name').values()[band]['band_name'])
-
-    table = []
-    for track in range(len(Track.objects.values())):
-        table.append([track + 1, Track.objects.order_by("artist_name").values()[track]['artist_name'], Track.objects.order_by("artist_name").values()[track]['song_name']])
-
-    dir_name = ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name']
-    if dir_name not in os.listdir():
-        os.makedirs(os.path.split(os.path.abspath(os.listdir()[0]))[0] + "\\" + dir_name)
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login_page')
     else:
-        pass
+        all_songs = len(Track.objects.values('song_name'))
+        all_bands = len(Band.objects.values('band_name'))
+        all_bands_list = []
+        cover_bands = []
+        for band in range(len(Band.objects.values('band_name'))):
+            all_bands_list.append([band + 1, Band.objects.order_by('band_name').values()[band]['band_name']])
+            cover_bands.append(Band.objects.order_by('band_name').values()[band]['band_name'])
 
-    print(os.listdir())
+        table = []
+        for track in range(len(Track.objects.values())):
+            table.append([track + 1, Track.objects.order_by("artist_name").values()[track]['artist_name'], Track.objects.order_by("artist_name").values()[track]['song_name']])
 
-    export_path = os.path.abspath(ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name'] + "\\")
+        dir_name = ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name']
+        if dir_name not in os.listdir():
+            os.makedirs(os.path.split(os.path.abspath(os.listdir()[0]))[0] + "\\" + dir_name)
+        else:
+            pass
 
-    # print(os.path.basename('C:\\Users\\User\\PycharmProjects\\test_python\\test_1'))
+        print(os.listdir())
 
-    # key_tracklist = ''
-    # x = request.POST
-    # for p in x:
-    #     key_tracklist = key_tracklist + x[p]
-    # print(key_tracklist)
-    # df_track_list = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\track_list.csv")
+        export_path = os.path.abspath(ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name'] + "\\")
+
+        # print(os.path.basename('C:\\Users\\User\\PycharmProjects\\test_python\\test_1'))
+
+        # key_tracklist = ''
+        # x = request.POST
+        # for p in x:
+        #     key_tracklist = key_tracklist + x[p]
+        # print(key_tracklist)
+        # df_track_list = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\track_list.csv")
 
 
-    # df_bands = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\band_list.csv")
-    # menu_items = df_bands['cover bands']
-    # menu_head = str(df_bands.keys()[1])
+        # df_bands = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\band_list.csv")
+        # menu_items = df_bands['cover bands']
+        # menu_head = str(df_bands.keys()[1])
 
 
-  #  response = requests.get(
-  #      'https://www.nbrb.by/api/exrates/rates?periodicity=0'
-  #  )
-   # data = json.loads(response.text)
+        # response = requests.get(
+        #     'https://www.nbrb.by/api/exrates/rates?periodicity=0'
+        # )
+        # data = json.loads(response.text)
 
-    context = {
-        #'exchange rates': data,
-        # 'cover_bands': menu_items,
-        'table': table,
-        "dir_name": dir_name,
-        "export_path": export_path,
-        "all_songs": all_songs,
-        "all_bands": all_bands,
-        "all_bands_list": all_bands_list,
-        "cover_bands": cover_bands,
-        'table_1': [],
-        'loged': request.user.is_authenticated,
-        'username_loged': request.user.username,
-        'title': _('Пожалуйста')
-    }
-    #print(data)
+        context = {
+            # 'exchange rates': data,
+            # 'cover_bands': menu_items,
+            'table': table,
+            "dir_name": dir_name,
+            "export_path": export_path,
+            "all_songs": all_songs,
+            "all_bands": all_bands,
+            "all_bands_list": all_bands_list,
+            "cover_bands": cover_bands,
+            'table_1': [],
+            'loged': request.user.is_authenticated,
+            'username_loged': request.user.username,
+            'title': _('Пожалуйста'),
+            'song': Song.objects.all()[0]
+        }
+        # print(data)
 
-    return render(request, 'main_page.html', context)
+        return render(request, 'main_page.html', context)
 # ______________________________________________________________________________________________________________________
 
 
@@ -137,15 +155,15 @@ def main_page_2(request):
 # ______________________________________________________________________________________________________________________
 
 
-def main(request):
-
-    """ URL:
-        Function:
-        File: .html """
-
-    context = {'loged_2': request.user.is_authenticated,
-    }
-    return render(request, 'main.html', context)
+# def main(request):
+#
+#     """ URL:
+#         Function:
+#         File: .html """
+#
+#     context = {'loged_2': request.user.is_authenticated,
+#     }
+#     return render(request, 'main.html', context)
 # ______________________________________________________________________________________________________________________
 
 
@@ -155,15 +173,24 @@ def login_user(request):
         Function:
         File: .html """
 
-    user = authenticate(
-        username=request.POST['username'],
-        password=request.POST['password']
-    )
-    if user is None:
-        return render(request, 'main.html', {'msg': True})
-    else:
-        login(request, user)
+    if request.user.is_authenticated:
         return HttpResponseRedirect('/main_page')
+    else:
+        user = authenticate(
+            username=request.POST['username'],
+            password=request.POST['password']
+        )
+
+        if user is None:
+            # response ={
+            #     "message": "Please, Try Again!"
+            # }
+            # return JsonResponse(response)
+            return render(request, 'login_page.html', {'msg': True})
+            # return HttpResponse('Please, Try Again!'),
+        else:
+            login(request, user)
+            return HttpResponseRedirect('/main_page')
 # ______________________________________________________________________________________________________________________
 
 
@@ -172,32 +199,37 @@ def test(request):
     """ URL:
         Function:
         File: .html """
-
-    return render(request, 'test.html')
+    # activate(random.choice(['en']))
+    return render(request, 'test.html', {"title": _("Новости")})
 # ______________________________________________________________________________________________________________________
 
 
 def do_logout(request):
+
+    """ URL: do_logout
+        Function: do_logout
+        File: .html """
+
+    if request.user.is_authenticated:
+        logout(request)
+        return HttpResponseRedirect('/login_page')
+    else:
+        return HttpResponse('You Are Not Log In')
+# ______________________________________________________________________________________________________________________
+
+
+def registration(request):
 
     """ URL:
         Function:
         File: .html """
 
     if request.user.is_authenticated:
-        logout(request)
-        return HttpResponseRedirect('/main')
-    else:
         return HttpResponseRedirect('/main_page')
-# ______________________________________________________________________________________________________________________
+    else:
+        return render(request, 'registration.html', {})
 
 
-def registration_form(request):
-
-    """ URL:
-        Function:
-        File: .html """
-
-    return render(request, 'registration.html', {})
 # ______________________________________________________________________________________________________________________
 
 
@@ -215,8 +247,8 @@ def register(request):
                                     )
     client = Client(user=user, address='Minsk')
     client.save()
-    #return HttpResponse('OK'),
-    return HttpResponseRedirect('/main')
+    # return HttpResponse('OK'),
+    return HttpResponseRedirect('/login_page')
 # ______________________________________________________________________________________________________________________
 
 
@@ -326,8 +358,8 @@ def exchange_rates(request):
     response = requests.get(
         'http://www.nbrb.by/api/exrates/rates/145?startDate=2020-10-14&endDate=2020-10-20'
     )
-    #z = 0
-    #for _ in range(7):
+    # z = 0
+    # for _ in range(7):
 
     data = json.loads(response.text)
     context = {
@@ -373,7 +405,7 @@ def experiment(request):
         sum = sum + delta
     print("Время выполнения 100 запрсосов: " + str(sum) + ' секунд')
    # return render(request,'\page_3.html', {"Время выполнения 100 запрсосов: " + str(sum) + ' секунд'})
-  #  print()
+
 # ______________________________________________________________________________________________________________________
 
 
@@ -638,3 +670,44 @@ def name_export_file(request):
 
     return JsonResponse(response)
 # ______________________________________________________________________________________________________________________
+
+
+def sort_track_list_change(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
+    reverse_mode = request.GET['reverse_mode']
+    print(reverse_mode)
+    context = {
+        "value_1" "song",
+        "value_2" "song",
+    }
+    response = {
+        'message': request.GET['reverse_mode']
+    }
+    # print(request.GET['cover_band_1_details'])
+    # print(request.GET['cover_band_2_details'])
+    render(response)
+
+    return render(request, "main_page.html", context)
+# ______________________________________________________________________________________________________________________
+
+
+def song_list_page(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
+    return render(request, "song_list_page.html", {})
+
+
+def player(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
+    return render(request, 'main_page.html', {'song': Song.objects.all()[0]})

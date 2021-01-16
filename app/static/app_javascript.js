@@ -19,20 +19,6 @@ $(document).ready(function() {
 //______________________________________________________________________________________________________________________
 
 
-    $('#id100').click(function (f) {
-        $.post(
-            "ajax_clock",
-            {
-                'a': ''
-            },
-            function (response) {
-                $('#100_1').attr({"placeholder": response.message})
-            }
-        );
-    })
-//______________________________________________________________________________________________________________________
-
-
     // $('#id101').keydown(function (f) {
     //     $.post(
     //         "path_3",
@@ -147,22 +133,6 @@ $(document).ready(function() {
         window.location.pathname = '/path_9'
     })
 //______________________________________________________________________________________________________________________
-
-
-    $('#id_time').mouseenter(function (f) {
-        $.post(
-            "ajax_clock",
-            {
-                'k': ''
-            },
-            function (response) {
-                alert(response.message)
-            }
-        );
-
-    })
-//______________________________________________________________________________________________________________________
-
 
         // """ URL: delete_cover_band
         // Function: delete_cover_band
@@ -301,7 +271,35 @@ $(document).ready(function() {
                 }
             })
         )
-    })
+    });
+
+    // rename_export_folder End_________________________________________________________________________________________
+
+
+        //    """ URL: rename_export_folder
+    //         Function: rename_export_folder
+    //         File: main_page.html
+    //         Element path (web/html): "MAIN MENU" button --> "Settings" button --> "Settings Modal Window" --> "Export Files Folder
+    //         Name:..." input + "Save Changes" button
+    //         JS path: """
+
+    $("#id_reverse").click(function () {
+        $.get(
+            "sort_track_list_change",
+            {
+                // 'new_export_file_name': $(document).forms["export_form"].export_file_name.value
+                'reverse_mode': "artist"
+            },
+
+        )
+    });
+    // $("#id106").click(function () {
+    //     $.get(
+    //         "sort_track_list_change",
+    //         {
+    //             'reverse_mode': "artist"//$("#new_export_folder_name_input").val()
+    //         })})
+    //         },
     //         (function (response) {
     //             if (response.message == "don't alert") {
     //                 window.location.pathname = '/main_page'
@@ -314,5 +312,60 @@ $(document).ready(function() {
     //     )
     // })
 
-    // rename_export_folder End_________________________________________________________________________________________
+    // _________________________________________________________________________________________
+
+    // $(function (f) {
+    //     $.post(
+    //         "login_user",
+    //         {
+    //             'a': ''
+    //         },
+    //         // window.location.pathname = '/login_page',
+    //         // alert(response.message)
+    //     );
+    // })
+
+    $('#do_logout_button').click(function (f) {
+        $.post(
+            "do_logout",
+            {
+                'k': ''
+            },
+            // function (response) {
+            //     alert(response.message)
+            // }
+        );
+
+    })
+
+
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        // add a zero in front of numbers<10
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+        t = setTimeout(function() {
+            startTime()
+        }, 500);
+    }
+    startTime();
+
+    // while (true){
+    //     alert(i)
+    //     sleep(1000)
+    // }
+
+
 });
