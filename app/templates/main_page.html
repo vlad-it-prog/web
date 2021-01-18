@@ -5,7 +5,7 @@
 
     <!--- Modal_1 "Entering the App": Модальное окно, всплывающее при загрузке главной страницы main_page. --->
 
-    <div id="myModalBox" class="modal fade">
+    <div id="myModalBox" class="modal fade" xmlns="http://www.w3.org/1999/html">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <div class="modal-dialog">
             <div class="modal-content">
@@ -491,9 +491,9 @@
                         <tbody>
                         <thead>
                         <th scope="row"></th>
-                        <th><input type="text" name="Input Command Name" class="form-control" id=""
+                        <th><input type="text" name="Input Command Name" class="form-control"
                                    placeholder="{% trans "Input Command Name" %}"></th>
-                        <th><input type="text" name="Input Key" class="form-control" id="" placeholder="{% trans "Input Key" %}"></th>
+                        <th><input type="text" name="Input Key" class="form-control" placeholder="{% trans "Input Key" %}"></th>
                         </thead>
                         </tbody>
                     </table>
@@ -607,9 +607,9 @@
                         <tbody>
                         <thead>
                         <th scope="row"></th>
-                        <th><input type="text" name="Input Command Name" class="form-control" id=""
+                        <th><input type="text" name="Input Command Name" class="form-control"
                                    placeholder="{% trans "Input Command Name" %}"></th>
-                        <th><input type="text" name="Input Key" class="form-control" id="" placeholder="{% trans "Input Key" %}"></th>
+                        <th><input type="text" name="Input Key" class="form-control" placeholder="{% trans "Input Key" %}"></th>
                         </thead>
                         </tbody>
                     </table>
@@ -655,7 +655,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <form id="settings_form" method="post">
+                    <form id="settings_form" method="get">
                         <div class="row">
                             <div class="col-10">
                                 <label>{% trans "Setting" %} 1</label>
@@ -709,7 +709,6 @@
 {#                                </form>#}
                             </div>
                         </div>
-
                     </form>
 
                     <form action="language" method="get">
@@ -720,15 +719,15 @@
                                             <option value="be">{% trans "belorussian" %}</option>
                                         </datalist>
                                     </select>
-                        <button  type="submit"
+                        <button  type="submit" id="language" hidden
                                  class="btn btn-primary" title="{% trans "Save Changes" %}">{% trans "Save Changes" %}
                         </button>
                     </form>
                 </div>
                 <div class="modal-footer">
-{#                    <button id="settings_save_changes_button" type="submit" form="#settings_form" formmethod="get"#}
-{#                            class="btn btn-primary" title="{% trans "Save Changes" %}">{% trans "Save Changes" %}#}
-{#                    </button>#}
+                    <button type="submit" id="settings_save_changes_button" formmethod="get"
+                            class="btn btn-primary" title="{% trans "Save Changes" %}">{% trans "Save Changes" %}
+                    </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" title="{% trans "Close" %}">{% trans "Close" %}</button>
                 </div>
             </div>
@@ -1074,7 +1073,7 @@
                     <button id="all_bands-add_cover_band_button" type="button" class="btn btn-primary"
                             data-toggle="modal" data-dismiss="modal" href="#main_menu_add_cover_band">{% trans "Add Cover Band" %}
                     </button>
-                    <button id="" type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal"
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal"
                             href="#main_menu_delete_cover_band">{% trans "Delete Cover Band" %}
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>

@@ -229,11 +229,14 @@ $(document).ready(function() {
                 'new_export_folder_name': $("#new_export_folder_name_input").val()
             },
             (function (response) {
+
                 if (response.message == "don't alert") {
-                    window.location.pathname = '/main_page'
+                    document.getElementById("language").click()
+                    // window.location.pathname = '/main_page'
                 } else {
-                    window.location.pathname = '/main_page'
                     alert(('Fxport Folder was renamed "') + $("#new_export_folder_name_input").val() + ('" successfully!'))
+                    document.getElementById("language").click()
+                    // window.location.pathname = '/main_page'
                     // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
                 }
             })
@@ -293,6 +296,7 @@ $(document).ready(function() {
 
         )
     });
+
     // $("#id106").click(function () {
     //     $.get(
     //         "sort_track_list_change",
@@ -337,8 +341,13 @@ $(document).ready(function() {
         );
 
     })
+//______________________________________________________________________________________________________________________
 
-
+    //     """ URL:
+    //         Function:
+    //         File:
+    //         Element path (web/html):
+    //         JS path: """
 
     function checkTime(i) {
         if (i < 10) {
@@ -355,29 +364,14 @@ $(document).ready(function() {
         // add a zero in front of numbers<10
         m = checkTime(m);
         s = checkTime(s);
-        document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+        if (document.getElementById('time')) {
+            document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+        }
         t = setTimeout(function() {
             startTime()
         }, 500);
     }
     startTime();
-//______________________________________________________________________________________________________________________
-
-    //     """ URL:
-    //         Function:
-    //         File: main_page.html
-    //         Element path (web/html):
-    //         Name:..."
-    //         JS path: """
-
-
-    // $("#settings_save_changes_button").click(function () {
-    //     $.get(
-    //         "language",
-    //         {
-    //             'language': $("#language").val()
-    //          })
-    // })
 //______________________________________________________________________________________________________________________
 
 });
