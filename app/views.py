@@ -22,18 +22,66 @@ from app.models import Track, Band, Client, Person, Person, Cash, Cat, Song, Exp
 import requests
 
 
+def language(request):
+
+    """ URL:
+        Function:
+        File:  """
+
+    from django.utils.datastructures import MultiValueDictKeyError
+
+    # lang = request.GET['language']
+    try:
+        lang = request.GET['language']
+    except MultiValueDictKeyError:
+        lang = False
+
+    activate(lang)
+    response = HttpResponseRedirect() #render(request, "login_page.html", {})
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
+    print(request.path_info)
+
+    return HttpResponseRedirect(request.get_full_path())
+
+    # return HttpResponseRedirect('/login_page')
+
+    # language_dict = {
+    #     "english": "en",
+    #     "russian": "ru",
+    #     "belorussian": "be"
+    # }
+    # for x in language_dict:
+    #     if request.GET['language'] == x:
+    #         lang = language_dict[x]
+    #         return lang
+
+
+def start_page(request):
+
+    """ URL: help_page
+        Function: help_page
+        File: help_page.html """
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login_page')
+    else:
+        return HttpResponseRedirect('/main_page')
+
+
 def help_page(request):
 
     """ URL: help_page
         Function: help_page
         File: help_page.html """
 
-    activate('ru')
+    # activate()
 
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/login_page')
     else:
-        return render(request, "help_page.html", {})
+        response = render(request, "help_page.html", {})
+        response.set_cookie(key="template_name", value="help_page.html")
+        return response
 
 
 # ______________________________________________________________________________________________________________________
@@ -58,13 +106,26 @@ def login_page(request):
     """ URL: login_page
         Function: login_page
         File: login_page.html """
+    # activate('en')
 
-    activate('ru')
+    from django.utils.datastructures import MultiValueDictKeyError
+
+
+    # try:
+    #     lang = request.GET['language']
+    # except MultiValueDictKeyError:
+    #     lang = False
+    # lang = request.GET['language']
+    # activate(lang)
+
     if request.user.is_authenticated:
         return HttpResponseRedirect('/main_page')
     else:
+        # response = render(request, "login_page.html", {})
+        # response.set_cookie(settings.LANGUAGE_COOKIE_NAME, 'ru')
+        # return response
         response = render(request, "login_page.html", {})
-        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, 'ru')
+        response.set_cookie(key="template_name", value="login_page.html")
         return response
 # ______________________________________________________________________________________________________________________
 
@@ -74,6 +135,16 @@ def main_page(request):
     """ URL: main_page
         Function: main_page
         File: main_page.html """
+
+    from django.utils.datastructures import MultiValueDictKeyError
+
+
+    # try:
+    #     lang = request.GET['language']
+    # except MultiValueDictKeyError:
+    #     lang = False
+    # # lang = request.GET['language']
+    # activate(lang)
 
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/login_page')
@@ -138,7 +209,9 @@ def main_page(request):
         }
         # print(data)
 
-        return render(request, 'main_page.html', context)
+        response = render(request, 'main_page.html', context)
+        response.set_cookie(key="template_name", value="main_page.html")
+        return response
 # ______________________________________________________________________________________________________________________
 
 
@@ -173,6 +246,7 @@ def login_user(request):
         Function:
         File: .html """
 
+    # activate()
     if request.user.is_authenticated:
         return HttpResponseRedirect('/main_page')
     else:
@@ -186,7 +260,9 @@ def login_user(request):
             #     "message": "Please, Try Again!"
             # }
             # return JsonResponse(response)
-            return render(request, 'login_page.html', {'msg': True})
+            response = render(request, 'login_page.html', {'msg': True})
+            response.set_cookie(key="template_name", value="login_page.html")
+            return response
             # return HttpResponse('Please, Try Again!'),
         else:
             login(request, user)
@@ -224,10 +300,13 @@ def registration(request):
         Function:
         File: .html """
 
+    # activate()
     if request.user.is_authenticated:
         return HttpResponseRedirect('/main_page')
     else:
-        return render(request, 'registration.html', {})
+        response = render(request, 'registration.html', {})
+        response.set_cookie(key="template_name", value="registration.html")
+        return response
 
 
 # ______________________________________________________________________________________________________________________

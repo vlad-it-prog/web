@@ -128,7 +128,8 @@ STATIC_URL = '/static/'
 LANGUAGES = [
     ('ru', 'Russian'),
     ('en', 'English'),
-    ('pl', 'Polish')
+    ('pl', 'Polish'),
+    ('be', 'Belorussian'),
 ]
 
 
