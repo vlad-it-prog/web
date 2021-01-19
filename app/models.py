@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 
 class Track(models.Model):                                              # Модель: база данных репертуара "Песня"
@@ -56,3 +57,12 @@ class ExportFileName(models.Model):
 class OtherTrackList(models.Model):
     artist_name = models.CharField(max_length=100)
     song_name = models.CharField(max_length=100)
+
+
+class HistoryTime(models.Model):
+    created = models.DateTimeField()
+
+    def __str__(self):
+        return 'Заявка от {}'.format(self.created.strftime('%d.%m.%Y %H:%M'))
+
+

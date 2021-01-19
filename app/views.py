@@ -18,7 +18,7 @@ import re
 import random
 from datetime import time
 from datetime import datetime
-from app.models import Track, Band, Client, Person, Person, Cash, Cat, Song, ExportFolderName, ExportFileName
+from app.models import Track, Band, Client, Person, Person, Cash, Cat, Song, ExportFolderName, ExportFileName, HistoryTime
 import requests
 from django.utils.datastructures import MultiValueDictKeyError
 from django.conf import settings
@@ -761,3 +761,15 @@ def player(request):
     response = render(request, "main_page.html", {'song': Song.objects.all()[0]})
     response.set_cookie(key="path_name", value="main_page")
     return response
+
+
+def history(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
+    now = datetime.now()
+    History.objects.create(month=now.month, day=now.day, hour=now.hour, minute=now.minute, second=now.second).save()
+
+    return
