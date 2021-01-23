@@ -7,8 +7,14 @@ class Track(models.Model):                                              # Мод
     artist_name = models.CharField(max_length=100)
     song_name = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.artist_name + self.song_name
+    # def __str__(self):
+    #     return self.artist_name + self.song_name
+
+    # def __str__(self):
+    #     return self.artist_name
+    #
+    # def __str__(self):
+    #     return self.song_name
 
 
 class Band(models.Model):                                               # Модель: база данных кавер-групп Cover Bands
@@ -34,7 +40,7 @@ class Cash(models.Model):                                               # Мод
     name = models.CharField(max_length=100)                             # - для кеширования данных
 
 
-class Cat(models.Model):                                                # Модель: база данных "Изображения"
+class Images(models.Model):                                                # Модель: база данных "Изображения"
     name = models.CharField(max_length=100)
     photo = models.ImageField()
 
@@ -59,10 +65,12 @@ class OtherTrackList(models.Model):
     song_name = models.CharField(max_length=100)
 
 
-class HistoryTime(models.Model):
-    created = models.DateTimeField()
+class History(models.Model):
+    time = models.DateTimeField()
+    event = models.CharField(max_length=200)
+    user = models.CharField(max_length=200)
 
     def __str__(self):
-        return 'Заявка от {}'.format(self.created.strftime('%d.%m.%Y %H:%M'))
+        return 'Заявка от {}'.format(self.time.strftime('%d.%m.%Y %H:%M'))
 
 

@@ -18,7 +18,7 @@ import re
 import random
 from datetime import time
 from datetime import datetime
-from app.models import Track, Band, Client, Person, Person, Cash, Cat, Song, ExportFolderName, ExportFileName, HistoryTime
+from app.models import Track, Band, Client, Person, Person, Cash, Images, Song, ExportFolderName, ExportFileName
 import requests
 from django.utils.datastructures import MultiValueDictKeyError
 from django.conf import settings
@@ -36,8 +36,9 @@ def language(request):
         lang = False
 
     activate(lang)
-    response = HttpResponseRedirect(request.COOKIES["path_name"])#re.match("^(.+).html$", request.COOKIES["template_name"]).groups()[0])
-    #render(request, request.COOKIES["template_name"], {}
+    response = HttpResponseRedirect(request.COOKIES["path_name"])
+    # re.match("^(.+).html$", request.COOKIES["template_name"]).groups()[0])
+    # render(request, request.COOKIES["template_name"], {}
 
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
 
@@ -569,7 +570,6 @@ def delete_cover_band(request):
         Band.objects.filter(band_name=request.GET['select_to_delete_cover_band']).delete()
     print(request.GET['select_to_delete_cover_band'])
 
-
     return JsonResponse(response)
 # ______________________________________________________________________________________________________________________
 
@@ -602,7 +602,6 @@ def add_cover_band(request):
         Band.objects.create(band_name=request.GET['select_to_add_cover_band'])
     print(request.GET['select_to_add_cover_band'])
 
-
     return JsonResponse(response)
 # ______________________________________________________________________________________________________________________
 
@@ -618,7 +617,6 @@ def cover_bands_details(request):
     # }
     print(request.GET['cover_band_1_details'])
     print(request.GET['cover_band_2_details'])
-
 
     return JsonResponse()#(response)
 # ______________________________________________________________________________________________________________________
@@ -769,7 +767,28 @@ def history(request):
         Function:
         File: .html """
 
-    now = datetime.now()
-    History.objects.create(month=now.month, day=now.day, hour=now.hour, minute=now.minute, second=now.second).save()
+    # try:
+    #     history_time = request.GET["history"]
+    # except MultiValueDictKeyError:
+    #     history_time = False
+    #
+    # history_reg_time = History(time=datetime.now()).save()
+    # # history_reg_time.created.strftime('%d.%m.%Y %H:%M')
 
-    return
+    response = HttpResponseRedirect(request.COOKIES["path_name"])
+    response.set_cookie(key="path_name", value="main_page")
+    return response
+
+
+def new(request):
+
+    """ URL: new
+        Function: new
+        File: new.html """
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login_page')
+    else:
+        response = render(request, "new.html", {})
+        response.set_cookie(key="path_name", value="new")
+        return response

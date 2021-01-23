@@ -505,6 +505,9 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px"
                             title="{% trans "Close" %}">{% trans "Close" %}
                     </button>
+                    <a href="history" act><button type="button" class="btn btn-secondary" style="width: 100px"
+                            title="">Reg_time
+                    </button></a>
                 </div>
             </div>
         </div>
@@ -714,7 +717,7 @@
                     <form action="language" method="post">
                                     <select class="custom-select" list="settings_language_list" name="language">
                                         <datalist id="settings_language_list">
-                                            <option value="en">{% trans "english" %}</option>
+                                            <option value="en" selected>{% trans "english" %}</option>
                                             <option value="ru">{% trans "russian" %}</option>
                                             <option value="be">{% trans "belorussian" %}</option>
                                         </datalist>
@@ -1422,15 +1425,31 @@
 {#                    <snap></snap>#}
                 </div>
         </div>
+        <div>
+            <li>1: <span id="test_1"></span></li>
+        </div>
         <div class="col-3">
                 <div align="right" style="opacity: 50%; cursor: default">
-                    <h6 href="#language">{{ app_language }}{% trans "EN" %}</h6>
+                    <h6 href="#language">{{ request.LANGUAGE_CODE }}</h6>
+{#                    <h6>{{ request.POST['language'] }}</h6>#}
                 </div>
             </div>
         </div>
     </div>
     </div>
     </div>
+
+{#    <script>#}
+{#    var success = function(id) {#}
+{#    var node = document.getElementById('test_' + id);#}
+{#    node.innerHTML += 'OK ';};#}
+{##}
+{#    $.Shortcuts.add({type: 'hold', mask: '1', handler: function() { success('1'); }});#}
+{##}
+{#    $.Shortcuts.start();#}
+{#    </script>#}
+
+
 
 
 {% endblock %}

@@ -5,8 +5,8 @@ from app.views import \
     ajax_cb, band_list, \
     page_3, main_test_cash, test_html, help_page, \
     add_new_cover_band_to_band_list, delete_cover_band, add_cover_band, cover_bands_details, \
-    rename_export_folder, name_export_file, sort_track_list_change, song_list_page, player, start_page, language, history
-
+    rename_export_folder, name_export_file, sort_track_list_change, song_list_page, player, start_page, language, \
+    history, new
 
 urlpatterns = [
 
@@ -14,28 +14,26 @@ urlpatterns = [
     path('login_page', login_page),
     path('registration', registration),  # Путь к странице с формой регистрации      (registration.html)
 
-
-    path('main_page', main_page),                      # Путь к главной странице                   ('main_page.html')
-    path('help_page', help_page),                      # Путь к странице помощи                    ('help_page.html')
+    path('main_page', main_page),  # Путь к главной странице                   ('main_page.html')
+    path('help_page', help_page),  # Путь к странице помощи                    ('help_page.html')
 
     path('add_new_cover_band_to_band_list', add_new_cover_band_to_band_list),
 
-
     # Путь к странице с формой Login
 
-    path('login_user', login_user),                 #
-    path('test', test),                             # Путь к тестовой страние                   (test.html)
-    path('do_logout', do_logout),                      #
-    path('register', register),                   #
-    path('path_4', ajax_valid),                     #
-    path('path_5', ajax_cb),                        #
+    path('login_user', login_user),  #
+    path('test', test),  # Путь к тестовой страние                   (test.html)
+    path('do_logout', do_logout),  #
+    path('register', register),  #
+    path('path_4', ajax_valid),  #
+    path('path_5', ajax_cb),  #
     # path('path_7', button_ok),                      #
-    path('path_8', band_list),                      #
+    path('path_8', band_list),  #
     # path('path_9', exchange_rates),
     # path('path_10', experiment),
-    path('page_3', page_3),                     # Путь к тестовой странице                  ('page_3.html')
-    path('path_11', main_test_cash),                # Путь к тестовой функции кеширования
-                                                    # данных на странице page_3.html            ('page_3.html')
+    path('page_3', page_3),  # Путь к тестовой странице                  ('page_3.html')
+    path('path_11', main_test_cash),  # Путь к тестовой функции кеширования
+    # данных на странице page_3.html            ('page_3.html')
 
     path('error', test_html),
     path('ajax_path', ajax_path),
@@ -49,6 +47,6 @@ urlpatterns = [
     path('player', player),
     path('language', language),
     path('history', history),
+    path('new', new),
 
 ]
-

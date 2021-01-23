@@ -329,7 +329,8 @@ $(document).ready(function() {
     //     );
     // })
 
-    $('#do_logout_button').click(function (f) {
+    
+    $('#do_logout_button').click(function () {
         $.post(
             "do_logout",
             {
@@ -339,8 +340,12 @@ $(document).ready(function() {
             //     alert(response.message)
             // }
         );
+    });
 
-    })
+
+
+
+
 //______________________________________________________________________________________________________________________
 
     //     """ URL:
@@ -373,5 +378,50 @@ $(document).ready(function() {
     }
     startTime();
 //______________________________________________________________________________________________________________________
+
+    //        "JS Shortcuts":
+
+    //     """ URL:
+    //         Function:
+    //         File:
+    //         Element path (web/html):
+    //         JS path: """
+
+    // var success = function(id) {
+    //     var node = document.getElementById("1");
+    //     alert("всё получилось")
+    //     window.location.pathname = '/help_page'
+    // // var node = document.getElementById('test_' + id);
+    // // node.innerHTML += 'OK ';
+    // };
+
+    // var success = function(id) {
+    // var node = document.getElementById('test_' + id);
+    // node.innerHTML += 'OK ';
+    // };
+    //
+    // $.Shortcuts.add({type: 'hold', mask: '1', handler: function() { alert('Победа'); }});
+
+    // $.Shortcuts.start();
+
+
+
+    $.key("esc", function() {
+        alert("esc");
+    });
+
+    $.key("ctrl+c", function() {
+        alert('ctrl+c');
+    });
+
+    $(document).key("ctrl+shift+a", function() {
+        alert("ctrl+shift+a");
+    });
+
+    $(window).on('resize', function(){
+        $('.logo').css({
+            fontSize: Math.max(Math.min($(window).outerWidth() / (1 * 6), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY))
+        });
+    }).resize();
 
 });
