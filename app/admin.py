@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Band, Cash, Images, Client, ExportFileName, ExportFolderName, OtherTrackList, Person, \
-    Song, Track
+    Song, Track, History
 
 # Register your models here.
 
@@ -72,12 +72,12 @@ class ExportFolderNameAdmin(admin.ModelAdmin):
     list_display_links = ("id", "name", "subject",)
 
 
-# @admin.register(History)
-# # admin.site.register(History, HistoryAdmin)
-# class HistoryAdmin(admin.ModelAdmin):
-#     list_display = ("id", "time",)
-#     list_display_links = ("id", "time",)
-#     readonly_fields = ("time",)
+@admin.register(History)
+# admin.site.register(History, HistoryAdmin)
+class HistoryAdmin(admin.ModelAdmin):
+    list_display = ("id", "time", "event", "user",)
+    list_display_links = ("id", "time", "event", "user",)
+    readonly_fields = ("id", "time", "event", "user",)
 
 
 @admin.register(OtherTrackList)

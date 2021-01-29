@@ -7,8 +7,8 @@ class Track(models.Model):                                              # Мод
     artist_name = models.CharField(max_length=100)
     song_name = models.CharField(max_length=100)
 
-    # def __str__(self):
-    #     return self.artist_name + self.song_name
+    def __str__(self):
+        return self.artist_name + " - " + self.song_name
 
     # def __str__(self):
     #     return self.artist_name
@@ -20,6 +20,9 @@ class Track(models.Model):                                              # Мод
 class Band(models.Model):                                               # Модель: база данных кавер-групп Cover Bands
     band_name = models.CharField(max_length=100)
     tracks = models.ManyToManyField(Track)
+
+    def __str__(self):
+        return self.band_name
 
 
 class Client(models.Model):
@@ -55,6 +58,11 @@ class ExportFolderName(models.Model):
     name = models.CharField(max_length=125)
 
 
+class ImportFolderName(models.Model):
+    subject = models.CharField(max_length=125)
+    name = models.CharField(max_length=125)
+
+
 class ExportFileName(models.Model):
     # subject = models.CharField(max_length=125)
     name = models.CharField(max_length=125)
@@ -71,6 +79,13 @@ class History(models.Model):
     user = models.CharField(max_length=200)
 
     def __str__(self):
-        return 'Заявка от {}'.format(self.time.strftime('%d.%m.%Y %H:%M'))
+        return format(self.time.strftime('%d.%m.%Y %H:%M'))
+        # return 'Заявка от {}'.format(self.time.strftime('%d.%m.%Y %H:%M'))
+    #
+    # def __str__(self):
+    #     return self.event
+    #
+    # def __str__(self):
+    #     return self.user
 
 

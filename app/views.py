@@ -18,7 +18,7 @@ import re
 import random
 from datetime import time
 from datetime import datetime
-from app.models import Track, Band, Client, Person, Person, Cash, Images, Song, ExportFolderName, ExportFileName
+from app.models import Track, Band, Client, Person, Person, Cash, Images, Song, ExportFolderName, ExportFileName, History, ImportFolderName
 import requests
 from django.utils.datastructures import MultiValueDictKeyError
 from django.conf import settings
@@ -37,8 +37,6 @@ def language(request):
 
     activate(lang)
     response = HttpResponseRedirect(request.COOKIES["path_name"])
-    # re.match("^(.+).html$", request.COOKIES["template_name"]).groups()[0])
-    # render(request, request.COOKIES["template_name"], {}
 
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
 
@@ -125,14 +123,22 @@ def main_page(request):
             table.append([track + 1, Track.objects.order_by("artist_name").values()[track]['artist_name'], Track.objects.order_by("artist_name").values()[track]['song_name']])
 
         dir_name = ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name']
+
         if dir_name not in os.listdir():
             os.makedirs(os.path.split(os.path.abspath(os.listdir()[0]))[0] + "\\" + dir_name)
         else:
             pass
-
-        print(os.listdir())
-
         export_path = os.path.abspath(ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1]['name'] + "\\")
+
+
+        import_dir_name = ImportFolderName.objects.values('name')[len(ImportFolderName.objects.values('name')) - 1]['name']
+        if import_dir_name not in os.listdir():
+            os.makedirs(os.path.split(os.path.abspath(os.listdir()[0]))[0] + "\\" + import_dir_name)
+        else:
+            pass
+        # print(os.listdir())
+        # import_path = os.path.abspath(ImportFolderName.objects.values('name')[len(ImportFolderName.objects.values('name')) - 1]['name'] + "\\")
+
 
         # print(os.path.basename('C:\\Users\\User\\PycharmProjects\\test_python\\test_1'))
 
@@ -154,12 +160,23 @@ def main_page(request):
         # )
         # data = json.loads(response.text)
 
+        history_dict = []
+        num = 0
+        history_all = History.objects.all()
+        for history_time in history_all:
+            history_dict.append([str(history_time), str(history_all[num].event) + "_" + str(num + 1), history_all[num].user])
+            num = num + 1
+        # print(history_dict)
+
+
         context = {
             # 'exchange rates': data,
             # 'cover_bands': menu_items,
             'table': table,
             "dir_name": dir_name,
             "export_path": export_path,
+            "import_dir_name": import_dir_name,
+            # "import_path": import_path,
             "all_songs": all_songs,
             "all_bands": all_bands,
             "all_bands_list": all_bands_list,
@@ -168,9 +185,15 @@ def main_page(request):
             'loged': request.user.is_authenticated,
             'username_loged': request.user.username,
             'title': _('Пожалуйста'),
-            'song': Song.objects.all()[0]
+            'song': Song.objects.all()[0],
+            "history_dict": history_dict
         }
-        # print(data)
+        # print(type(request.LANGUAGE_CODE))
+        # print()
+        # from django.views
+
+        # for p in request.COOKIES:
+        #     print(p)
 
         response = render(request, 'main_page.html', context)
         response.set_cookie(key="path_name", value="main_page")
@@ -185,8 +208,8 @@ def main_page_2(request):
         File: .html """
 
     context = {'loged': request.user.is_authenticated,
-               'username_loged': request.user.username
-    }
+               'username_loged': request.user.username}
+
     return render(request, 'main_page.html', context)
 # ______________________________________________________________________________________________________________________
 
@@ -220,20 +243,14 @@ def login_user(request):
             password = 'False'
 
         user = authenticate(
-            username=username, #request.POST['username'],
-            password=password #request.POST['password']
+            username=username,
+            password=password
         )
 
         if user is None:
-            # response ={
-            #     "message": "Please, Try Again!"
-            # }
-            # return JsonResponse(response)
-
             response = render(request, 'login_page.html', {'msg': True})
             response.set_cookie(key="path_name", value="login_user")
             return response
-            # return HttpResponse('Please, Try Again!'),
         else:
             login(request, user)
             return HttpResponseRedirect('/main_page')
@@ -246,7 +263,6 @@ def test(request):
         Function:
         File: .html """
 
-    # activate(random.choice(['en']))
     return render(request, 'test.html', {"title": _("Новости")})
 # ______________________________________________________________________________________________________________________
 
@@ -278,7 +294,6 @@ def registration(request):
         response.set_cookie(key="path_name", value="registration")
         return response
 
-
 # ______________________________________________________________________________________________________________________
 
 
@@ -296,7 +311,6 @@ def register(request):
                                     )
     client = Client(user=user, address='Minsk')
     client.save()
-    # return HttpResponse('OK'),
     return HttpResponseRedirect('/login_page')
 # ______________________________________________________________________________________________________________________
 
@@ -386,15 +400,20 @@ def band_list(request):
         Function:
         File: .html """
 
-    df = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\band_list.csv")
-    menu_items = df['cover bands']
-    menu_head = str(df.keys()[1])
-    context = {
-        'cover_bands': menu_items
-    }
-    print(sorted(menu_items))
-    print(df.loc[5])
-    return render(request, 'main_page.html', context)
+    # df = pandas.read_csv("C:\\Users\\User\\PycharmProjects\\web\\cover_bands.csv")
+    # menu_items = df['cover band']
+    # menu_head = str(df.keys()[1])
+    # context = {
+    #     'cover_bands': menu_items
+    # }
+    # print(sorted(menu_items))
+    # print(df.loc[5])
+    if request.GET['button'] == 'yes':
+        print(os.getcwd())
+        os.chdir("C:\\Users\\User\\PycharmProjects\\web\\" + request.GET['import_folder_name'])
+        print(os.getcwd())
+        # db = pandas.read_csv()
+    return HttpResponseRedirect("song_list_page")
 # ______________________________________________________________________________________________________________________
 
 
@@ -504,20 +523,6 @@ def ajax_path(request):
 # ______________________________________________________________________________________________________________________
 
 
-def ajax_clock(request):
-
-    """ URL: ajax_clock
-        Function: ajax_clock
-        File: .html """
-
-    a = str(datetime.now().time())
-    response = {
-        'message': request.POST['a'] + a
-    }
-    return JsonResponse(response)
-# ______________________________________________________________________________________________________________________
-
-
 def main_test_cash(request):
 
     """ URL:
@@ -618,7 +623,7 @@ def cover_bands_details(request):
     print(request.GET['cover_band_1_details'])
     print(request.GET['cover_band_2_details'])
 
-    return JsonResponse()#(response)
+    return JsonResponse()# (response)
 # ______________________________________________________________________________________________________________________
 
 
@@ -647,7 +652,38 @@ def rename_export_folder(request):
         os.rename(current_dir_name, request.GET['new_export_folder_name'])
         ExportFolderName.objects.filter(subject='export folder').update(name=request.GET['new_export_folder_name'])
 
-    print(ExportFolderName.objects.values())
+    # print(ExportFolderName.objects.values())
+
+    return JsonResponse(response)
+# ______________________________________________________________________________________________________________________
+
+
+def rename_import_folder(request):
+
+    """ URL: rename_export_folder
+        Function: rename_export_folder
+        File: main_page.html
+        Element path (web/html): "MAIN MENU" button --> "Settings" button --> "Settings Modal Window" --> "Export Files Folder
+        Name:..." input + "Save Changes" button
+        JS path: """
+
+    current_dir_name = ImportFolderName.objects.values('name')[len(ImportFolderName.objects.values('name')) - 1]['name']
+    if len(request.GET['new_import_folder_name']) == 0:
+        response = {
+            'message': "don't alert"
+        }
+    elif request.GET['new_import_folder_name'] == current_dir_name:
+        response = {
+            'message': "don't alert"
+        }
+    else:
+        response = {
+            'message': ""
+        }
+        os.rename(current_dir_name, request.GET['new_import_folder_name'])
+        ImportFolderName.objects.filter(subject='import folder').update(name=request.GET['new_import_folder_name'])
+
+    print(ImportFolderName.objects.values())
 
     return JsonResponse(response)
 # ______________________________________________________________________________________________________________________
@@ -677,7 +713,7 @@ def name_export_file(request):
             else:
                 creat_file = open((os.path.abspath(
                     ExportFolderName.objects.values('name')[len(ExportFolderName.objects.values('name')) - 1][
-                        'name'] + "\\") + export_file_name + ".csv"), 'w')
+                        'name'] + "\\") + export_file_name + ".txt"), 'w')
                 # creat_file.write('artist,song')
                 creat_file.close()
 
@@ -741,13 +777,20 @@ def sort_track_list_change(request):
 # ______________________________________________________________________________________________________________________
 
 
-def song_list_page(request):
+# def song_list_page(request):
+#
+#     """ URL:
+#         Function:
+#         File: .html """
+    # try:
+    #     x = request.GET.getlist()
+    # except MultiValueDictKeyError:
+    #     x = False
 
-    """ URL:
-        Function:
-        File: .html """
-
-    return render(request, "song_list_page.html", {})
+    # print(x)
+    # response = render(request, "song_list_page.html", {})
+    # return response
+    # pass
 
 
 def player(request):
@@ -767,13 +810,14 @@ def history(request):
         Function:
         File: .html """
 
-    # try:
-    #     history_time = request.GET["history"]
-    # except MultiValueDictKeyError:
-    #     history_time = False
-    #
-    # history_reg_time = History(time=datetime.now()).save()
-    # # history_reg_time.created.strftime('%d.%m.%Y %H:%M')
+    try:
+        history_all = request.GET["history"]
+    except MultiValueDictKeyError:
+        history_all = False
+
+    history_register_time = History(time=datetime.now(), event="test_event", user=request.user).save()
+
+    # history_reg_time.created.strftime('%d.%m.%Y %H:%M')
 
     response = HttpResponseRedirect(request.COOKIES["path_name"])
     response.set_cookie(key="path_name", value="main_page")
@@ -792,3 +836,42 @@ def new(request):
         response = render(request, "new.html", {})
         response.set_cookie(key="path_name", value="new")
         return response
+
+
+def import_file_to_database(request):
+
+    """ URL: new
+        Function: new
+        File: new.html """
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login_page')
+    else:
+        import_file_name = r"" + str(request.GET['add_cb_open_folder_form']) + ""
+        import_file_name_split = import_file_name.split("\\")
+        import_file_name_split_2 = import_file_name_split[-1].split(".csv")
+        result = import_file_name_split_2[0]
+        current_band = Band(band_name=result)
+        current_band.save()
+        print(current_band)
+
+        import_folder_name = ImportFolderName.objects.all()
+        current_import_folder_name = import_folder_name[0].name
+        current_path = os.getcwd() + "\\" + current_import_folder_name
+
+        import_db = pandas.read_csv(current_path + "\\" + import_file_name_split[-1])
+        for iter_number in range(import_db.shape[0]):
+            current_band.tracks.create(artist_name=import_db.artist[iter_number], song_name=import_db.song[iter_number])
+
+        return JsonResponse
+
+    # os.chdir("C:\\Users\\User\\PycharmProjects\\web\\files")
+    # for dir_object in os.listdir():
+    #     current_file = dir_object
+    # creat_file = open(os.getcwd() + "\\" + current_file, 'w')
+    # creat_file.write("band:\n")
+    # for w in Band.objects.values_list('band_name', flat=True):
+    #     creat_file.write(w + "\n")
+    #     print(w)
+    # creat_file.close()
+

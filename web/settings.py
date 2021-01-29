@@ -142,5 +142,5 @@ MEDIA_URL = '/media/'
 # AUDIO_ROOT = 'C:\\Users\\pc1\\PycharmProjects\\web\\audio'
 # AUDIO_URL = '/audio/'
 
-TIME_ZONE = 'Europe/Samara'
-USE_TZ = True
+TIME_ZONE = 'Europe/Minsk'
+USE_TZ = False

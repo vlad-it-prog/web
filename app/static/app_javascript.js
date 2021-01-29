@@ -232,18 +232,29 @@ $(document).ready(function() {
 
                 if (response.message == "don't alert") {
                     document.getElementById("language").click()
-                    // window.location.pathname = '/main_page'
                 } else {
-                    alert(('Fxport Folder was renamed "') + $("#new_export_folder_name_input").val() + ('" successfully!'))
+                    alert(('Export Folder was renamed "') + $("#new_export_folder_name_input").val() + ('" successfully!'))
                     document.getElementById("language").click()
-                    // window.location.pathname = '/main_page'
-                    // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
+                }
+            })
+        );
+            $.get(
+            "rename_import_folder",
+            {
+                'new_import_folder_name': $("#new_import_folder_name_input").val()
+            },
+            (function (response) {
+                if (response.message == "don't alert") {
+                } else {
+                    alert(('Import Folder was renamed "') + $("#new_import_folder_name_input").val() + ('" successfully!'))
                 }
             })
         )
     })
 
     // rename_export_folder End_________________________________________________________________________________________
+    // rename_import_folder End_________________________________________________________________________________________
+
 
     //    """ URL: name_export_file
     //         Function: name_export_file
@@ -279,7 +290,7 @@ $(document).ready(function() {
     // rename_export_folder End_________________________________________________________________________________________
 
 
-        //    """ URL: rename_export_folder
+    //    """ URL: rename_export_folder
     //         Function: rename_export_folder
     //         File: main_page.html
     //         Element path (web/html): "MAIN MENU" button --> "Settings" button --> "Settings Modal Window" --> "Export Files Folder
@@ -406,22 +417,90 @@ $(document).ready(function() {
 
 
 
-    $.key("esc", function() {
-        alert("esc");
-    });
+    // $.key("esc", function() {
+    //     alert("esc");
+    // });
+    //
+    // $.key("ctrl+c", function() {
+    //     alert('ctrl+c');
+    // });
+    //
+    // $(document).key("ctrl+shift+a", function() {
+    //     alert("ctrl+shift+a");
+    // });
+    //
+    // $(window).on('resize', function(){
+    //     $('.logo').css({
+    //         fontSize: Math.max(Math.min($(window).outerWidth() / (1 * 6), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY))
+    //     });
+    // }).resize();
 
-    $.key("ctrl+c", function() {
-        alert('ctrl+c');
-    });
+//______________________________________________________________________________________________________________________
 
-    $(document).key("ctrl+shift+a", function() {
-        alert("ctrl+shift+a");
-    });
+    //    """ URL: rename_export_folder
+    //         Function: rename_export_folder
+    //         File: main_page.html
+    //         Element path (web/html): "MAIN MENU" button --> "Settings" button --> "Settings Modal Window" --> "Export Files Folder
+    //         Name:..." input + "Save Changes" button
+    //         JS path: """
 
-    $(window).on('resize', function(){
-        $('.logo').css({
-            fontSize: Math.max(Math.min($(window).outerWidth() / (1 * 6), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY))
-        });
-    }).resize();
+    $("#add_cb_open_folder_button").click(function () {
+        document.getElementById("open_folder_hidden").click()
+    })
+//______________________________________________________________________________________________________________________
 
+    //     $("#add_cb_yes").click(function () {
+    //     $.get(
+    //         "name_import_file",
+    //         {
+    //             // 'new_export_file_name': $(document).forms["export_form"].export_file_name.value
+    //             'new_import_file_name': $("#add_cb_select").val()
+    //         },
+    //         (function (response) {
+    //             if ($("#add_cb_select").val() == "") {
+    //                 alert('File "' + response.message + '.csv" was successfully created on path !')
+    //                 window.location.pathname = '/main_page'
+    //             } else if (response.message == "This Cover Band name does not exist in the Band list! Please, try again!") {
+    //                 alert(response.message)
+    //                 window.location.pathname = '/main_page'
+    //                 // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
+    //             } else {
+    //                 alert('File "' + response.message + '.csv" was successfully created on path !')
+    //                 window.location.pathname = '/main_page'
+    //                 // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
+    //             }
+    //         })
+    //     )
+    // });
+ //______________________________________________________________________________________________________________________
+
+    // $("#add_cb_open_folder").blur(function () {
+     $("#add_cb_open_folder").change(function () {
+         $.get(
+            "import_file_to_database",
+            {
+                // 'new_export_file_name': $(document).forms["export_form"].export_file_name.value
+                'add_cb_open_folder_form': $("#add_cb_open_folder").val()
+                // 'add_cb_open_folder_form': $("#add_cb_open_folder").attr("value")
+            },
+         )
+     });
+
+
+            // (function (response) {
+            //     if ($("#export_cb_name_select").val() == "") {
+            //         alert('File "' + response.message + '.csv" was successfully created on path !')
+            //         window.location.pathname = '/main_page'
+            //     } else if (response.message == "This Cover Band name does not exist in the Band list! Please, try again!") {
+            //         alert(response.message)
+            //         window.location.pathname = '/main_page'
+            //         // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
+            //     } else {
+            //         alert('File "' + response.message + '.csv" was successfully created on path !')
+            //         window.location.pathname = '/main_page'
+            //         // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
+            //     }
+            // })
+    //     )
+    // });
 });

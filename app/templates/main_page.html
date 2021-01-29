@@ -35,18 +35,18 @@
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <div align="left">
                         <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                           style="cursor: help"><h5 class="modal-title" id="update">{% trans "Update" %}</h5></a>
+                           style="cursor: help"><h5 class="modal-title" id="update" style="color: whitesmoke">{% trans "Update" %}</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" title="{% trans "Close" %}">&times;</span>
+                            <span aria-hidden="true" title="{% trans "Close" %}" style="color: whitesmoke">&times;</span>
                         </button>
                         <button id="button_help" type="button" class="close" data-dismiss="modal" data-toggle="modal"
                                 data-target="#main_menu_help" aria-label="Close" style="cursor: help">
-                            <span aria-hidden="true" title="{% trans "Help" %}">?</span>
+                            <span aria-hidden="true" title="{% trans "Help" %}" style="color: whitesmoke">?</span>
                         </button>
                     </div>
                 </div>
@@ -55,8 +55,8 @@
                         <h6 style="padding-top: 30px">{% trans "Are you sure you want to update all databases?" %}</h6>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" style="width: 100px" title="{% trans "Update" %}">{% trans "Update" %}</button>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-dark" style="width: 100px" title="{% trans "Update" %}">{% trans "Update" %}</button>
                     <button type="button" class="btn btn-secondary" class="close" data-dismiss="modal"
                             style="width: 100px" title="{% trans "Close" %}">{% trans "Close" %}
                     </button>
@@ -78,20 +78,20 @@
         </button>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                       style="cursor: help"><h5 class="modal-title" id="export">{% trans "Export" %}</h5></a>
+                       style="cursor: help"><h5 class="modal-title" id="export" style="color: white">{% trans "Export" %}</h5></a>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" data-toggle="modal"
-                              data-target="#main_menu_export_cover_band">&times;</span>
+                              data-target="#main_menu_export_cover_band" style="color: white">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="padding-bottom: 30px" align="center">
                     {% trans "Are You Sure you want to Export it?" %}
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <button type="submit" id="export_cb_yes" formaction="#export_form" formmethod="get"
-                            form="#export_form" class="btn btn-primary" title="{% trans "Yes" %}" style="width: 80px"
+                            form="#export_form" class="btn btn-dark" title="{% trans "Yes" %}" style="width: 80px"
                             data-toggle="modal" data-dismiss="modal" data-target="export_cb_yes">{% trans "Yes" %}
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
@@ -118,18 +118,18 @@
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <div align="left">
                         <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                           style="cursor: help"><h5 class="modal-title" id="export">{% trans "Export" %}</h5></a>
+                           style="cursor: help"><h5 class="modal-title" id="export" style="color: white">{% trans "Export" %}</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" title="{% trans "Close" %}">&times;</span>
+                            <span aria-hidden="true" title="{% trans "Close" %}" style="color: white">&times;</span>
                         </button>
                         <button id="button_help" type="button" class="close" data-dismiss="modal" data-toggle="modal"
                                 data-target="#main_menu_help" aria-label="Close" style="cursor: help">
-                            <span aria-hidden="true" title="{% trans "Help" %}">?</span>
+                            <span aria-hidden="true" title="{% trans "Help" %}" style="color: white">?</span>
                         </button>
                     </div>
                 </div>
@@ -184,8 +184,8 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" style="width: 100px" title="{% trans "Export" %}"
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-dark" style="width: 100px" title="{% trans "Export" %}"
                             data-toggle="modal" data-target="#export_cover_band_sure" data-dismiss="modal">Export
                     </button>
                     <button type="button" class="btn btn-secondary" class="close" data-dismiss="modal"
@@ -208,20 +208,20 @@
         </button>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                       style="cursor: help"><h5 class="modal-title" id="add">{% trans "Add Cover Band" %}</h5></a>
+                       style="cursor: help"><h5 class="modal-title" id="add" style="color: white">{% trans "Add Cover Band" %}</h5></a>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" data-toggle="modal"
-                              data-target="#main_menu_add_cover_band">&times;</span>
+                              data-target="#main_menu_add_cover_band" style="color: white">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="padding-bottom: 30px" align="center">
                     {% trans "Are You Sure you want to add this Cover Band?" %}
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <button type="submit" id="add_cb_yes" formaction="#delete_cb_select" formmethod="get"
-                            class="btn btn-primary" title="{% trans "Yes" %}" style="width: 80px">{% trans "Yes" %}
+                            class="btn btn-dark" title="{% trans "Yes" %}" style="width: 80px">{% trans "Yes" %}
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
                             data-target="#main_menu_add_cover_band" title="{% trans "Cancel" %}">{% trans "Cancel" %}
@@ -248,18 +248,18 @@
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <div align="left">
                         <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                           style="cursor: help"><h5 class="modal-title" id="main_menu_add_cover_band">{% trans "Add Cover Band" %}</h5></a>
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_add_cover_band" style="color: white">{% trans "Add Cover Band" %}</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" title="{% trans "Close" %}">&times;</span>
+                            <span aria-hidden="true" title="{% trans "Close" %}" style="color: white">&times;</span>
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
                                 data-target="#main_menu_help" style="cursor: help">
-                            <span aria-hidden="true" title="{% trans "Help" %}">?</span>
+                            <span aria-hidden="true" title="{% trans "Help" %}" style="color: white">?</span>
                         </button>
                     </div>
                 </div>
@@ -267,10 +267,6 @@
                     <div style="padding-top: 30px; padding-bottom: 30px" align="center">
                         {% trans "Enter Cover Band name you want to add:" %}
                     </div>
-                    <form action="/">
-                        <input type="text" name="test_name">
-                        <input type="submit">
-                    </form>
                     <form id="form_id_add_new_cover_band" action="/add_new_cover_band_to_band_list">
                         <div align="center">
                             <input id="add_cb_select" class="form-control mr-sm-2" style="width: 420px" list="CB_name"
@@ -281,19 +277,26 @@
                                 {% endfor %}
                             </datalist>
                         </div>
+                    </form>
+                        <div style="padding-top: 10px" align="center">
+                            <input class="form-control mr-sm-2" title="{% trans "File Name" %}" type="text" maxlength="100" min="0"
+                                   style="width: 420px" align="left" id="id_form_link" placeholder="File Name">
+                        </div>
+                <form method="get" action="/import_file_to_database">
                         <div style="padding-top: 10px" align="center">
                             <input class="form-control mr-sm-2" title="{% trans "Open Folder" %}" type="file" maxlength="100" min="0"
-                                   style="width: 420px" align="left" id="id_form_link">
+                                   style="width: 420px" align="left" id="add_cb_open_folder" name="open_folder_hidden" placeholder="">
                         </div>
-                    </form>
+                    <div><button type="submit">button</button></div>
+            </form>
                 </div>
-                <div class="modal-footer" style="padding-top: 40px" align="right">
-                    <button type="button" class="btn btn-primary" title="{% trans "Open Folder" %}" id="id_form">{% trans "Open Folder" %}</button>
-                    <button type="submit" formaction="#add_cb_select" class="btn btn-primary" title="{% trans "Add" %}"
+                <div class="modal-footer bg-light" style="padding-top: 40px" align="right">
+                    <button id="add_cb_open_folder_button" type="button" class="btn btn-secondary" title="{% trans "Open Folder" %}">{% trans "Open Folder" %}</button>
+                    <button type="submit" formaction="#add_cb_select" class="btn btn-dark" title="{% trans "Add" %}"
                             style="width: 100px" data-toggle="modal" data-target="#add_cover_band_sure"
                             data-dismiss="modal">{% trans "Add" %}
                     </button>
-                    <button type="button" class="btn btn-primary" title="{% trans "Cancel -> All Bands" %}"
+                    <button type="button" class="btn btn-secondary" title="{% trans "Cancel -> All Bands" %}"
                             id="add_cover_band_cancel_button" data-toggle="modal" data-target="#main_block_all_bands"
                             data-dismiss="modal" style="width: 100px">{% trans "Cancel" %}
                     </button>
@@ -316,20 +319,20 @@
         </button>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                       style="cursor: help"><h5 class="modal-title" id="delete">{% trans "Delete Cover Band" %}</h5></a>
+                       style="cursor: help"><h5 class="modal-title" id="delete" style="color: white">{% trans "Delete Cover Band" %}</h5></a>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" data-toggle="modal"
-                              data-target="#main_menu_delete_cover_band">&times;</span>
+                              data-target="#main_menu_delete_cover_band" style="color: white">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="padding-bottom: 30px" align="center">
                     {% trans "Are You Sure you want to delete this Cover Band?" %}
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <button type="submit" id="delete_cb_yes" formaction="#delete_cb_select" formmethod="get"
-                            class="btn btn-primary" title="{% trans "Yes" %}" style="width: 80px">{% trans "Yes" %}
+                            class="btn btn-dark" title="{% trans "Yes" %}" style="width: 80px">{% trans "Yes" %}
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
                             data-target="#main_menu_delete_cover_band" title="{% trans "Cancel" %}">{% trans "Cancel" %}
@@ -353,18 +356,18 @@
         </button>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <div align="left">
                         <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                           style="cursor: help"><h5 class="modal-title" id="main_menu_delete_cover_band">{% trans "Delete Cover Band" %}</h5></a>
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_delete_cover_band" style="color: white">{% trans "Delete Cover Band" %}</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" title="{% trans "Close" %}">&times;</span>
+                            <span aria-hidden="true" title="{% trans "Close" %}" style="color: white">&times;</span>
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
                                 data-target="#main_menu_help" style="cursor: help">
-                            <span aria-hidden="true" title="{% trans "Help" %}">?</span>
+                            <span aria-hidden="true" title="{% trans "Help" %}" style="color: white">?</span>
                         </button>
                     </div>
                 </div>
@@ -382,11 +385,11 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete"
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#delete"
                             data-dismiss="modal" class="modal" title="{% trans "Delete" %}">{% trans "Delete" %}
                     </button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                    <button type="button" class="btn btn-secondary" data-toggle="modal"
                             data-target="#main_block_all_bands" data-dismiss="modal" title="{% trans "Cancel" %}">{% trans "Cancel" %}
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" title="{% trans "Close" %}">{% trans "Close" %}</button>
@@ -418,75 +421,47 @@
             </button>
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
-            <div class="modal-content" style="padding-top: 30px">
-                <div class="modal-header" style="padding-top: 0px">
+            <div class="modal-content">
+                <div class="modal-header bg-dark" style="padding-top: 15px">
                     <div align="left">
                         <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                           style="cursor: help"><h5 class="modal-title" id="main_menu_history">{% trans "History" %}</h5></a>
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_history" style="color: white">{% trans "History" %}</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" title="{% trans "Close" %}">&times;</span>
+                            <span aria-hidden="true" title="{% trans "Close" %}" style="color: white">&times;</span>
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
                                 data-target="#main_menu_help" style="cursor: help">
-                            <span aria-hidden="true" title="{% trans "Help" %}">?</span>
+                            <span aria-hidden="true" title="{% trans "Help" %}" style="color: white">?</span>
                         </button>
                     </div>
                 </div>
                 <div class="modal-body" class="modal-scroll-window">
-                    <table class="table table-sm" class="modal-title" id="main_menu_history">
+                    <table class="table table-sm bg-light" class="modal-title" id="main_menu_history">
                         <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>{% trans "History Name" %}</th>
+                        <tr align="center" style="padding-right: 25px">
                             <th>{% trans "Time" %}</th>
+                            <th>{% trans "Event" %}</th>
+                            <th>User</th>
                         </tr>
                         </thead>
                     </table>
                     <div data-spy="scroll" class="scrollspy_history">
                         <table class="table table-sm" style="padding-top: 0px; padding-bottom: 0px">
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>{% trans "History" %} 1</td>
-                                <td>Ctrl + T</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>{% trans "History" %} 2</td>
-                                <td>Alt + O</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>{% trans "History" %} 3</td>
-                                <td>Q</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>{% trans "History" %} 4</td>
-                                <td>Ctrl + Enter</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>{% trans "History" %} 5</td>
-                                <td>X</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <td>{% trans "History" %} 6</td>
-                                <td>O</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">7</th>
-                                <td>{% trans "History" %} 7</td>
-                                <td>Ctrl + Alt + L</td>
-                            </tr>
+                            {% for user, event, time in history_dict %}
+                                <tr align="center">
+                                    <th scope="row">{{ user }}</th>
+                                    <td>{{ event }}</td>
+                                    <td>{{ time }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="modal-footer" style="padding-bottom: 0px">
+                <div class="modal-footer bg-light" style="padding-bottom: 0px">
                     <table class="table table-sm" style="padding-top: 0px; padding-bottom: 0px">
                         <tbody>
                         <thead>
@@ -498,16 +473,14 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="modal-footer" style="padding-top: 0px; padding-bottom: 20px">
-                    <button type="button" class="btn btn-primary" style="width: 100px" title="{% trans "Search" %}">{% trans "Search" %}</button>
-                    <button type="button" class="btn btn-primary" style="width: 100px" title="{% trans "Add Key" %}">{% trans "Add Key" %}</button>
-                    <button type="button" class="btn btn-primary" style="width: 100px" title="{% trans "Save changes" %}">{% trans "OK" %}</button>
+                <div class="modal-footer bg-light" style="padding-top: 0px; padding-bottom: 20px">
+                    <button type="button" class="btn btn-secondary" style="width: 100px" title="{% trans "Search" %}">{% trans "Search" %}</button>
+                    <a href="history" act><button type="button" class="btn btn-dark" style="width: 100px"
+                            title="">Reg_time
+                    </button></a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px"
                             title="{% trans "Close" %}">{% trans "Close" %}
                     </button>
-                    <a href="history" act><button type="button" class="btn btn-secondary" style="width: 100px"
-                            title="">Reg_time
-                    </button></a>
                 </div>
             </div>
         </div>
@@ -536,27 +509,27 @@
             </button>
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
-            <div class="modal-content" style="padding-top: 30px">
-                <div class="modal-header" style="padding-top: 0px">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
                     <div align="left">
                         <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                           style="cursor: help"><h5 class="modal-title" id="exampleModalCenteredLabel">{% trans "Key Commands" %}</h5>
+                           style="cursor: help"><h5 class="modal-title" id="exampleModalCenteredLabel" style="color: white">{% trans "Key Commands" %}</h5>
                         </a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" title="{% trans "Close" %}">&times;</span>
+                            <span aria-hidden="true" title="{% trans "Close" %}" style="color: white">&times;</span>
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
                                 data-target="#main_menu_help" style="cursor: help">
-                            <span aria-hidden="true" title="{% trans "Help" %}">?</span>
+                            <span aria-hidden="true" title="{% trans "Help" %}" style="color: white">?</span>
                         </button>
                     </div>
                 </div>
                 <div class="modal-body" class="modal-scroll-window">
                     <table class="table table-sm" class="modal-title" id="exampleModalCenteredLabel">
-                        <thead>
-                        <tr>
+                        <thead class="bg-light">
+                        <tr align="center">
                             <th>#</th>
                             <th>{% trans "Command Name" %}</th>
                             <th>{% trans "Key Name" %}</th>
@@ -565,7 +538,7 @@
                     </table>
                     <div data-spy="scroll" class="scrollspy-example-2">
                         <table class="table table-sm" style="padding-top: 0px; padding-bottom: 0px">
-                            <tbody>
+                            <tbody align="center">
                             <tr>
                                 <th scope="row">1</th>
                                 <td>{% trans "Key Command" %} 1</td>
@@ -606,7 +579,7 @@
                     </div>
                 </div>
                 <div class="modal-footer" style="padding-bottom: 0px">
-                    <table class="table table-sm" style="padding-top: 0px; padding-bottom: 0px">
+                    <table class="table table-sm bg-light" style="padding-top: 0px; padding-bottom: 0px">
                         <tbody>
                         <thead>
                         <th scope="row"></th>
@@ -617,10 +590,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="modal-footer" style="padding-top: 0px; padding-bottom: 20px">
-                    <button type="button" class="btn btn-primary" style="width: 100px" title="{% trans "Search" %}">{% trans "Search" %}</button>
-                    <button type="button" class="btn btn-primary" style="width: 100px" title="{% trans "Add Key" %}">{% trans "Add Key" %}</button>
-                    <button type="button" class="btn btn-primary" title="{% trans "Save changes" %}">{% trans "Save Changes" %}</button>
+                <div class="modal-footer bg-light" style="padding-top: 0px; padding-bottom: 20px">
+                    <button type="button" class="btn btn-secondary" style="width: 100px" title="{% trans "Search" %}">{% trans "Search" %}</button>
+                    <button type="button" class="btn btn-secondary" style="width: 100px" title="{% trans "Add Key" %}">{% trans "Add Key" %}</button>
+                    <button type="button" class="btn btn-dark" title="{% trans "Save changes" %}">{% trans "Save Changes" %}</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px"
                             title="{% trans "Close" %}">{% trans "Close" %}
                     </button>
@@ -642,23 +615,24 @@
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <div align="left">
                         <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                           style="cursor: help"><h5 class="modal-title" id="main_menu_settings">{% trans "Settings" %}</h5></a>
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_settings" style="color: white">{% trans "Settings" %}</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="{% trans "Close" %}">
-                            <span aria-hidden="true" title="{% trans "Close" %}">&times;</span>
+                            <span aria-hidden="true" title="{% trans "Close" %}" style="color: white">&times;</span>
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
                                 data-target="#main_menu_help" style="cursor: help">
-                            <span aria-hidden="true" title="{% trans "Help" %}">?</span>
+                            <span aria-hidden="true" title="{% trans "Help" %}" style="color: white">?</span>
                         </button>
                     </div>
                 </div>
                 <div class="modal-body">
                     <form id="settings_form" method="get">
+                        <p>
                         <div class="row">
                             <div class="col-10">
                                 <label>{% trans "Setting" %} 1</label>
@@ -667,6 +641,8 @@
                                 <input type="checkbox">
                             </div>
                         </div>
+                        </p>
+                        <p>
                         <div class="row">
                             <div class="col-10">
                                 <label>{% trans "Setting" %} 2</label>
@@ -675,6 +651,8 @@
                                 <input type="checkbox">
                             </div>
                         </div>
+                        </p>
+                        <p>
                         <div class="row">
                             <div class="col-6">
                                 <label>{% trans "App Style:" %} </label>
@@ -684,6 +662,8 @@
                                        name="app_style_name_input" placeholder="" required>
                             </div>
                         </div>
+                        </p>
+                        <p>
                         <div class="row">
                             <div class="col-6">
                                 <label>{% trans "Export Files Folder Name:" %} </label>
@@ -693,28 +673,25 @@
                                        name="export_folder_name" placeholder="{{ dir_name }}" required>
                             </div>
                         </div>
+                        </p>
+                        <p>
                         <div class="row">
                             <div class="col-6">
-                                <label>{% trans "Language" %}</label>
+                                <label>{% trans "Import Files Folder Name:" %} </label>
                             </div>
                             <div class="col-6">
-{#                                <form action="language" method="post">#}
-{#                                    <select class="custom-select" type="" list="settings_language_list" id="language" name="language">#}
-{#                                        <datalist id="settings_language_list">#}
-{#                                            <option value="en">{% trans "english" %}</option>#}
-{#                                            <option value="ru">{% trans "russian" %}</option>#}
-{#                                            <option value="be">{% trans "belorussian" %}</option>#}
-{#                                        </datalist>#}
-{#                                    </select>#}
-{#                                                       <button  type="submit"#}
-{#                           class="btn btn-primary" title="{% trans "Save Changes" %}">{% trans "Save Changes" %}#}
-{#                    </button>#}
-{#                                </form>#}
+                                <input id="new_import_folder_name_input" type="text" class="form-control mr-sm-6"
+                                       name="import_folder_name" placeholder="{{ import_dir_name }}" required>
                             </div>
                         </div>
+                        </p>
                     </form>
-
-                    <form action="language" method="post">
+                    <div class="row">
+                            <div class="col-6">
+                                <label>{% trans "Language" %}:</label>
+                            </div>
+                            <div class="col-6">
+                                <form action="language" method="post">
                                     <select class="custom-select" list="settings_language_list" name="language">
                                         <datalist id="settings_language_list">
                                             <option value="en" selected>{% trans "english" %}</option>
@@ -722,14 +699,16 @@
                                             <option value="be">{% trans "belorussian" %}</option>
                                         </datalist>
                                     </select>
-                        <button  type="submit" id="language" hidden
-                                 class="btn btn-primary" title="{% trans "Save Changes" %}">{% trans "Save Changes" %}
-                        </button>
-                    </form>
+                                    <button  type="submit" id="language" hidden
+                                             class="btn btn-primary" title="{% trans "Save Changes" %}">{% trans "Save Changes" %}
+                                    </button>
+                                </form>
+                            </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <button type="submit" id="settings_save_changes_button" formmethod="get"
-                            class="btn btn-primary" title="{% trans "Save Changes" %}">{% trans "Save Changes" %}
+                            class="btn btn-dark" title="{% trans "Save Changes" %}">{% trans "Save Changes" %}
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" title="{% trans "Close" %}">{% trans "Close" %}</button>
                 </div>
@@ -761,19 +740,19 @@
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <div align="left">
                         <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                           style="cursor: help"><h5 class="modal-title" id="exampleModalCenteredLabel">{% trans "About App" %}</h5>
+                           style="cursor: help"><h5 class="modal-title" id="exampleModalCenteredLabel" style="color: white">{% trans "About App" %}</h5>
                         </a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" title="{% trans "Close" %}">&times;</span>
+                            <span aria-hidden="true" title="{% trans "Close" %}" style="color: white">&times;</span>
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
                                 data-target="#main_menu_help" style="cursor: help">
-                            <span aria-hidden="true" title="{% trans "Help" %}">?</span>
+                            <span aria-hidden="true" title="{% trans "Help" %}" style="color: white">?</span>
                         </button>
                     </div>
                 </div>
@@ -812,8 +791,8 @@
 
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">{% trans "Save changes" %}</button>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-primary bg-dark">{% trans "Save changes" %}</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
                 </div>
             </div>
@@ -844,18 +823,18 @@
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <div align="left">
                         <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                           style="cursor: help"><h5 class="modal-title" id="main_menu_help">{% trans "Help" %}</h5></a>
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_help" style="color: white">{% trans "Help" %}</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" title="{% trans "Close" %}">&times;</span>
+                            <span aria-hidden="true" title="{% trans "Close" %}" style="color: white">&times;</span>
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
                                 data-target="#main_menu_help" style="cursor: help">
-                            <span aria-hidden="true" title="{% trans "Help" %}">?</span>
+                            <span aria-hidden="true" title="{% trans "Help" %}" style="color: white">?</span>
                         </button>
                     </div>
                 </div>
@@ -892,9 +871,9 @@
                         fringilla.
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <a href="http://127.0.0.1:8000/help_page" target="_blank">
-                        <button type="button" class="btn btn-primary">{% trans "Open Full Documentation" %}</button>
+                        <button type="button" class="btn btn-dark">{% trans "Open Full Documentation" %}</button>
                     </a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
                 </div>
@@ -915,18 +894,18 @@
         </div>
         <div class="modal-dialog modal-dialog-scrollable" role="dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-dark">
                     <div align="left">
                         <a data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#main_menu_help"
-                           style="cursor: help"><h5 class="modal-title" id="main_menu_help">{% trans "Exit" %}</h5></a>
+                           style="cursor: help"><h5 class="modal-title" id="main_menu_help" style="color: white">{% trans "Exit" %}</h5></a>
                     </div>
                     <div align="right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" title="{% trans "Close" %}">&times;</span>
+                            <span aria-hidden="true" title="{% trans "Close" %}" style="color: white">&times;</span>
                         </button>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal"
                                 data-target="#main_menu_help" style="cursor: help">
-                            <span aria-hidden="true" title="{% trans "Help" %}">?</span>
+                            <span aria-hidden="true" title="{% trans "Help" %}" style="color: white">?</span>
                         </button>
                     </div>
                 </div>
@@ -935,9 +914,9 @@
                         {% trans "Are you sure you want to exit the App?" %}
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <a href="http://127.0.0.1:8000/login_page">
-                        <button type="button" class="btn btn-primary" style="width: 100px" title="{% trans "Yes" %}"
+                        <button type="button" class="btn btn-dark" style="width: 100px" title="{% trans "Yes" %}"
                                 id="do_logout_button">{% trans "Yes" %}
                         </button>
                     </a>
@@ -1091,12 +1070,13 @@
     <div class="col-12">
         <div class="row">
             <div class="col-2" style="padding: 0px">
-                <div class="card card-body bg-light">
+{#                <div class="card card-body bg-light">#}
+                <div class="card card-body bg-dark">
 
                     <!-- "MAIN MENU" -->
 
                     <div class="dropdown open">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false"
                                 style="height: auto; width: 200px; white-space: nowrap" title="{% trans "MAIN MENU" %}"> {% trans "MAIN MENU" %}
                         </button>
@@ -1137,7 +1117,7 @@
             <!-- "Audio Player" -->
 
             <div class="col-6" style="padding: 0px">
-                <div class="card card-body bg-light">
+                <div class="card card-body bg-dark">
                     <div class="row">
                         <div class="col-10">
                             <audio controls class="form-control mr-sm-0" style="width: 600px" title="{% trans "Audio Player" %}">
@@ -1145,9 +1125,15 @@
                             </audio>
                         </div>
 
-                        <div class="col-2" align="right">
+{#                        <div class="col-1" align="">#}
+{#                            <button data-toggle="modal" data-target="#" type="button"#}
+{#                                    class="btn btn-secondary" style="height: auto; width: 100px" title="{% trans "Audio Track List" %}">#}
+{#                                {% trans "Audio Track List" %}#}
+{#                            </button>#}
+{#                        </div>#}
+                            <div class="col-2" align="right">
                             <button data-toggle="modal" data-target="#main_page_download_song" type="button"
-                                    class="btn btn-primary" style="height: auto; width: 100px" title="{% trans "Download Song" %}">
+                                    class="btn btn-secondary" style="height: auto; width: 100px" title="{% trans "Download Song" %}">
                                 {% trans "Download" %}
                             </button>
                         </div>
@@ -1159,7 +1145,7 @@
 
 
             <div class="col-4" style="padding: 0px">
-                <div class="card card-body bg-light">
+                <div class="card card-body bg-dark">
                     <div class="row">
                         <div class="col-5" align="left">
                             <input class="form-control mr-sm-2" style="width: 170px; cursor: inherit" title="{% trans "All Songs" %}"
@@ -1173,7 +1159,7 @@
 
                         <!-- "Log Out Button" -->
                         <div class="col-4" align="right">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#id3"
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#id3"
                                     title="{% trans "Log Out" %}" style="width: 100px; text-align: center">
                                 {% trans "Log Out" %}
                             </button>
@@ -1203,7 +1189,7 @@
 
                     <nav id="navbar-example2" class="navbar navbar-light bg-light">
                         <div style="padding-bottom: 20px">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"
                                     title="{% trans "Add Track to Track List" %}">{% trans "Add Track" %}
                             </button>
                         </div>
@@ -1235,7 +1221,7 @@
                             <thead>
                             <tr id="tr1">
                                 <th style="width: 0; padding-left: 0">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" title="{% trans "Search" %}">
+                                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" title="{% trans "Search" %}">
                                         {% trans "Search" %}
                                     </button>
                                 </th>
@@ -1245,14 +1231,14 @@
                                                                                 style="width: 360px" type="text"
                                                                                 placeholder="{% trans "Songs" %}" id="id102"></th>
                                 <th>
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="id105"
+                                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="button" id="id105"
                                             title="{% trans "Reverse to Songs/Artists" %}">{% trans "Reverse" %}
                                     </button>
                                 </th>
                             </tr>
                             <tr id="tr2">
                                 <th style="width: 0; padding-left: 0">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" title="{% trans "Search" %}">
+                                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" title="{% trans "Search" %}">
                                         {% trans "Search" %}
                                     </button>
                                 </th>
@@ -1262,7 +1248,7 @@
                                                                                 style="width: 360px" type="text"
                                                                                 placeholder="{% trans "Artists" %}" id="id102"></th>
                                 <th>
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="id106"
+                                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="button" id="id106"
                                             title="{% trans "Reverse to Artists/Songs" %}">{% trans "Reverse" %}
                                     </button>
                                 </th>
@@ -1411,50 +1397,38 @@
             </div>
         </div>
     </div>
-    <div class="card card-body bg-light" style="height: 60px; padding-bottom: 10px">
+    <div class="card card-body bg-secondary" style="height: 60px; padding-bottom: 10px">
     <div class="row">
-        <div class="col-6">
+        <div class="col-8">
             <div>
                 <div align="left" style="opacity: 50%; cursor: default">
                     <button id="id_reverse" type="button">Reverse</button>
                 </div>
             </div>
         </div>
-        <div class="col-3">
-                <div id="time" align="right">
-{#                    <snap></snap>#}
+        <div class="col-1">
+                <div align="right">
+                    <h6 style="color: white">Time: <snap id="time" style="color: white"></snap></h6>
                 </div>
         </div>
-        <div>
-            <li>1: <span id="test_1"></span></li>
+        <div class="col-1">
+            <h6 align="right" style="color: white">User: {{ request.user }}</h6>
         </div>
-        <div class="col-3">
-                <div align="right" style="opacity: 50%; cursor: default">
-                    <h6 href="#language">{{ request.LANGUAGE_CODE }}</h6>
+        <div class="col-1">
+                <div style="opacity: 100%; cursor: default">
+                    <h6 href="#language" style="color: white">Language: {{ request.LANGUAGE_CODE }}</h6>
 {#                    <h6>{{ request.POST['language'] }}</h6>#}
                 </div>
+            <div>
+                <button type="button" name="name" value="value" id="button">
+                    button
+                </button>
+            </div>
             </div>
         </div>
     </div>
     </div>
     </div>
 
-{#    <script>#}
-{#    var success = function(id) {#}
-{#    var node = document.getElementById('test_' + id);#}
-{#    node.innerHTML += 'OK ';};#}
-{##}
-{#    $.Shortcuts.add({type: 'hold', mask: '1', handler: function() { success('1'); }});#}
-{##}
-{#    $.Shortcuts.start();#}
-{#    </script>#}
-
-
-
-
 {% endblock %}
-
-<!---<button type="reset" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button> --->
 
