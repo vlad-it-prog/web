@@ -838,7 +838,7 @@ def new(request):
         return response
 
 
-def import_file_to_database(request):
+def import_file(request):
 
     """ URL: new
         Function: new
@@ -851,19 +851,87 @@ def import_file_to_database(request):
         import_file_name_split = import_file_name.split("\\")
         import_file_name_split_2 = import_file_name_split[-1].split(".csv")
         result = import_file_name_split_2[0]
-        current_band = Band(band_name=result)
-        current_band.save()
-        print(current_band)
+        # print(result)
+        response = {
+            "message": result
+        }
+        return JsonResponse(response)
 
-        import_folder_name = ImportFolderName.objects.all()
-        current_import_folder_name = import_folder_name[0].name
-        current_path = os.getcwd() + "\\" + current_import_folder_name
 
-        import_db = pandas.read_csv(current_path + "\\" + import_file_name_split[-1])
-        for iter_number in range(import_db.shape[0]):
-            current_band.tracks.create(artist_name=import_db.artist[iter_number], song_name=import_db.song[iter_number])
+def import_file_to_database(request):
 
-        return JsonResponse
+    """ URL: new
+        Function: new
+        File: new.html """
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login_page')
+    else:
+        # import_file_name = r"" + str(request.GET['add_cb_open_folder_form']) + ""
+        # import_file_name_split = import_file_name.split("\\")
+        # import_file_name_split_2 = import_file_name_split[-1].split(".csv")
+        # result = import_file_name_split_2[0]
+        # print(result)
+        # result = request.GET["result_to_view"]
+        result = request.GET["result_to_view"]
+        all_bands = Band.objects.all()
+
+        band_name_list = []
+        num = 0
+        for item in all_bands:
+            band_name_list.append(all_bands[num].band_name)
+            print(band_name_list)
+            num = num + 1
+
+        if len(result) == 0:
+            response = {
+                'message': "Nothing was ever done_(file_name)!"
+            }
+        elif result in band_name_list:
+            print("Yes")
+            response = {
+                'message': "This Cover Band is already exist_(file_name)!"
+            }
+        else:
+            current_band = Band(band_name=result)
+            current_band.save()
+            response = {
+                'message': "Was Created!",
+                'created_band_name': current_band.band_name,
+            }
+
+            ru_alphabet = ['б', 'Б', 'в', 'г', 'Г', 'д', 'Д', 'ё', 'Ё', 'ж', 'Ж', 'з', 'З', 'и', 'И', 'й', 'Й', 'к', 'л', 'Л', 'м', 'н', 'п', 'П', 'т', 'У',
+                           'ф', 'Ф', 'ц', 'Ц', 'ч', 'Ч', 'ш', 'Ш', 'щ', 'Щ', 'э', 'Э', 'ю', 'Ю', 'я', 'Я', ];
+            en_alphabet = ['b', 'd', 'D', 'f', 'F', 'g', 'G', 'h', 'i', 'I', 'k', 'l', 'L', 'm', 'n', 'N', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'u', 'U', 'v',
+                           'V', 'w', 'W', 'Y', 'z', 'Z', ]
+
+            current_track = Track.objects.all()
+            en_language_alphabet_list = []
+            ru_language_alphabet_list = []
+            tr_num = 0
+            for x in current_track[tr_num].song_name:
+                if x in ru_alphabet:
+                    ru_language_alphabet_list.append('ru')
+                    tr_num = tr_num + 1
+                elif x in en_alphabet:
+                    en_language_alphabet_list.append('en')
+                    tr_num = tr_num + 1
+                else:
+                    tr_num = tr_num + 1
+            if en_language_alphabet_list > ru_language_alphabet_list:
+                language_track_par = "en"
+            else:
+                language_track_par = "ru"
+
+            import_folder_name = ImportFolderName.objects.all()
+            current_import_folder_name = import_folder_name[0].name
+            current_path = os.getcwd() + "\\" + current_import_folder_name
+
+            import_db = pandas.read_csv(current_path + "\\" + current_band.band_name + ".csv")
+            for iter_number in range(import_db.shape[0]):
+                current_band.tracks.create(artist_name=import_db.artist[iter_number], song_name=import_db.song[iter_number])
+
+        return JsonResponse(response)
 
     # os.chdir("C:\\Users\\User\\PycharmProjects\\web\\files")
     # for dir_object in os.listdir():

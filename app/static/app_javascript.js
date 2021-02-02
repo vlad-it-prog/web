@@ -8,7 +8,6 @@ $(document).ready(function() {
 
     $('#all_bands-add_cover_band_button').click(function (p) {
         // $('#add_cover_band_cancel_button').hide() ?????????????????????????????????????????????????????????????
-
     })
 //______________________________________________________________________________________________________________________
 
@@ -73,7 +72,6 @@ $(document).ready(function() {
 
     $('#id_form').click(function (o) {
         $('#id_form_link').onclick()
-
     })
 //______________________________________________________________________________________________________________________
 
@@ -100,7 +98,6 @@ $(document).ready(function() {
         window.location.pathname = '/path_7'
         alert('Файл был удачно создан')
     })
-
     $("#id121").click(function () {
         window.location.pathname = '/path_8'
     })
@@ -113,8 +110,7 @@ $(document).ready(function() {
             {
                 'b': 'artist'
             })
-
-    }),
+    })
 //______________________________________________________________________________________________________________________
 
 
@@ -124,7 +120,6 @@ $(document).ready(function() {
             {
                 'b': 'song'
             })
-
     })
         $("#id122").click(function () {
         window.location.pathname = '/path_8'
@@ -165,42 +160,128 @@ $(document).ready(function() {
             })
         )
     })
-            // ),
-    //     window.location.pathname = '/main_page'
-    //     alert(('Cover Band "') + $("#delete_cb_select").val() + ('" was deleted successfully!'))
-    // })
+
     // delete_cover_band End______________________________________________________________________________________________________________________
 
+    // $("#add_cb_open_folder").click(function f() {
+    //     if ($("#add_cb_select").val() > "") {
+    //         $("#add_cb_open_folder").val().attr({"disabled": true})
+    //     } else {
+    //         $("#add_cb_open_folder").val().attr({"disabled": false})
+    //     }
+    // })
+    $("#add_cb_open_folder").click(function f() {
+        $("#add_cb_select").val(onreset)
+        $("#add_cb_select").hide()
+    });
+    $("#add_cb_select").click(function f() {
+        $("#add_cb_open_folder").val(onreset)
+        $("#add_cb_open_folder").hide()
+    });
+    $("#import_file_name_reset").click(function f() {
+        $("#add_cb_open_folder").val(onreset)
+        $("#add_cb_open_folder").attr({"disabled": false})
+        $("#add_cb_open_folder").show()
+        $("#add_cb_select").val(onreset)
+        $("#add_cb_select").attr({"disabled": false})
+        $("#add_cb_select").show()
+    });
+
+    // (function (){
+    //     if ($("#add_cb_select").val() == "") {
+    //         $("#add_cb_open_folder").attr({"disabled": false})
+    //     } else if ($("#add_cb_open_folder").val() == "") {
+    //         $("#add_cb_select").attr({"disabled": false})
+    //     };
+    // })
+    // $("#add_cb_open_folder").click(function f() {
+    //     $("#add_cb_open_folder").attr({"disabled": false})
+    //     $("#add_cb_select").val(onreset)
+    //     $("#add_cb_select").attr({"disabled": true})
+    // })
+    // $("#add_cb_select").click(function f() {
+    //     $("#add_cb_select").attr({"disabled": false})
+    //     $("#add_cb_open_folder").val(onreset)
+    //     $("#add_cb_open_folder").attr({"disabled": true})
+    // })
+
+    $("#add_cb_open_folder").change(function () {
+        $.get(
+            "import_file",
+            {
+                // 'new_export_file_name': $(document).forms["export_form"].export_file_name.value
+                'add_cb_open_folder_form': $("#add_cb_open_folder").val()
+                // 'add_cb_open_folder_form': $("#add_cb_open_folder").attr("value")
+            },
+            // $("#add_cb_select").val( ""),
+            (function (response) {
+                // document.getElementById("add_cb_select").val = response["message"],
+                // document.getElementById("add_cb_select").attr({"placeholder": response["message"]}),
+                // $("#add_cb_select").placeholder = response["message"],
+                // $("#add_cb_select").val(onreset)
+
+                // if ($("#add_cb_open_folder").val() > "") {
+                //     $("#add_cb_select").attr({"value": response["message"]})
+                //     $("#add_cb_select").attr({"disabled": true})
+                // } else {
+                //     $("#add_cb_select").attr({"disabled": false})
+                //     $("#add_cb_select").attr({"value": ""})
+                //     // $("#add_cb_select").show()
+                // };
+                alert(response['message'])
+                $.get(
+                "import_file_to_database",
+                {
+                    'result_to_view': response['message']
+                },
+                    (function (response) {
+                        if ($("#add_cb_open_folder").show()){
+                        if (response["message"] == "Nothing was ever done_(file_name)!") {
+                            alert("You have not enter the Cover Band name! Please, try again.")
+                        } else if (response["message"] == "This Cover Band is already exist_(file_name)!") {
+                            alert("This Cover Band is already exist! Please, try again.")
+                        } else if (response["message"] == "Was Created!") {
+                            alert('Cover Band "' + response["created_band_name"] + '" was added successfully!')
+                        } else {
+                            alert("Что-то пошло не так")
+                        };
+                        // window.location.pathname = '/main_page'
+                            }
+
+                    }),
+                )
+            })
+        )
+    });
 
     $("#add_cb_yes").click(function () {
-        $.get(
+         $.get(
             "add_cover_band",
             {
                 'select_to_add_cover_band': $("#add_cb_select").val()
             },
             (function (response) {
+                if ($("#add_cb_select").show()) {
                 if (response.message == "Nothing was ever done!") {
-                    // window.location.pathname = '/main_page'
-                    alert(("You have not enter the Cover Band name! Please, try again."))
+                    alert("You have not enter the Cover Band name! Please, try again.")
                     // $("#main_menu_add_cover_band").selected()
-                    window.location.pathname = '/main_page'
                 } else if (response.message == "This Cover Band is already exist!") {
-                    // window.location.pathname = '/main_page'
                     alert(("This Cover Band is already exist! Please, try again."))
-                    window.location.pathname = '/main_page'
                 } else {
-                    window.location.pathname = '/main_page'
                     alert(('Cover Band "') + $("#add_cb_select").val() + ('" was added successfully!'))
                 }
+                }
             })
-        )
+        );
+        window.location.pathname = '/main_page'
     })
-    //         ),
-    //     window.location.pathname = '/main_page'
-    //     alert(('Cover Band "') + $("#add_cb_select").val() + ('" was added successfully!'))
-    // })
-//______________________________________________________________________________________________________________________
 
+     //     function (response) {
+     //        alert(response.message)
+     //        document.getElementById("#add_cb_file_name").attr({"placeholder": response.message})
+     //     });
+
+//______________________________________________________________________________________________________________________
 
     $("#cover_bands_details_start").click(function () {
         $.get(
@@ -238,7 +319,7 @@ $(document).ready(function() {
                 }
             })
         );
-            $.get(
+        $.get(
             "rename_import_folder",
             {
                 'new_import_folder_name': $("#new_import_folder_name_input").val()
@@ -353,10 +434,6 @@ $(document).ready(function() {
         );
     });
 
-
-
-
-
 //______________________________________________________________________________________________________________________
 
     //     """ URL:
@@ -389,51 +466,6 @@ $(document).ready(function() {
     }
     startTime();
 //______________________________________________________________________________________________________________________
-
-    //        "JS Shortcuts":
-
-    //     """ URL:
-    //         Function:
-    //         File:
-    //         Element path (web/html):
-    //         JS path: """
-
-    // var success = function(id) {
-    //     var node = document.getElementById("1");
-    //     alert("всё получилось")
-    //     window.location.pathname = '/help_page'
-    // // var node = document.getElementById('test_' + id);
-    // // node.innerHTML += 'OK ';
-    // };
-
-    // var success = function(id) {
-    // var node = document.getElementById('test_' + id);
-    // node.innerHTML += 'OK ';
-    // };
-    //
-    // $.Shortcuts.add({type: 'hold', mask: '1', handler: function() { alert('Победа'); }});
-
-    // $.Shortcuts.start();
-
-
-
-    // $.key("esc", function() {
-    //     alert("esc");
-    // });
-    //
-    // $.key("ctrl+c", function() {
-    //     alert('ctrl+c');
-    // });
-    //
-    // $(document).key("ctrl+shift+a", function() {
-    //     alert("ctrl+shift+a");
-    // });
-    //
-    // $(window).on('resize', function(){
-    //     $('.logo').css({
-    //         fontSize: Math.max(Math.min($(window).outerWidth() / (1 * 6), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY))
-    //     });
-    // }).resize();
 
 //______________________________________________________________________________________________________________________
 
@@ -474,19 +506,7 @@ $(document).ready(function() {
     // });
  //______________________________________________________________________________________________________________________
 
-    // $("#add_cb_open_folder").blur(function () {
-     $("#add_cb_open_folder").change(function () {
-         $.get(
-            "import_file_to_database",
-            {
-                // 'new_export_file_name': $(document).forms["export_form"].export_file_name.value
-                'add_cb_open_folder_form': $("#add_cb_open_folder").val()
-                // 'add_cb_open_folder_form': $("#add_cb_open_folder").attr("value")
-            },
-         )
-     });
-
-
+    // // $("#add_cb_open_folder").blur(function () {
             // (function (response) {
             //     if ($("#export_cb_name_select").val() == "") {
             //         alert('File "' + response.message + '.csv" was successfully created on path !')
@@ -503,4 +523,15 @@ $(document).ready(function() {
             // })
     //     )
     // });
+
+     $("#track_list_menu_1").mouseenter(function () {
+         alert("Привет, ты выбрал Full Track List")
+     });
+     $("#track_list_menu_2").mouseup(function () {
+         alert("Привет, ты выбрал Foreign Track List")
+     });
+     $("#track_list_menu_3").mouseup(function () {
+         alert("Привет, ты выбрал Domestic Track List")
+     });
+
 });

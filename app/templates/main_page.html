@@ -220,7 +220,7 @@
                     {% trans "Are You Sure you want to add this Cover Band?" %}
                 </div>
                 <div class="modal-footer bg-light">
-                    <button type="submit" id="add_cb_yes" formaction="#delete_cb_select" formmethod="get"
+                    <button type="submit" id="add_cb_yes" formmethod="get"
                             class="btn btn-dark" title="{% trans "Yes" %}" style="width: 80px">{% trans "Yes" %}
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal"
@@ -270,7 +270,7 @@
                     <form id="form_id_add_new_cover_band" action="/add_new_cover_band_to_band_list">
                         <div align="center">
                             <input id="add_cb_select" class="form-control mr-sm-2" style="width: 420px" list="CB_name"
-                                   class="class-band-menu" type="text" name="type_new_cover_band">
+                                   class="class-band-menu" type="text" name="type_new_cover_band" placeholder="">
                             <datalist id="CB_name">
                                 {% for xx in cover_bands %}
                                     <option>{{ xx }}</option>
@@ -278,21 +278,29 @@
                             </datalist>
                         </div>
                     </form>
-                        <div style="padding-top: 10px" align="center">
-                            <input class="form-control mr-sm-2" title="{% trans "File Name" %}" type="text" maxlength="100" min="0"
-                                   style="width: 420px" align="left" id="id_form_link" placeholder="File Name">
-                        </div>
-                <form method="get" action="/import_file_to_database">
-                        <div style="padding-top: 10px" align="center">
+{#                        <div style="padding-top: 10px" align="center">#}
+{#                            <input class="form-control mr-sm-2" title="{% trans "File Name" %}" maxlength="100"#}
+{#                                   style="width: 420px" align="left" id="add_cb_file_name" placeholder="File Name">#}
+{#                        </div>#}
+
+                            <form>
+                                 <p>
+                                <div align="center">
                             <input class="form-control mr-sm-2" title="{% trans "Open Folder" %}" type="file" maxlength="100" min="0"
-                                   style="width: 420px" align="left" id="add_cb_open_folder" name="open_folder_hidden" placeholder="">
-                        </div>
-                    <div><button type="submit">button</button></div>
-            </form>
+                                   style="width: 420px" align="left" id="add_cb_open_folder">
+                                    </div>
+                                </p>
+                                <p>
+                                    <div align="right" style="padding-right: 25px">
+                                <button class="btn btn-dark" style="width: 100px" type="reset" id="import_file_name_reset">Reset</button>
+                                 </div>
+                                </p>
+                            </form>
+
                 </div>
                 <div class="modal-footer bg-light" style="padding-top: 40px" align="right">
-                    <button id="add_cb_open_folder_button" type="button" class="btn btn-secondary" title="{% trans "Open Folder" %}">{% trans "Open Folder" %}</button>
-                    <button type="submit" formaction="#add_cb_select" class="btn btn-dark" title="{% trans "Add" %}"
+{#                    <button id="add_cb_open_folder_button" type="button" class="btn btn-secondary" title="{% trans "Open Folder" %}">{% trans "Open Folder" %}</button>#}
+                    <button id="add_cb" type="button" class="btn btn-dark" title="{% trans "Add" %}"
                             style="width: 100px" data-toggle="modal" data-target="#add_cover_band_sure"
                             data-dismiss="modal">{% trans "Add" %}
                     </button>
@@ -1202,10 +1210,10 @@
                             </select>
                         </div>
                         <div>
-                            <select class="custom-select" style="width: 260px">
-                                <option>{% trans "Full Track List" %}</option>
-                                <option>{% trans "Foreign Track List" %}</option>
-                                <option>{% trans "Domestic Track List" %}</option>
+                            <select class="custom-select" style="width: 260px" id="#track_list_menu_1">
+                                <option id="">{% trans "Full Track List" %}</option>
+                                <option id="">{% trans "Foreign Track List" %}</option>
+                                <option id="">{% trans "Domestic Track List" %}</option>
                             </select>
                         </div>
                         <ul class="nav nav-pills">
@@ -1321,7 +1329,7 @@
                 <div class="card card-body bg-light" align="center" style="height: 650px">
                     <div class="row">
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 10px">
-                            <form id="form_cover_bands_details">
+                            <form>
                                 <input id="cover_band_1_details" class="form-control" name="cover_band_1"
                                        style="width: 230px" list="CB_name" class="class-band-menu" type="search"
                                        placeholder="{% trans "Cover Band" %} 1">

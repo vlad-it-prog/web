@@ -6,7 +6,7 @@ from app.views import \
     page_3, main_test_cash, test_html, help_page, \
     add_new_cover_band_to_band_list, delete_cover_band, add_cover_band, cover_bands_details, \
     rename_export_folder, name_export_file, sort_track_list_change, player, start_page, language, \
-    history, new, rename_import_folder, import_file_to_database
+    history, new, rename_import_folder, import_file_to_database, import_file
 
 urlpatterns = [
 
@@ -50,5 +50,6 @@ urlpatterns = [
     path('new', new),
     path('rename_import_folder', rename_import_folder),
     path('import_file_to_database', import_file_to_database),
+    path('import_file', import_file),
 
 ]
