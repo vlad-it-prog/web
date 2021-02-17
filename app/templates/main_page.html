@@ -1197,23 +1197,25 @@
 
                     <nav id="navbar-example2" class="navbar navbar-light bg-light">
                         <div style="padding-bottom: 20px">
-                            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"
+                            <button id="add_tr_to_another_tl" class="btn btn-outline-secondary my-2 my-sm-0" type="submit"
                                     title="{% trans "Add Track to Track List" %}">{% trans "Add Track" %}
                             </button>
                         </div>
                         <div>
-                            <select class="custom-select" style="width: 260px" disabled>
-                                <option value="1" selected>{% trans "All Tracks" %}</option>
-                                <option value="2"><a class="nav-link" href="#verse2">{% trans "Coincided Tracks" %}</a></option>
-                                <option value="3"><a href="#verse3">{% trans "Unmatched Tracks" %}</a></option>
-                                <option value="3"><a href="#verse3">{% trans "Default" %}</a></option>
+                            <select class="custom-select" style="width: 260px" id="track_list_menu_1" disabled>
+                                <option value="1">{% trans "All Tracks" %}</option>
+                                <option value="2">{% trans "Coincided Tracks" %}</option>
+                                <option value="3">{% trans "Unmatched Tracks" %}</option>
+{#                                <option value="3"><a href="#verse3">{% trans "Default" %}</a></option>#}
                             </select>
                         </div>
                         <div>
-                            <select class="custom-select" style="width: 260px" id="#track_list_menu_1">
-                                <option id="">{% trans "Full Track List" %}</option>
-                                <option id="">{% trans "Foreign Track List" %}</option>
-                                <option id="">{% trans "Domestic Track List" %}</option>
+                            <select class="custom-select" style="width: 260px" id="track_list_menu">
+{#                                <option id="track_list_menu_default" selected></option>#}
+                                <option id="track_list_menu_full">{% trans "Full Track List" %}</option>
+                                <option id="track_list_menu_for">{% trans "Foreign Track List" %}</option>
+                                <option id="track_list_menu_dom">{% trans "Domestic Track List" %}</option>
+                                <option id="track_list_menu_anoth">{% trans "Another Track List" %}</option>
                             </select>
                         </div>
                         <ul class="nav nav-pills">
@@ -1227,61 +1229,56 @@
 
                         <table class="table table-hover">
                             <thead>
+                            <form action="search_track" method="get">
                             <tr id="tr1">
                                 <th style="width: 0; padding-left: 0">
-                                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" title="{% trans "Search" %}">
+                                    <button id="search_button" class="btn btn-outline-secondary my-2 my-sm-0" type="submit" title="{% trans "Search" %}">
                                         {% trans "Search" %}
                                     </button>
                                 </th>
                                 <th style="width: 0"><input class="form-control mr-sm-2" style="width: 360px"
-                                                            type="text" placeholder="{% trans "Artists" %}" id="id101"></th>
+                                                            type="text" placeholder="{% trans "Artists" %}" id="id101" name="another_artist_name"></th>
                                 <th style="width: 0; padding-right: 0px"><input class="form-control mr-sm-2"
                                                                                 style="width: 360px" type="text"
-                                                                                placeholder="{% trans "Songs" %}" id="id102"></th>
+                                                                                placeholder="{% trans "Songs" %}" id="id102" name="another_song_name"></th>
                                 <th>
                                     <button class="btn btn-outline-secondary my-2 my-sm-0" type="button" id="id105"
                                             title="{% trans "Reverse to Songs/Artists" %}">{% trans "Reverse" %}
                                     </button>
                                 </th>
                             </tr>
-                            <tr id="tr2">
-                                <th style="width: 0; padding-left: 0">
-                                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" title="{% trans "Search" %}">
-                                        {% trans "Search" %}
-                                    </button>
-                                </th>
-                                <th style="width: 0"><input class="form-control mr-sm-2" style="width: 360px"
-                                                            type="text" placeholder="{% trans "Songs" %}" id="id101"></th>
-                                <th style="width: 0; padding-right: 0px"><input class="form-control mr-sm-2"
-                                                                                style="width: 360px" type="text"
-                                                                                placeholder="{% trans "Artists" %}" id="id102"></th>
-                                <th>
-                                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="button" id="id106"
-                                            title="{% trans "Reverse to Artists/Songs" %}">{% trans "Reverse" %}
-                                    </button>
-                                </th>
-                            </tr>
+                                </form>
+{#                            <tr id="tr2">#}
+{#                                <th style="width: 0; padding-left: 0">#}
+{#                                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" title="{% trans "Search" %}">#}
+{#                                        {% trans "Search" %}#}
+{#                                    </button>#}
+{#                                </th>#}
+{#                                <th style="width: 0"><input class="form-control mr-sm-2" style="width: 360px"#}
+{#                                                            type="text" placeholder="{% trans "Songs" %}" id="id101"></th>#}
+{#                                <th style="width: 0; padding-right: 0px"><input class="form-control mr-sm-2"#}
+{#                                                                                style="width: 360px" type="text"#}
+{#                                                                                placeholder="{% trans "Artists" %}" id="id102"></th>#}
+{#                                <th>#}
+{#                                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="button" id="id106"#}
+{#                                            title="{% trans "Reverse to Artists/Songs" %}">{% trans "Reverse" %}#}
+{#                                    </button>#}
+{#                                </th>#}
+{#                            </tr>#}
                             </thead>
                         </table>
                     </nav>
 
                     <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy-example">
+                       <div id="foreign_track_list_content">
                         <h4 id="verse1" align="center">{% trans "Foreign Track List" %}</h4>
                         <table class="table table-hover">
                             <tbody>
-                            {% for number, artist, song in table %}
+                            {% for track in track_for %}
                                 <tr>
-                                    <th scope="row" width="176">{{ number }}</th>
-                                    <td width="350"><a href="http://127.0.0.1:8000/login_page">{{ artist }}</a></td>
-                                    <td><a href="http://127.0.0.1:8000/login_page">{{ song }}</a></td>
-                                </tr>
-                            {% endfor %}
-                            {% for artist_name, song_name in track_list %}
-                                <tr>
-                                    <th scope="row" width="176">{{ number }}</th>
-                                    <td width="350"><a href="http://127.0.0.1:8000/login_page">{{ artist_name }}</a>
-                                    </td>
-                                    <td><a href="http://127.0.0.1:8000/login_page">{{ song_name }}</a></td>
+                                    <th scope="row" width="176"></th>
+                                    <td width="350"><a href="http://127.0.0.1:8000/login_page">{{ track.artist_name }}</a></td>
+                                    <td><a href="http://127.0.0.1:8000/login_page">{{ track.song_name }}</a></td>
                                 </tr>
                             {% endfor %}
                             <tr>
@@ -1291,17 +1288,20 @@
                             </tr>
                             </tbody>
                         </table>
+                       </div>
                         </p>
+                    <div id="domestic_track_list_content">
                         <h4 id="verse2" align="center">{% trans "Domestic Track List" %}</h4>
                         <table class="table table-hover">
                             <tbody>
-                            {% for number, artist, song in table %}
+                            {% for track in track_dom %}
                                 <tr>
-                                    <th scope="row" width="176">{{ number }}</th>
-                                    <td width="350">{{ artist }}</td>
-                                    <td>{{ song }}</td>
+                                    <th scope="row" width="176"></th>
+                                    <td width="350">{{ track.artist_name }}</td>
+                                    <td>{{ track.song_name }}</td>
                                 </tr>
                             {% endfor %}
+
                             <tr>
                                 <th scope="row" width="176"></th>
                                 <td width="350"></td>
@@ -1309,18 +1309,36 @@
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div id="another_track_list_content">
                         <h4 id="verse3" align="center">{% trans "Another Songs" %}</h4>
+                        <br>
+                        <h5 id="" align="center">{% trans "Foreign" %}</h5>
                         <table class="table table-hover">
                             <tbody>
-                            {% for number, artist, song in table %}
+                                    {% for track in track_another_en %}
                                 <tr>
-                                    <th scope="row" width="176">{{ number }}</th>
-                                    <td width="350">{{ artist }}</td>
-                                    <td>{{ song }}</td>
+                                    <th scope="row" width="176"></th>
+                                    <td width="350">{{ track.artist_name }}</td>
+                                    <td>{{ track.song_name }}</td>
                                 </tr>
-                            {% endfor %}
+                                    {% endfor %}
                             </tbody>
                         </table>
+                     <table class="table table-hover">
+                            <tbody>
+                            <h5 id="" align="center">{% trans "Domestic" %}</h5>
+                            {% for track in track_another_ru %}
+                                <tr>
+                                    <th scope="row" width="176"></th>
+                                    <td width="350">{{ track.artist_name }}</td>
+                                    <td>{{ track.song_name }}</td>
+                                </tr>
+                                    {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
                     </div>
                 </div>
             </div>
@@ -1329,7 +1347,8 @@
                 <div class="card card-body bg-light" align="center" style="height: 650px">
                     <div class="row">
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 10px">
-                            <form>
+
+
                                 <input id="cover_band_1_details" class="form-control" name="cover_band_1"
                                        style="width: 230px" list="CB_name" class="class-band-menu" type="search"
                                        placeholder="{% trans "Cover Band" %} 1">
@@ -1339,32 +1358,46 @@
                                                 onclick="dataSelected(this.option.value())">{{ xx }}</option>
                                     {% endfor %}
                                 </datalist>
-                            </form>
                         </div>
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 10px">
-                            <form id="form_cover_bands_details">
                                 <input id="cover_band_2_details" class="form-control" name="cover_band_2"
                                        style="width: 230px" list="CB_name" class="class-band-menu" type="search"
-                                       placeholder="{% trans "Cover Band" %} 2">
+                                       placeholder="{% trans "Cover Band" %} 2" disabled>
                                 <datalist id="CB_name">
                                     {% for cb_2_name in cover_bands %}
                                         <option>{{ cb_2_name }}</option>
                                     {% endfor %}
                                 </datalist>
-                            </form>
+
+{#                            <button id="cover_bands_details_start" type="submit" formmethod="get"#}
+{#                                formaction="#form_cover_bands_details" class="btn-secondary"#}
+{#                                style="height: 50px; width: 100px">#}
+{#                            Start#}
+{#                        </button>#}
+
+                        <p>
+                            <div>
+                                <button id="cover_bands_details_reset" type="button"
+                                class="btn btn-secondary"
+                                style="height: 50px; width: 100px">
+                            Reset
+                        </button>
+                        </div>
+                        </p>
+
                         </div>
 
                         <div class="col-6" style="padding-bottom: 30px; padding-top: 30px">
-                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
+                            <input id="cb_1_songs_count" class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
                                    placeholder="{% trans "CB 1 Songs:" %} {{ cb2_songs }}" readonly disabled>
                             <div style="padding-top: 10px">
-                                <input class="form-control mr-sm-2"
+                                <input id="cb_count_difference" class="form-control mr-sm-2"
                                        style="width: 230px; cursor: inherit; padding-top: 10px" title=""
                                        placeholder="{% trans "Difference" %}: {{ difference_1 }}" readonly disabled>
                             </div>
                         </div>
                         <div class="col-6" style="padding-bottom: 20px; padding-top: 30px">
-                            <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
+                            <input id="cb_2_songs_count" class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
                                    placeholder="{% trans "CB 2 Songs:" %} {{ cb2_songs }}" readonly disabled>
                         </div>
 
@@ -1395,11 +1428,6 @@
                             <input class="form-control mr-sm-2" style="width: 230px; cursor: inherit" title=""
                                    placeholder="" readonly disabled>
                         </div>
-                        <button id="cover_bands_details_start" type="submit" formmethod="get"
-                                formaction="#form_cover_bands_details" class="btn-secondary" type="button"
-                                style="height: 50px">
-                            Start
-                        </button>
                     </div>
                 </div>
             </div>
@@ -1427,6 +1455,9 @@
                     <h6 href="#language" style="color: white">Language: {{ request.LANGUAGE_CODE }}</h6>
 {#                    <h6>{{ request.POST['language'] }}</h6>#}
                 </div>
+
+
+            <a href="/test?id={{ track.id }}">go</a>
             <div>
                 <button type="button" name="name" value="value" id="button">
                     button

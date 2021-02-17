@@ -4,9 +4,9 @@ from app.views import \
     login_page, register, registration, ajax_path, ajax_valid, \
     ajax_cb, band_list, \
     page_3, main_test_cash, test_html, help_page, \
-    add_new_cover_band_to_band_list, delete_cover_band, add_cover_band, cover_bands_details, \
+    add_new_cover_band_to_band_list, delete_cover_band, add_cover_band, cover_bands_details_1, cover_bands_details_2,\
     rename_export_folder, name_export_file, sort_track_list_change, player, start_page, language, \
-    history, new, rename_import_folder, import_file_to_database, import_file
+    history, new, rename_import_folder, import_file_to_database, import_file, add_track_to_another_tr_list, search_track
 
 urlpatterns = [
 
@@ -39,7 +39,8 @@ urlpatterns = [
     path('ajax_path', ajax_path),
     path('delete_cover_band', delete_cover_band),
     path('add_cover_band', add_cover_band),
-    path('cover_bands_details', cover_bands_details),
+    path('cover_bands_details_1', cover_bands_details_1),
+    path('cover_bands_details_2', cover_bands_details_2),
     path('rename_export_folder', rename_export_folder),
     path('name_export_file', name_export_file),
     path('sort_track_list_change', sort_track_list_change),
@@ -51,5 +52,8 @@ urlpatterns = [
     path('rename_import_folder', rename_import_folder),
     path('import_file_to_database', import_file_to_database),
     path('import_file', import_file),
+    path('add_track_to_another_tr_list', add_track_to_another_tr_list),
+    path('search_track', search_track),
+    # path('cb_details_test', cb_details_test),
 
 ]

@@ -5,7 +5,23 @@
     <h3>{{ title }}</h3>
     <h3>{% trans "Привет" %}</h3>
 
+    <div class="main"><h5>Заголовок</h5></div>
+    {% for x in track_table %}
+    <div class="body">
+        <div class="artist_name">
+            <h5>{{ x.artist_name }}</h5>
+        </div>
+        <div class="song_name">
+            <h5>{{ x.song_name }}</h5>
+        </div>
+    </div>
+    {% endfor %}
 
+
+
+
+
+<div hidden>
 <div id="myModalBox" class="modal fade">
 <div class="modal-dialog">
 <div class="modal-content">
@@ -23,9 +39,6 @@
 </div>
 </div>
 </div>
-
-    <
-
     <br>
     <br>
     <br>
@@ -277,7 +290,7 @@
 </nav>
     </div>
 
-
+<div hidden>
         <!-- Custom css that makes this example work like it does: -->
 <style type="text/css" scoped>
 .scrollspy-example {
@@ -343,6 +356,8 @@ $('.toast').toast();
     Hello, world! This is a toast message.
   </div>
 </div>
+    </div>
+    </div>
 
 
 {% endblock %}

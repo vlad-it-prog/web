@@ -149,11 +149,9 @@ def main_page(request):
         # print(key_tracklist)
         # df_track_list = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\track_list.csv")
 
-
         # df_bands = pandas.read_csv("C:\\Users\\pc1\\PycharmProjects\\untitled1\\cover_bands\\band_list.csv")
         # menu_items = df_bands['cover bands']
         # menu_head = str(df_bands.keys()[1])
-
 
         # response = requests.get(
         #     'https://www.nbrb.by/api/exrates/rates?periodicity=0'
@@ -167,6 +165,40 @@ def main_page(request):
             history_dict.append([str(history_time), str(history_all[num].event) + "_" + str(num + 1), history_all[num].user])
             num = num + 1
         # print(history_dict)
+
+        try:
+            id = request.GET["id"]
+        except MultiValueDictKeyError:
+            id = False
+
+        track = Track.objects.all()
+        all_band_names = Band.objects.all()
+        track_dom = Track.objects.filter(language_code="ru")
+        track_for = Track.objects.filter(language_code="en")
+
+        for var in all_band_names:
+            if len(var.tracks.all()) != 0:
+                for var_track in var.tracks.all():
+                    Track.objects.filter(id=var_track.id).update(another_track_mark=False)
+
+        track_another_en = track_for.filter(another_track_mark=True)
+        track_another_ru = track_dom.filter(another_track_mark=True)
+        track_name = Track.objects.filter(id=id)
+
+
+        # Фильтр another track list по id!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        # track_id_list = []
+        # for var in all_band_names:
+        #     if len(var.tracks.all()) != 0:
+        #         for var_track in var.tracks.all():
+        #             track_id_list.append(var_track.id)
+        # another_track_id_list = []
+        # for sel_id in track:
+        #     if sel_id.id not in track_id_list:
+        #         another_track_id_list.append(sel_id.id)
+        #         print(sel_id.id)
+
 
 
         context = {
@@ -186,14 +218,14 @@ def main_page(request):
             'username_loged': request.user.username,
             'title': _('Пожалуйста'),
             'song': Song.objects.all()[0],
-            "history_dict": history_dict
+            "history_dict": history_dict,
+            "track_name": track_name,
+            "track": track,
+            "track_dom": track_dom,
+            "track_for": track_for,
+            "track_another_en": track_another_en,
+            "track_another_ru": track_another_ru,
         }
-        # print(type(request.LANGUAGE_CODE))
-        # print()
-        # from django.views
-
-        # for p in request.COOKIES:
-        #     print(p)
 
         response = render(request, 'main_page.html', context)
         response.set_cookie(key="path_name", value="main_page")
@@ -263,7 +295,19 @@ def test(request):
         Function:
         File: .html """
 
-    return render(request, 'test.html', {"title": _("Новости")})
+    # id = request.GET["id"]
+    # track_name = Track.objects.filter(id=id)
+    # track = Track.objects.all(track_name=track_name)[0]
+    track_table = Track.objects.all()
+
+    context = {
+        "title": _("Новости"),
+        "track_table": track_table,
+        # "track": track
+
+    }
+
+    return render(request, 'test.html', context)
 # ______________________________________________________________________________________________________________________
 
 
@@ -357,7 +401,8 @@ def ajax_cb(request):
 
     x = request.POST['a']
     print(x)
-    alph_ls = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '_', ' ']
+    alph_ls = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+               'v', 'w', 'x', 'y', 'z', '_', ' ']
     if x[-1] in alph_ls:
         ls_list = []
         ls_str = ''
@@ -611,19 +656,56 @@ def add_cover_band(request):
 # ______________________________________________________________________________________________________________________
 
 
-def cover_bands_details(request):
+def cover_bands_details_1(request):
 
     """ URL:
         Function:
         File: .html """
 
-    # response = {
-    #     'message': request.GET['cover_band_1_details']
-    # }
-    print(request.GET['cover_band_1_details'])
-    print(request.GET['cover_band_2_details'])
+    current_band_1 = request.GET['cover_band_1_details']
+    band = Band.objects.all()
+    for cb in band:
+        if cb.band_name == current_band_1:
+            track_count_cb_1 = len(cb.tracks.all())
 
-    return JsonResponse()# (response)
+    response = {
+        "cb_1": track_count_cb_1,
+    }
+    return JsonResponse(response)
+
+
+def cover_bands_details_2(request):
+
+    """ URL:
+        Function:
+        File: .html """
+
+    current_band_2 = request.GET['cover_band_2_details']
+    band = Band.objects.all()
+    for cb in band:
+        if cb.band_name == current_band_2:
+            track_count_cb_2 = len(cb.tracks.all())
+
+    response = {
+        "cb_2": track_count_cb_2,
+    }
+    print(response)
+    return JsonResponse(response)
+
+
+
+# def cb_details_test(request):
+#
+#     try:
+#         x = request.GET["cover_band_1"]
+#     except MultiValueDictKeyError:
+#         x = False
+#
+#     print(x)
+#
+#     response = HttpResponseRedirect(request.COOKIES["path_name"])
+#     response.set_cookie(key="path_name", value="main_page")
+#     return response
 # ______________________________________________________________________________________________________________________
 
 
@@ -900,38 +982,120 @@ def import_file_to_database(request):
                 'created_band_name': current_band.band_name,
             }
 
-            ru_alphabet = ['б', 'Б', 'в', 'г', 'Г', 'д', 'Д', 'ё', 'Ё', 'ж', 'Ж', 'з', 'З', 'и', 'И', 'й', 'Й', 'к', 'л', 'Л', 'м', 'н', 'п', 'П', 'т', 'У',
-                           'ф', 'Ф', 'ц', 'Ц', 'ч', 'Ч', 'ш', 'Ш', 'щ', 'Щ', 'э', 'Э', 'ю', 'Ю', 'я', 'Я', ];
-            en_alphabet = ['b', 'd', 'D', 'f', 'F', 'g', 'G', 'h', 'i', 'I', 'k', 'l', 'L', 'm', 'n', 'N', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'u', 'U', 'v',
-                           'V', 'w', 'W', 'Y', 'z', 'Z', ]
-
-            current_track = Track.objects.all()
-            en_language_alphabet_list = []
-            ru_language_alphabet_list = []
-            tr_num = 0
-            for x in current_track[tr_num].song_name:
-                if x in ru_alphabet:
-                    ru_language_alphabet_list.append('ru')
-                    tr_num = tr_num + 1
-                elif x in en_alphabet:
-                    en_language_alphabet_list.append('en')
-                    tr_num = tr_num + 1
-                else:
-                    tr_num = tr_num + 1
-            if en_language_alphabet_list > ru_language_alphabet_list:
-                language_track_par = "en"
-            else:
-                language_track_par = "ru"
-
             import_folder_name = ImportFolderName.objects.all()
             current_import_folder_name = import_folder_name[0].name
             current_path = os.getcwd() + "\\" + current_import_folder_name
 
             import_db = pandas.read_csv(current_path + "\\" + current_band.band_name + ".csv")
-            for iter_number in range(import_db.shape[0]):
-                current_band.tracks.create(artist_name=import_db.artist[iter_number], song_name=import_db.song[iter_number])
+
+            ru_alphabet = ['б', 'Б', 'в', 'г', 'Г', 'д', 'Д', 'ё', 'Ё', 'ж', 'Ж', 'з', 'З', 'и', 'И', 'й', 'Й', 'к',
+                           'л', 'Л', 'м', 'н', 'п', 'П', 'т', 'У',
+                           'ф', 'Ф', 'ц', 'Ц', 'ч', 'Ч', 'ш', 'Ш', 'щ', 'Щ', 'э', 'Э', 'ю', 'Ю', 'я', 'Я', ]
+            en_alphabet = ['b', 'd', 'D', 'f', 'F', 'g', 'G', 'h', 'i', 'I', 'k', 'l', 'L', 'm', 'n', 'N', 'q', 'Q',
+                           'r', 'R', 's', 'S', 't', 'u', 'U', 'v',
+                           'V', 'w', 'W', 'Y', 'z', 'Z', ]
+
+            current_track = Track.objects.all()
+
+            if len(current_track) > 0:
+                en_language_alphabet_list = []
+                ru_language_alphabet_list = []
+                tr_num = 0
+                for x in current_track[tr_num].artist_name:
+                    if x in ru_alphabet:
+                        ru_language_alphabet_list.append('ru')
+                        tr_num = tr_num + 1
+                    elif x in en_alphabet:
+                        en_language_alphabet_list.append('en')
+                        tr_num = tr_num + 1
+                    else:
+                        tr_num = tr_num + 1
+
+                tr_num_2 = 0
+                for x in current_track[tr_num].song_name:
+                    if x in ru_alphabet:
+                        ru_language_alphabet_list.append('ru')
+                        tr_num_2 = tr_num_2 + 1
+                    elif x in en_alphabet:
+                        en_language_alphabet_list.append('en')
+                        tr_num_2 = tr_num_2 + 1
+                    else:
+                        tr_num_2 = tr_num_2 + 1
+                if en_language_alphabet_list > ru_language_alphabet_list:
+                    language_track_par = "en"
+                else:
+                    language_track_par = "ru"
+            else:
+                en_language_alphabet_list = []
+                ru_language_alphabet_list = []
+                for x in import_db.loc[0]["artist"]:
+                    if x in ru_alphabet:
+                        ru_language_alphabet_list.append("ru")
+                    else:
+                        en_language_alphabet_list.append('en')
+                for x in import_db.loc[0]["song"]:
+                    if x in ru_alphabet:
+                        ru_language_alphabet_list.append("ru")
+                    else:
+                        en_language_alphabet_list.append('en')
+
+                if en_language_alphabet_list > ru_language_alphabet_list:
+                    language_track_par = "en"
+                else:
+                    language_track_par = "ru"
+
+                for iter_number in range(import_db.shape[0]):
+                    current_band.tracks.create(artist_name=import_db.artist[iter_number],
+                                               song_name=import_db.song[iter_number],
+                                               language_code=language_track_par).save()
+                    if import_db.loc[iter_number].artist in current_track.filter(artist_name=import_db.loc[iter_number].artist, song_name=import_db.loc[iter_number].song)[iter_number].artist_name and import_db.loc[iter_number].song in current_track.filter(artist_name=import_db.loc[iter_number].song, song_name=import_db.loc[iter_number].song)[iter_number].song_name:
+                        print(import_db.loc[iter_number].artist)
+                        print("Oh, Yes")
+                        this_track = current_track.filter(artist_name=import_db.loc[iter_number].artist, song_name=import_db.loc[iter_number].song)
+                        this_track.update(another_track_mark=False)
+                        # for var in all_band_names:
+                        #     if len(var.tracks.all()) != 0:
+                        #         for var_track in var.tracks.all():
+                        #             Track.objects.filter(id=var_track.id).update(another_track_mark=False)
+                    else:
+                        print(import_db.loc[iter_number].artist)
+                        print("No")
+                        current_band.tracks.create(artist_name=import_db.artist[iter_number], song_name=import_db.song[iter_number], language_code=language_track_par).save()
 
         return JsonResponse(response)
+
+
+def add_track_to_another_tr_list(request):
+
+    """ URL: new
+        Function: new
+        File: new.html """
+
+    JsonResponse
+
+
+def search_track(request):
+
+    """ URL: new
+        Function: new
+        File: new.html """
+
+    ru_alphabet = ['б', 'Б', 'в', 'г', 'Г', 'д', 'Д', 'ё', 'Ё', 'ж', 'Ж', 'з', 'З', 'и', 'И', 'й', 'Й', 'к',
+                   'л', 'Л', 'м', 'н', 'п', 'П', 'т', 'У',
+                   'ф', 'Ф', 'ц', 'Ц', 'ч', 'Ч', 'ш', 'Ш', 'щ', 'Щ', 'э', 'Э', 'ю', 'Ю', 'я', 'Я', ]
+    en_alphabet = ['b', 'd', 'D', 'f', 'F', 'g', 'G', 'h', 'i', 'I', 'k', 'l', 'L', 'm', 'n', 'N', 'q', 'Q',
+                   'r', 'R', 's', 'S', 't', 'u', 'U', 'v',
+                   'V', 'w', 'W', 'Y', 'z', 'Z', ]
+
+    another_artist_name = request.GET["another_artist_name"]
+    another_song_name = request.GET["another_song_name"]
+
+    print(another_artist_name)
+    print(another_song_name)
+
+    response = HttpResponseRedirect(request.COOKIES["path_name"])
+    response.set_cookie(key="path_name", value="main_page")
+    return response
 
     # os.chdir("C:\\Users\\User\\PycharmProjects\\web\\files")
     # for dir_object in os.listdir():
@@ -943,3 +1107,36 @@ def import_file_to_database(request):
     #     print(w)
     # creat_file.close()
 
+
+def cover_band_rating(request):
+
+    """ URL: new
+        Function: new
+        File: new.html """
+
+    rating_length = len(Band.objects.all())
+    for band in Band.objects.all():
+        len(band.tracks.all())
+    # current_band_1 =
+    # current_band_2 =
+
+    pass
+
+
+
+
+# d = {}
+# for x in Band.objects.all():
+#     d[x] = len(x.tracks.all())
+# print(d)
+# list_d = list(d.items())
+# ls = sorted(list(d.values()), reverse=True)
+# ls_set = set(ls)
+# ls_set_ls = sorted(list(ls_set), reverse=True)
+# print(ls)
+# print(ls_set_ls)
+# list_d.sort(key=lambda i: i[1], reverse=True)
+# x = 0
+# for q in list_d:
+#     if q[1] == x:
+#         print(q)

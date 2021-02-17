@@ -6,9 +6,11 @@ from datetime import datetime
 class Track(models.Model):                                              # Модель: база данных репертуара "Песня"
     artist_name = models.CharField(max_length=100)
     song_name = models.CharField(max_length=100)
+    language_code = models.CharField(max_length=100)
+    another_track_mark = models.BooleanField()
 
     def __str__(self):
-        return self.artist_name + " - " + self.song_name
+        return self.artist_name + " - " + self.song_name + " - " + self.language_code
 
     # def __str__(self):
     #     return self.artist_name

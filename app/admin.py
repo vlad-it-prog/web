@@ -111,8 +111,15 @@ class SongAdmin(admin.ModelAdmin):
 @admin.register(Track)
 # admin.site.register(Track, TrackAdmin)
 class TrackAdmin(admin.ModelAdmin):
-    list_display = ("id", "artist_name", "song_name",)
-    list_display_links = ("id", "artist_name", "song_name",)
-    list_filter = ("artist_name", "band__band_name")
-    search_fields = ("artist_name", "song_name",)
+    list_display = ("id", "artist_name", "song_name", "language_code", "another_track_mark",)
+    list_display_links = ("id", "artist_name", "song_name", "language_code", "another_track_mark",)
+    list_filter = ("artist_name", "band__band_name", "language_code", "another_track_mark",)
+    search_fields = ("artist_name", "song_name", "language_code", "another_track_mark",)
 
+# @admin.register(Track)
+# # admin.site.register(Track, TrackAdmin)
+# class TrackAdmin(admin.ModelAdmin):
+#     list_display = ("id", "artist_name", "song_name",)
+#     list_display_links = ("id", "artist_name", "song_name",)
+#     list_filter = ("artist_name", "band__band_name",)
+#     search_fields = ("artist_name", "song_name")

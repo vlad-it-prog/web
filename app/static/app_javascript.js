@@ -1,8 +1,9 @@
 $(document).ready(function() {
 
-    $('#tr2').hide()
-    $('#id20').show()
-    $('#id21').hide()
+    $('#tr2').hide();
+    $('#id20').show();
+    $('#id21').hide();
+    $("#another_track_list_content").hide();
 //______________________________________________________________________________________________________________________
 
 
@@ -54,19 +55,19 @@ $(document).ready(function() {
 
 
     $('#id105').click(function (p) {
-        $('#tr1').hide()
-        $('#tr2').show()
+        $('#tr1').attr({"placeholder": "Songs"})
+        $('#tr2').attr({"placeholder": "Artists"})
 
 
     })
 //______________________________________________________________________________________________________________________
 
 
-    $('#id106').click(function (p) {
-        $('#tr1').show()
-        $('#tr2').hide()
-
-    })
+    // $('#id106').click(function (p) {
+    //     $('#tr1').show()
+    //     $('#tr2').hide()
+    //
+    // })
 //______________________________________________________________________________________________________________________
 
 
@@ -104,13 +105,13 @@ $(document).ready(function() {
 //______________________________________________________________________________________________________________________
 
 
-    $("#id105").click(function () {
-        $.post(
-            "main_page",
+    $("#search_button").click(function () {
+        $.get(
+            "search_track",
             {
-                'b': 'artist'
+                'artist': $("#id101").val()
             })
-    })
+    });
 //______________________________________________________________________________________________________________________
 
 
@@ -283,16 +284,52 @@ $(document).ready(function() {
 
 //______________________________________________________________________________________________________________________
 
-    $("#cover_bands_details_start").click(function () {
-        $.get(
-            "cover_bands_details",
+    $("#cover_band_1_details").focusout(function () {
+            $.get(
+            "cover_bands_details_1",
             {
                 'cover_band_1_details': $("#cover_band_1_details").val(),
+             },
+            (function (response) {
+                if ($("#cb_1_songs_count").val() > 0) {
+            $("#cb_1_songs_count").attr(onreset)
+                } else {
+                $("#cb_1_songs_count").attr({"placeholder": $("#cb_1_songs_count").attr("placeholder") + ""})
+                $("#cb_1_songs_count").attr({"placeholder": $("#cb_1_songs_count").attr("placeholder") + response["cb_1"]})
+                    $("#cover_band_1_details").attr({"disabled": true})
+                    $("#cb_count_difference").attr({"placeholder": response["cb_1"]})
+                }
+            }),
+            )
+    });
+
+    $("#cover_band_2_details").blur(function () {
+            $.get(
+            "cover_bands_details_2",
+            {
                 'cover_band_2_details': $("#cover_band_2_details").val()
-             })
-        // window.location.pathname = '/main_page'
-        // alert(('Cover Band "') + $("#add_cb_select").val() + ('" was added successfully!'))
+             },
+            (function (response) {
+                // $("#cb_2_songs_count").attr({"placeholder": $("#cb_2_songs_count").attr("placeholder") + ""})
+                $("#cb_2_songs_count").attr({"placeholder": $("#cb_2_songs_count").attr("placeholder") + response["cb_2"]})
+                    $("#cover_band_2_details").attr({"disabled": true})
+                if ($("#cb_count_difference").attr("placeholder") >= response["cb_2"]) {
+                    $("#cb_count_difference").attr({"placeholder":  $("#cb_count_difference").attr("placeholder") - response["cb_2"]});
+                }
+                else {
+                    $("#cb_count_difference").attr({"placeholder":  Math.abs($("#cb_count_difference").attr("placeholder") - response["cb_2"])});
+                }
+            }))
     })
+
+    $("#cover_bands_details_reset").click(function () {
+        // $("#cover_band_1_details").attr({"disabled": false})
+        // $("#cb_1_songs_count").attr({"placeholder": ""})
+        // $("#cover_band_2_details").attr({"disabled": false})
+        // $("#cb_2_songs_count").attr({"placeholder": ""})
+        window.location.pathname = '/main_page'
+    })
+
 //______________________________________________________________________________________________________________________
 
 
@@ -401,7 +438,7 @@ $(document).ready(function() {
     //                 window.location.pathname = '/main_page'
     //             } else {
     //                 window.location.pathname = '/main_page'
-    //                 alert(('Fxport Folder was renamed "') + $("#new_export_folder_name_input").val() + ('" successfully!'))
+    //                 alert(('Export Folder was renamed "') + $("#new_export_folder_name_input").val() + ('" successfully!'))
     //                 // $('#new_export_folder_name_input').attr({"placeholder": $("#new_export_folder_name_input").val()})
     //             }
     //         })
@@ -524,14 +561,188 @@ $(document).ready(function() {
     //     )
     // });
 
-     $("#track_list_menu_1").mouseenter(function () {
-         alert("Привет, ты выбрал Full Track List")
-     });
-     $("#track_list_menu_2").mouseup(function () {
-         alert("Привет, ты выбрал Foreign Track List")
-     });
-     $("#track_list_menu_3").mouseup(function () {
-         alert("Привет, ты выбрал Domestic Track List")
-     });
+    // $("#track_list_menu").click(function () {
+    //     // let select = document.getElementById("track_list_menu");
+    //     // select.size = select.options.length;
+    //     // alert();
+    //     // $("#track_list_menu").focus()
+    //     // $("#track_list_menu").show()
+    //     // $("#track_list_menu_default").hide()
+    //     // NaN
+    //     $("#track_list_menu").click(onreset)
+    // });
+
+    // $("#track_list_menu").click(function foo () {
+    //     setTimeout(foo, 1000000)
+    //     // $("#track_list_menu").attr({"value": ""})
+    // })
+    $("#track_list_menu").blur(function foo () {
+         // setTimeout(foo, 100);
+         // alert("Привет, ты выбрал " + $("#track_list_menu").val())
+        if ($("#track_list_menu").val() == "Full Track List") {
+            // $("#track_list_menu").val(onreset)
+            // alert()
+            $("#foreign_track_list_content").show();
+                $("#domestic_track_list_content").show();
+                $("#another_track_list_content").hide();
+                // $("#track_list_menu").click(function () {
+                //     $("#track_list_menu_default").attr({"selected": true})
+                // })
+        } else if ($("#track_list_menu").val() == "Foreign Track List") {
+            // alert()
+
+            $("#foreign_track_list_content").show();
+                $("#domestic_track_list_content").hide();
+                $("#another_track_list_content").hide();
+        } else if ($("#track_list_menu").val() == "Domestic Track List") {
+            // alert()
+            $("#foreign_track_list_content").hide();
+                $("#domestic_track_list_content").show();
+                $("#another_track_list_content").hide();
+        } else if ($("#track_list_menu").val() == "Another Track List") {
+            // alert()
+            $("#foreign_track_list_content").hide();
+                $("#domestic_track_list_content").hide();
+                $("#another_track_list_content").show();
+        }
+    });
+    // $("#cover_band_2_details").attr({"disabled": true});
+    $("#cover_band_1_details").blur(function () {
+        if ($("#cover_band_1_details").val() > "") {
+            $("#cover_band_2_details").attr({"disabled": false});
+            // alert()
+        } else if ($("#cover_band_1_details").val() == "") {
+            // $("#cover_band_2_details").val(onreset)
+            $("#cover_band_2_details").attr({"disabled": true})
+            // $("#track_list_menu_1").val(onreset)
+            $("#track_list_menu_1").attr({"disabled": true})
+        }
+    });
+    $("#cover_band_2_details").blur(function () {
+        if ($("#cover_band_2_details").val() > "") {
+            $("#track_list_menu_1").attr({"disabled": false});
+            // alert()
+        } else if ($("#cover_band_2_details").val() == "") {
+               // $("#track_list_menu_1").val(onreset)
+            $("#track_list_menu_1").attr({"disabled": true})
+        }
+    })
+
+
+    // $("#track_list_menu").click(function () {
+    //
+    // });
+    // $("#track_list_menu").click(function () {
+    //      alert("Привет, ты выбрал " + $("#track_list_menu").val())
+    //     if ($("#track_list_menu_full").select()) {
+    //         alert()
+    //         $("#foreign_track_list_content").show();
+    //             $("#domestic_track_list_content").show();
+    //             $("#another_track_list_content").show();
+    //     } else if ($("#track_list_menu_for").select()) {
+    //         alert()
+    //         $("#foreign_track_list_content").show();
+    //             $("#domestic_track_list_content").hide();
+    //             $("#another_track_list_content").hide();
+    //     } else if ($("#track_list_menu_dom").select()) {
+    //         alert()
+    //         $("#foreign_track_list_content").hide();
+    //             $("#domestic_track_list_content").show();
+    //             $("#another_track_list_content").hide();
+    //     } else if ($("#track_list_menu_anoth").select()) {
+    //         alert()
+    //         $("#foreign_track_list_content").hide();
+    //             $("#domestic_track_list_content").hide();
+    //             $("#another_track_list_content").show();
+    //     }
+    // });
+
+
+
+    // $("#track_list_menu_full").click(function () {
+    //      alert("Привет, ты выбрал " + $("#track_list_menu").val())
+    //     if ($("#track_list_menu").val() == "Full Track List") {
+    //         $("#foreign_track_list_content").show();
+    //         $("#domestic_track_list_content").show();
+    //         $("#another_track_list_content").show();
+    //     }
+    // });
+    // $("#track_list_menu_for").click(function () {
+    //     if ($("#track_list_menu").val() == "Foreign Track List") {
+    //         alert()
+    //         $("#foreign_track_list_content").show();
+    //         $("#domestic_track_list_content").hide();
+    //         $("#another_track_list_content").hide();
+    //     }
+    // });
+    // $("#track_list_menu_dom").click(function () {
+    //    if ($("#track_list_menu").val() == "Domestic Track List") {
+    //         alert()
+    //         $("#foreign_track_list_content").hide();
+    //             $("#domestic_track_list_content").show();
+    //             $("#another_track_list_content").hide();
+    //    }
+    // });
+    // $("#track_list_menu_anoth").click(function () {
+    //      if ($("#track_list_menu").val() == "Another Track List") {
+    //         alert()
+    //         $("#foreign_track_list_content").hide();
+    //             $("#domestic_track_list_content").hide();
+    //             $("#another_track_list_content").show();
+    //     }
+    // });
+
+
+
+    // $("#track_list_menu").click(function foo () {
+    //      setTimeout(foo, 1000);
+    //      // alert("Привет, ты выбрал " + $("#track_list_menu").val())
+    //     if ($("#track_list_menu_full").click()) {
+    //         if ($("#track_list_menu").val() == "Full Track List") {
+    //             alert()
+    //         $("#foreign_track_list_content").show();
+    //             $("#domestic_track_list_content").show();
+    //             $("#another_track_list_content").show();
+    //         }
+    //     } else if ($("#track_list_menu_for").click()) {
+    //         if ($("#track_list_menu").val() == "Foreign Track List") {
+    //             alert()
+    //             $("#foreign_track_list_content").show();
+    //             $("#domestic_track_list_content").hide();
+    //             $("#another_track_list_content").hide();
+    //         }
+    //     } else if ($("#track_list_menu_dom").click()) {
+    //         if ($("#track_list_menu").val() == "Domestic Track List") {
+    //             alert()
+    //         $("#foreign_track_list_content").hide();
+    //             $("#domestic_track_list_content").show();
+    //             $("#another_track_list_content").hide();
+    //         }
+    //     } else if ($("#track_list_menu_anoth").click()) {
+    //         if ($("#track_list_menu").val() == "Another Track List") {
+    //         alert()
+    //         $("#foreign_track_list_content").hide();
+    //             $("#domestic_track_list_content").hide();
+    //             $("#another_track_list_content").show();
+    //         }
+    //     }
+    // })
+
+
+
+
+
+    //  $("#track_list_menu_full").blur(function () {
+    //      alert("Привет, ты выбрал Full Track List")
+    //  });
+    //  $("#track_list_menu_for").mouseup(function () {
+    //      alert("Привет, ты выбрал Foreign Track List")
+    //  });
+    //  $("#track_list_menu_dom").click(function () {
+    //      alert("Привет, ты выбрал Domestic Track List")
+    //  });
+
+
 
 });
+

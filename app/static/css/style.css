@@ -9,3 +9,27 @@
     height: 150px;
     padding: 5px;
 }
+.main h5 {
+    margin-left: 30%;
+    color: black;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.body {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    grid-auto-rows: minmax(30px, auto);
+}
+
+.body > .artist_name {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+}
+
+.body > .song_name {
+    display: grid;
+}
